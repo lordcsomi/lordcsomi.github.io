@@ -1,6 +1,5 @@
 h1 {
 	font-size: 80px;
-	padding: 10px;
 }
 p {
     font-size: 20px;
@@ -9,6 +8,11 @@ p {
 a {
 	color: blue;
 	text-decoration: none;
+}
+img {
+    width: 35%;
+    height: auto;
+    padding: 10px;
 }
 body {
     background: pink;
