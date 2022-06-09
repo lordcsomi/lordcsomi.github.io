@@ -1,0 +1,15 @@
+h1 {
+	font-size: 80px;
+	padding: 10px;
+}
+p {
+    font-size: 20px;
+    padding: 10px;
+}
+a {
+	color: blue;
+	text-decoration: none;
+}
+body {
+    background: pink;
+}
