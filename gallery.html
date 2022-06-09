@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Image Gallery</title>
+		<style type="text/css">
+
+		#darkbox { width:1280px; height:720px; position:absolute;
+			top:0; left:0; background-color:#333; overflow: hidden; text-align:center;
+		}
+		.darkboximg { padding:5%; max-width: 1216px; max-height: 684px; }
+
+		#gallery {
+			line-height:0;
+			-webkit-column-count:5;
+			-webkit-column-gap:5px;
+			-moz-column-count:5;
+			-moz-column-gap:5px;
+			column-count:5;
+			column-gap:5px;
+			margin-top:2rem;
+		}
+
+		#gallery img {
+			width: 100% !important;
+			height: auto !important;
+			margin-bottom:5px;
+			filter: grayscale(100%);
+			transition: filter 2s;
+		}
+
+		#gallery img:hover {
+			filter:none;
+		}
+
+		@media (max-width: 1200px) {
+			#gallery {
+				-moz-column-count:    4;
+				-webkit-column-count: 4;
+				column-count:         4;
+			}
+		}
+		@media (max-width: 1000px) {
+			#gallery {
+				-moz-column-count:    3;
+				-webkit-column-count: 3;
+				column-count:         3;
+			}
+		}
+		@media (max-width: 800px) {
+			#gallery {
+				-moz-column-count:    2;
+				-webkit-column-count: 2;
+				column-count:         2;
+			}
+		}
+		@media (max-width: 400px) {
+			#gallery {
+				-moz-column-count:    1;
+				-webkit-column-count: 1;
+				column-count:         1;
+			}
+		}
+
+		</style>
+	</head>
+	<body>
+	<h1>CAT</h1>
+	<p>The only member of your family you actually like</p>
+		<div id="gallery">
+
+			<img src="images/image-001.jpg">
+			<img src="images/image-002.jpg">
+			<img src="images/image-003.jpg">
+			<img src="images/image-004.jpg">
+			<img src="images/image-005.jpg">
+			<img src="images/image-006.jpg">
+			<img src="images/image-007.jpg">
+			<img src="images/image-008.jpg">
+			<img src="images/image-009.jpg">
+			<img src="images/image-010.jpg">
+			<img src="images/image-011.jpg">
+			<img src="images/image-012.jpg">
+			<img src="images/image-013.jpg">
+			<img src="images/image-014.jpg">
+			<img src="images/image-015.jpg">
+			<img src="images/image-016.jpg">
+			<img src="images/image-017.jpg">
+			<img src="images/image-018.jpg">
+			<img src="images/image-019.jpg">
+			<img src="images/image-020.jpg">
+			<img src="images/image-021.jpg">
+			<img src="images/image-022.jpg">
+			<img src="images/image-023.jpg">
+			<img src="images/image-024.jpg">
+
+		</div>
+
+		<script>
+		let darkBoxVisible = false;
+
+		window.addEventListener('load', (event) => {
+			let images = document.querySelectorAll("img");
+			if(images !== null && images !== undefined && images.length > 0) {
+				images.forEach(function(img) {
+					img.addEventListener('click', (evt) => {
+						showDarkbox(img.src);
+					});
+				});
+			}
+		});
+
+		function showDarkbox(url) {
+			if(!darkBoxVisible) {
+				let x = (window.innerWidth - 1280) / 2;
+				let y = window.scrollY + 50;
+
+				// Create the darkBox
+				var div = document.createElement("div");
+				div.id = "darkbox";
+				div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
+				document.body.appendChild(div);
+				let box = document.getElementById("darkbox");
+				box.style.left = x.toString()+"px";
+				box.style.top = y.toString()+"px";
+				box.style.height = 'auto';
+				box.addEventListener('click', (event) => {
+					// Remove it
+					let element = document.getElementById("darkbox");
+					element.parentNode.removeChild(element);
+
+					darkBoxVisible = false;
+				})
+
+				darkBoxVisible = true;
+
+			} else {
+				// Remove it
+				let element = document.getElementById("darkbox");
+				element.parentNode.removeChild(element);
+
+				darkBoxVisible = false;
+			}
+		}
+		</script>
+
+	</body>
+</html>
