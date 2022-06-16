@@ -1,6 +1,6 @@
 
 body {
-	background: url('../images/island.jpg');
+	background: url('../images/islan2.jpg');
 	/* the follow is the code to have the image display as a full page */
 	background-position: center;
 	background-attachment: fixed;
@@ -9,15 +9,11 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 }
-#container {
-    background: black;
-    width: 420px;
-    color: white;
-    padding: 15px;
-    text-align:center;
-}
 h1 {
 	font-size: 80px;
+	display: block;
+	margin-inline-end: 0px;
+	margin-inline-start: 0px;
 }
 h2 {
 	background: #75c1f6;
@@ -28,4 +24,62 @@ h2 {
 a {
 	color: #75c1f6;
 	text-decoration: none;
+}
+.entry-title {
+    font-size: 50px;
+    font-weight: bold;
+    text-align:center;
+    margin-top: 200px;
+    margin-bottom: 350px;
+    color: white;
+}
+
+#title {
+    background: none;
+    margin-right: auto;
+    margin-left: auto;
+    width: 500px;
+    font-weight: 800;
+    box-sizing: border-box;
+    text-transform: capitalize !important;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #000000;
+  overflow: hidden;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #fca311;
+  color: white;
+}
+
+p {
+    color: white;
+    padding: 30px;
+}
+
+#container {
+    background: blue;
 }
