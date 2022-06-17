@@ -94,3 +94,7 @@ p {
 #bluetitle {
     width: 250px;
 }
+#footer {
+    font-size: 10px;
+    display: block;
+}
