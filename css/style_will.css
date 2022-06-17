@@ -32,13 +32,15 @@ a {
     margin-top: 200px;
     margin-bottom: 350px;
     color: white;
+    font-family: 'Fascinate', cursive;
+    font-size: 60px;
 }
 
 #title {
     background: none;
     margin-right: auto;
     margin-left: auto;
-    width: 500px;
+    width: 600px;
     font-weight: 800;
     box-sizing: border-box;
     text-transform: capitalize !important;
@@ -67,12 +69,14 @@ a {
 .topnav a:hover {
   background-color: #ddd;
   color: black;
+  border-radius: 10px;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
   background-color: #fca311;
   color: white;
+  border-radius: 10px;
 }
 
 p {
@@ -81,5 +85,7 @@ p {
 }
 
 #container {
-    background: blue;
+    background: black;
+    margin-bottom: 0px;
+    padding-bottom: 1000px;
 }
