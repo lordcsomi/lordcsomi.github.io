@@ -4,6 +4,7 @@ body {
 	/* the follow is the code to have the image display as a full page */
 	background-position: center;
 	background-attachment: fixed;
+	background-repeat: no-repeat;
 	-webkit-background-size: cover; /* the next 3 lines are "browser prefixes", they are necessary to include for CSS3 techniques */
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -48,8 +49,12 @@ a {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #000000;
+  background-color: rgba(0,0,0,0.7);
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
   padding-right: 15px;
   padding-bottom: 5px;
   padding-top: 5px;
@@ -86,9 +91,11 @@ p {
 
 #container {
     background: black;
+    width: 100%;
+    height: 100vh;
     margin: 0px;
     padding:15px;
-    padding-bottom: 1000px;
+    padding-bottom: 20px;
     padding-top:20px;
 }
 #bluetitle {
