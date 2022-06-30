@@ -44,6 +44,80 @@
 	<div id="gallary" class="third">
 		<h2>Gallery</h2>
 		<p>A fluffy member of your family who also doesn't listen to you</p>
+		<div id="gallery">
+			<img src="images/image-001.jpg">
+			<img src="images/image-002.jpg">
+			<img src="images/image-003.jpg">
+			<img src="images/image-004.jpg">
+			<img src="images/image-005.jpg">
+			<img src="images/image-006.jpg">
+			<img src="images/image-007.jpg">
+			<img src="images/image-008.jpg">
+			<img src="images/image-009.jpg">
+			<img src="images/image-010.jpg">
+			<img src="images/image-011.jpg">
+			<img src="images/image-012.jpg">
+			<img src="images/image-013.jpg">
+			<img src="images/image-014.jpg">
+			<img src="images/image-015.jpg">
+			<img src="images/image-016.jpg">
+			<img src="images/image-017.jpg">
+			<img src="images/image-018.jpg">
+			<img src="images/image-019.jpg">
+			<img src="images/image-020.jpg">
+			<img src="images/image-021.jpg">
+			<img src="images/image-022.jpg">
+			<img src="images/image-023.jpg">
+			<img src="images/image-024.jpg">
+		</div>
+
+		<script>
+		let darkBoxVisible = false;
+
+		window.addEventListener('load', (event) => {
+			let images = document.querySelectorAll("img");
+			if(images !== null && images !== undefined && images.length > 0) {
+				images.forEach(function(img) {
+					img.addEventListener('click', (evt) => {
+						showDarkbox(img.src);
+					});
+				});
+			}
+		});
+
+		function showDarkbox(url) {
+			if(!darkBoxVisible) {
+				let x = (window.innerWidth - 1280) / 2;
+				let y = window.scrollY + 50;
+
+				// Create the darkBox
+				var div = document.createElement("div");
+				div.id = "darkbox";
+				div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
+				document.body.appendChild(div);
+				let box = document.getElementById("darkbox");
+				box.style.left = x.toString()+"px";
+				box.style.top = y.toString()+"px";
+				box.style.height = 'auto';
+				box.addEventListener('click', (event) => {
+					// Remove it
+					let element = document.getElementById("darkbox");
+					element.parentNode.removeChild(element);
+
+					darkBoxVisible = false;
+				})
+
+				darkBoxVisible = true;
+
+			} else {
+				// Remove it
+				let element = document.getElementById("darkbox");
+				element.parentNode.removeChild(element);
+
+				darkBoxVisible = false;
+			}
+		}
+		</script>
 	</div>
 	<div id="archive" class="fourth">
 		<h2>Archive</h2>
