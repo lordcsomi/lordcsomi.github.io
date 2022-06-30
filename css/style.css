@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
 
@@ -68,6 +69,7 @@ section {
   overflow: hidden;
 }
 
+
 section img {
   position: absolute;
   top: 0;
@@ -108,6 +110,8 @@ section img {
   position: relative;
   padding: 100px;
   background: #1c0522 ;
+  width: 100%;
+  height: 100vh;
 }
 
 .sec h2 {
@@ -122,3 +126,62 @@ section img {
   margin-bottom: 10px;
 }
 
+.third {
+  position: relative;
+  padding: 100px;
+  background: #1c0522 ;
+  width: 100%;
+  height: 100vh;
+}
+
+.third h2 {
+  color: #fff;
+  font-size: 3.5em;
+  margin-bottom: 10px;
+}
+
+.third p {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.fourth {
+  position: relative;
+  padding: 100px;
+  background: #1c0522 ;
+  width: 100%;
+  height: 100vh;
+}
+
+.fourth h2 {
+  color: #fff;
+  font-size: 3.5em;
+  margin-bottom: 10px;
+}
+
+.fourth p {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.fifth {
+  position: relative;
+  padding: 100px;
+  background: #1c0522 ;
+  width: 100%;
+  height: 100vh;
+}
+
+.fifth h2 {
+  color: #fff;
+  font-size: 3.5em;
+  margin-bottom: 10px;
+}
+
+.fifth p {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
