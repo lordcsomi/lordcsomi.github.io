@@ -131,7 +131,7 @@ section img {
   padding: 100px;
   background: #1c0522 ;
   width: 100%;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 
 .third h2 {
