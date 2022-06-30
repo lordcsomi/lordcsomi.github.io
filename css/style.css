@@ -1,107 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 
 body {
-	background: url('../images/islan2.jpg');
-	/* the follow is the code to have the image display as a full page */
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover; /* the next 3 lines are "browser prefixes", they are necessary to include for CSS3 techniques */
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-h1 {
-	font-size: 80px;
-	display: block;
-	margin-inline-end: 0px;
-	margin-inline-start: 0px;
-}
-h2 {
-	background: #75c1f6;
-	color: black;
-	padding: 5px;
-	border-radius: 6px;
-}
-a {
-	color: #75c1f6;
-	text-decoration: none;
-}
-.entry-title {
-    font-size: 50px;
-    font-weight: bold;
-    text-align:center;
-    margin-top: 200px;
-    margin-bottom: 350px;
-    color: white;
-    font-family: 'Fascinate', cursive;
-    font-size: 60px;
+  min-height: 100vh;
+  background: linear-gradient(#2b1055, #7597de)
 }
 
-#title {
-    background: none;
-    margin-right: auto;
-    margin-left: auto;
-    width: 600px;
-    font-weight: 800;
-    box-sizing: border-box;
-    text-transform: capitalize !important;
-}
-
-/* Add a black background color to the top navigation */
-.topnav {
-  background-color: rgba(0,0,0,0.7);
-  overflow: hidden;
-  position: fixed;
+header {
+  position: absolute;
   top: 0;
-  z-index: 1;
+  left: 0;
   width: 100%;
-  padding-right: 15px;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding: 30px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10000;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: right;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+header .logo {
+  color: #fff;
+  font-weight: 700;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-  border-radius: 10px;
+header ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #fca311;
-  color: white;
-  border-radius: 10px;
+header ul li {
+  list-style: none;
+  margin-left: 20px;
 }
 
-p {
-    color: white;
-    padding: 30px;
+header ul li a {
+  text-decoration: none;
+  padding: 6px 15px;
+  color: #fff;
+  border-radius: 20px;
 }
 
-#container {
-    background: black;
-    width: 100%;
-    height: 100vh;
-    margin: 0px;
-    padding:15px;
-    padding-bottom: 20px;
-    padding-top:20px;
+header ul li a:hover , header ul li a.hover {
+  background: #fff;
+  color: #2b1055;
 }
-#bluetitle {
-    width: 250px;
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#footer {
-    font-size: 10px;
-    display: block;
+
+section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#text {
+  position: absolute;
+  color: #000;
+  white-space: nowrap;
+  font-size: 7.5vw;
+  font-size: 2em;
+  z-index: 9;
 }
