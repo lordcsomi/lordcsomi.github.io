@@ -88,6 +88,11 @@ section img {
   pointer-events: none;
 }
 
+.particles {
+  transform: rotate(-90deg);
+}
+
+
 #text {
   position: absolute;
   color: #fff;  
@@ -126,3 +131,4 @@ section img {
   font-size: 1em;
   margin-bottom: 10px;
 }
+
