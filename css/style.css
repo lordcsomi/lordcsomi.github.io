@@ -181,6 +181,35 @@ section img {
   margin-bottom: 10px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 2vw 4vw;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+form input, form textarea {
+  border: 0;
+  margin: 10px 0;
+  padding: 20px;
+  outline: none;
+  font-size: 16px;
+}
+
+form button {
+  padding: 15px;
+  background-color: #fff;
+  font-size: 18 px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+  margin: 20px auto 0;
+  border-radius: 30px;
+}
+
 #darkbox { width:1280px; height:720px; position:absolute;
   top:0; left:0; background-color:#333; overflow: hidden; text-align:center;
 }
