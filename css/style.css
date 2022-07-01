@@ -272,3 +272,22 @@ form button {
     column-count:         1;
   }
 }
+
+#footer {
+  width: 100%;
+  background: #000;
+  padding: auto 10 auto 10;
+  color: #fff;
+}
+
+#footer p {
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+#footer a {
+  color: #D4EFAA;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
