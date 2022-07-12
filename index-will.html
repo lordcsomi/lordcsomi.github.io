@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    	<meta charset="utf-8">
+		<title>Csomi's site</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap" rel="stylesheet">
+		<link rel="icon" href="images/home.png">
+
+</head>
+
+<body>
+	<header>
+		<a href="#home" class="logo">csomi.me</a>
+		<ul>
+			<li><a href="#about">About</a></li>
+			<li><a href="#gallary">Gallery</a></li>
+			<li><a href="#projects">Projects</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+	</header>
+	<section>
+		<img src="images/stars2.png" alt="stars" id="particles">
+		<img src="images/clouds.png" alt="clouds" id="clouds">
+		<!--<img src="images/island.png" alt="small island in a lake" id="island">-->
+		<h2 id="text">Welcome to my site!</h2>
+		<a id="btn" href="#about">Learn more</a>
+	</section>
+	<script>
+		let particles = document.getElementById('particles');
+
+		window.addEventListener('scroll', function(){
+			let value = window.scrollY;
+			particles.style.left = value * 0.25 + 'px';
+		});
+	</script>
+	<div id="about" class="sec">
+		<h2>About me</h2>
+		<div class="sec-inner">
+			<div class="sec-left">
+		<p>Lorem ipendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
+			</div>
+			<div class="sec-right">
+				<img src="./images/mee1.jpg" alt="me" id="me">
+			</div>
+		</div>
+	</div>
+	<div id="gallary" class="third">
+		<h2>Cat(s)</h2>
+		<p>A fluffy member of your family who also doesn't listen to you</p>
+		<div id="gallery">
+			<img src="images/image-001.jpg">
+			<img src="images/image-002.jpg">
+			<img src="images/image-003.jpg">
+			<img src="images/image-004.jpg">
+			<img src="images/image-005.jpg">
+			<img src="images/image-006.jpg">
+			<img src="images/image-007.jpg">
+			<img src="images/image-008.jpg">
+			<img src="images/image-009.jpg">
+			<img src="images/image-010.jpg">
+			<img src="images/image-011.jpg">
+			<img src="images/image-012.jpg">
+			<img src="images/image-013.jpg">
+			<img src="images/image-014.jpg">
+			<img src="images/image-015.jpg">
+			<img src="images/image-016.jpg">
+			<img src="images/image-017.jpg">
+			<img src="images/image-018.jpg">
+			<img src="images/image-019.jpg">
+			<img src="images/image-020.jpg">
+			<img src="images/image-021.jpg">
+			<img src="images/image-022.jpg">
+			<img src="images/image-023.jpg">
+			<img src="images/image-024.jpg">
+		</div>
+
+		<script>
+		let darkBoxVisible = false;
+
+		window.addEventListener('load', (event) => {
+			let images = document.querySelectorAll("img");
+			if(images !== null && images !== undefined && images.length > 0) {
+				images.forEach(function(img) {
+					img.addEventListener('click', (evt) => {
+						showDarkbox(img.src);
+					});
+				});
+			}
+		});
+
+		function showDarkbox(url) {
+			if(!darkBoxVisible) {
+				let x = (window.innerWidth - 1280) / 2;
+				let y = window.scrollY + 50;
+
+				// Create the darkBox
+				var div = document.createElement("div");
+				div.id = "darkbox";
+				div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
+				document.body.appendChild(div);
+				let box = document.getElementById("darkbox");
+				box.style.left = x.toString()+"px";
+				box.style.top = y.toString()+"px";
+				box.style.height = 'auto';
+				box.addEventListener('click', (event) => {
+					// Remove it
+					let element = document.getElementById("darkbox");
+					element.parentNode.removeChild(element);
+
+					darkBoxVisible = false;
+				})
+
+				darkBoxVisible = true;
+
+			} else {
+				// Remove it
+				let element = document.getElementById("darkbox");
+				element.parentNode.removeChild(element);
+
+				darkBoxVisible = false;
+			}
+		}
+		</script>
+	</div>
+	<div id="projects" class="fourth">
+		<h2>Projects</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
+	</div>
+	<div id="contact" class="fifth">
+		<h2>Contact me</h2>
+		<div class="fifth-inner">
+			<div class="fifth-inner-left">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
+			</div>
+			<div class="fifth-inner-right">
+				<form action="https://formspree.io/f/xgedbjre" method="POST">
+					<input type="email" name="email" placeholder="Your Email">
+					<textarea name="message" placeholder="Your lovely message"></textarea>
+				<button type="submit">Send</button>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+	<div id="footer">
+		<a target="_blank" href="https://icons8.com/icon/2VPMLRU1s9HT/love">Love</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+		<p>&copy; Copyright 2023. All rights reserved.</p>
+	</div>
+</body>
+</html>
+
+
+
+

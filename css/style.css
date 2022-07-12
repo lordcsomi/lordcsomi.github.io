@@ -121,6 +121,15 @@ section img {
   margin-bottom: 10px;
 }
 
+.sec-inner{
+  display: flex;
+}
+
+#me {
+  height: auto;
+  width: auto;
+}
+
 .third {
   position: relative;
   padding: 100px;

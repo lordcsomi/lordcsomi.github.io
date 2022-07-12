@@ -1,151 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    	<meta charset="utf-8">
-		<title>Csomi's site</title>
-
-		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/style.css">
-		<link href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap" rel="stylesheet">
-		<link rel="icon" href="images/home.png">
-
+    <meta charset="UTF-8">
+    <title>Coming Soon</title>
+    <link rel="stylesheet" href="css/main-loading.css">
 </head>
-
 <body>
-	<header>
-		<a href="#home" class="logo">csomi.me</a>
-		<ul>
-			<li><a href="#about">About</a></li>
-			<li><a href="#gallary">Gallery</a></li>
-			<li><a href="#archive">Archive</a></li>
-			<li><a href="#contact">Contact</a></li>
-		</ul>
-	</header>
-	<section>
-		<img src="images/stars2.png" alt="stars" id="particles">
-		<img src="images/clouds.png" alt="clouds" id="clouds">
-		<!--<img src="images/island.png" alt="small island in a lake" id="island">-->
-		<h2 id="text">Welcome to my site!</h2>
-		<a id="btn" href="#about">Learn more</a>
-	</section>
-	<script>
-		let particles = document.getElementById('particles');
-
-		window.addEventListener('scroll', function(){
-			let value = window.scrollY;
-			particles.style.left = value * 0.25 + 'px';
-		});
-	</script>
-	<div id="about" class="sec">
-		<h2>About me</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
-	</div>
-	<div id="gallary" class="third">
-		<h2>Cat(s)</h2>
-		<p>A fluffy member of your family who also doesn't listen to you</p>
-		<div id="gallery">
-			<img src="images/image-001.jpg">
-			<img src="images/image-002.jpg">
-			<img src="images/image-003.jpg">
-			<img src="images/image-004.jpg">
-			<img src="images/image-005.jpg">
-			<img src="images/image-006.jpg">
-			<img src="images/image-007.jpg">
-			<img src="images/image-008.jpg">
-			<img src="images/image-009.jpg">
-			<img src="images/image-010.jpg">
-			<img src="images/image-011.jpg">
-			<img src="images/image-012.jpg">
-			<img src="images/image-013.jpg">
-			<img src="images/image-014.jpg">
-			<img src="images/image-015.jpg">
-			<img src="images/image-016.jpg">
-			<img src="images/image-017.jpg">
-			<img src="images/image-018.jpg">
-			<img src="images/image-019.jpg">
-			<img src="images/image-020.jpg">
-			<img src="images/image-021.jpg">
-			<img src="images/image-022.jpg">
-			<img src="images/image-023.jpg">
-			<img src="images/image-024.jpg">
-		</div>
-
-		<script>
-		let darkBoxVisible = false;
-
-		window.addEventListener('load', (event) => {
-			let images = document.querySelectorAll("img");
-			if(images !== null && images !== undefined && images.length > 0) {
-				images.forEach(function(img) {
-					img.addEventListener('click', (evt) => {
-						showDarkbox(img.src);
-					});
-				});
-			}
-		});
-
-		function showDarkbox(url) {
-			if(!darkBoxVisible) {
-				let x = (window.innerWidth - 1280) / 2;
-				let y = window.scrollY + 50;
-
-				// Create the darkBox
-				var div = document.createElement("div");
-				div.id = "darkbox";
-				div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
-				document.body.appendChild(div);
-				let box = document.getElementById("darkbox");
-				box.style.left = x.toString()+"px";
-				box.style.top = y.toString()+"px";
-				box.style.height = 'auto';
-				box.addEventListener('click', (event) => {
-					// Remove it
-					let element = document.getElementById("darkbox");
-					element.parentNode.removeChild(element);
-
-					darkBoxVisible = false;
-				})
-
-				darkBoxVisible = true;
-
-			} else {
-				// Remove it
-				let element = document.getElementById("darkbox");
-				element.parentNode.removeChild(element);
-
-				darkBoxVisible = false;
-			}
-		}
-		</script>
-	</div>
-	<div id="archive" class="fourth">
-		<h2>Archive</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
-	</div>
-	<div id="contact" class="fifth">
-		<h2>Contact me</h2>
-		<div class="fifth-inner">
-			<div class="fifth-inner-left">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis ea molestiae nisi vitae, accusamus sit maiores distinctio at culpa dolorem qui alias itaque? Voluptas, culpa. A saepe nobis non placeat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ratione quam error vitae illum consectetur reiciendis facilis cumque non, tenetur, ex beatae, veniam asperiores blanditiis facere praesentium eligendi. Amet, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quos neque reiciendis sapiente repellendus vero explicabo pariatur cumque sit excepturi ratione cum alias mollitia ullam autem labore temporibus, maiores est! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore aut soluta beatae tempore perspiciatis voluptatum? Ipsa dolorum mollitia laudantium sequi illo molestiae commodi libero quasi temporibus suscipit sed, alias veniam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima ducimus tenetur facilis sed, nisi, beatae aperiam odit error ullam voluptatem porro? Dolorem laboriosam accusantium est consectetur, suscipit amet eaque. Explicabo.</p>
-			</div>
-			<div class="fifth-inner-right">
-				<form action="https://formspree.io/f/xgedbjre" method="POST">
-					<input type="email" name="email" placeholder="Your Email">
-					<textarea name="message" placeholder="Your lovely message"></textarea>
-				<button type="submit">Send</button>
-				</form>
-			</div>
-			
-		</div>
-	</div>
-	<div id="footer">
-		<a target="_blank" href="https://icons8.com/icon/2VPMLRU1s9HT/love">Love</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-		<p>&copy; Copyright 2023. All rights reserved.</p>
-	</div>
+    <div class="container">
+        <div class="bg">
+            <video muted autoplay loop>
+                <source src="./videos/stars.webm" type="video/webm">
+            </video>
+        </div>
+        <h1>Coming Soon</h1>
+        <h3>Site Nearly Ready</h3>
+        <div class="progress-bar"><span></span></div>
+        <div class="social">
+            <a href="https://github.com/lordcsomi/" target="_blank"><img src="./images/icon-github.png" alt=""></a>
+            <a href="https://www.facebook.com/adam.csomos.1" target="_blank"><img src="./images/icon-facebook.png" alt=""></a>
+            <a href="https://www.youtube.com/channel/UCLwsHHvs0ZJBjVJU1xOJMnA/featured" target="_blank"><img src="./images/icon-youtube.png" alt=""></a>
+            <a href="#iLoveYou"><img src="./images/icon-love.png" 
+                onmouseover="this.src='./images/icon-love-full.png'"
+                onmouseout="this.src='./images/icon-love.png'"></a>
+            <a href="#discord"><button onclick="AdvancedCopy()"><img src="./images/icon-discord.png"></button></a>
+            <script>
+                function AdvancedCopy(){
+                    //the text that is to be copied to the clipboard
+                    var theText = 'csomi#9533';
+                
+                    //create our hidden div element
+                    var hiddenCopy = document.createElement('div');
+                    //set the innerHTML of the div
+                    hiddenCopy.innerHTML = theText;
+                    //set the position to be absolute and off the screen
+                    hiddenCopy.style.position = 'absolute';
+                    hiddenCopy.style.left = '-9999px';
+                
+                    //check and see if the user had a text selection range
+                    var currentRange;
+                    if(document.getSelection().rangeCount > 0)
+                    {
+                        //the user has a text selection range, store it
+                        currentRange = document.getSelection().getRangeAt(0);
+                        //remove the current selection
+                        window.getSelection().removeRange(currentRange);
+                    }
+                    else
+                    {
+                        //they didn't have anything selected
+                        currentRange = false;
+                    }
+                
+                    //append the div to the body
+                    document.body.appendChild(hiddenCopy);
+                    //create a selection range
+                    var CopyRange = document.createRange();
+                    //set the copy range to be the hidden div
+                    CopyRange.selectNode(hiddenCopy);
+                    //add the copy range
+                    window.getSelection().addRange(CopyRange);
+                
+                    //since not all browsers support this, use a try block
+                    try
+                    {
+                        //copy the text
+                        document.execCommand('copy');
+                        window.alert("My Discord username is copied to your clipboard!");
+                    }
+                    catch(err)
+                    {
+                        window.alert("Your Browser Doesn't support this! Error : " + err);
+                    }
+                    //remove the selection range (Chrome throws a warning if we don't.)
+                    window.getSelection().removeRange(CopyRange);
+                    //remove the hidden div
+                    document.body.removeChild(hiddenCopy);
+                
+                    //return the old selection range
+                    if(currentRange)
+                    {
+                        window.getSelection().addRange(currentRange);
+                    }
+                }
+            </script>
+        </div>
+    </div>
 </body>
 </html>
-
-
-
-
