@@ -86,12 +86,25 @@ h3 {
     }
 }
 
-.social {
+.social img {
     filter: grayscale(100%);
+    opacity: .6;
+    transition: 1s;
+}
+
+.social img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
 button {
     background-color: transparent;
     cursor: pointer;
     border: transparent;
+}
+
+.love-socials {
+    padding-top: 45px;
+    color: #b9b9b9;
+    font-size: 15px;
 }
