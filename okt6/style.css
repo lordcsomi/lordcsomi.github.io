@@ -36,6 +36,7 @@ header a{
     font-size: 2em;
     text-transform: uppercase;
     font-weight: 700;
+    white-space: nowrap;
 }
 .bi-brightness-high-fill::before, .bi-moon::before{
     padding-right: 20px;
@@ -53,4 +54,9 @@ header ul li {
 
 main {
     padding-top: 100px;
+}
+
+main a {
+    font-size: 2em;
+
 }
