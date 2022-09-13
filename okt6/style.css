@@ -29,7 +29,9 @@ header {
     z-index: 10000;
     padding-top: 30px;
     padding-left: 20px;
+    padding-bottom: 30px;
     justify-content: space-between;
+    background-color: cadetblue;
 
 }
 header a{
@@ -37,26 +39,68 @@ header a{
     text-transform: uppercase;
     font-weight: 700;
     white-space: nowrap;
-}
-.bi-brightness-high-fill::before, .bi-moon::before{
     padding-right: 20px;
+}
+
+header img{
+    width: 50px;
+    height: auto;
+}
+
+
+.bi-brightness-high-fill::before, .bi-moon::before{
+    transform: translateY(-5%);
+}
+.bi-moon::before{
     transform: translateY(-15%);
 }
 
 header ul {
     display: flex;
-    align-items: center;    
+    align-items: center;   
 }
 
 header ul li {
     list-style: none;
+    padding-right: 20px; 
+}
+
+.bg {
+    position: absolute;
+    top: 118px;
+    left: 0;
+    z-index: -1;
+}
+
+.bg img{
+    width: 100%;
+    height: auto;
 }
 
 main {
-    padding-top: 100px;
+    padding-top: 200px;
+    align-items: center;
+    text-align: center;
 }
 
 main a {
-    font-size: 2em;
+    font-size: 1.5em;
 
+}
+
+main p {
+    font-size: 2em;
+}
+
+
+@media screen and (max-width: 992px) {
+    body {
+      background-color: blue;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+      background-color: olive;
+    }
 }
