@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    margin: 0 auto
 }
 
 body{
@@ -27,9 +28,9 @@ header {
     justify-content: space-between;
     align-items: center;
     z-index: 10000;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-left: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     justify-content: space-between;
 }
 
@@ -71,15 +72,16 @@ header ul li {
 
 .bg {
     position: absolute;
-    top: 118px;
+    top: 90px;
     left: 0;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.15;
 }
 
 .bg img{
     width: 100%;
     height: auto;
+    margin: 0 auto;
 }
 
 main {
@@ -94,11 +96,17 @@ main h1 {
 }
 
 main p {
-    font-size: 2em;
+    font-size: 1.5em;
+}
+
+#maintext{
+    padding-top: 50px;
+    padding-bottom: 20px;
+    width: 300px;
 }
 
 main form{
-    padding-top: 100px;
+    padding-top: 10px;
 }
 
 .form-element{
