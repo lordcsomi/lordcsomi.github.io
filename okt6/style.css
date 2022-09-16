@@ -96,7 +96,7 @@ main h1 {
 }
 
 main p {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 #maintext{
@@ -116,12 +116,12 @@ main form{
 
 @media screen and (max-width: 992px) { /* 992px wide or less */
     body {
-      background-color: blue;
+
     }
 }
 
 @media screen and (max-width: 600px) { /* 600px wide or less */
     body {
-      background-color: olive;
+                
     }
 }
