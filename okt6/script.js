@@ -13,3 +13,9 @@ toggle.addEventListener('click', function(){
         body.style.transition = '2s';
     }
 });
+
+function updateOsztaly(){
+    console.log('Changed osztály');
+    var mylist = document.getElementById("myList");
+    document.getElementById("osztaly").value = mylist.options[mylist.selectedIndex].text;
+}

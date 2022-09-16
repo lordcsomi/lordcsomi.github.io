@@ -33,7 +33,39 @@
     <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSds-5hM3c_cSprj30ad-PHWF8EstOU4azz-qw8BaTCkL6Dasw/formResponse" method="post">
         <div class="form-element">
             <span>Melyik osztályba jársz?</span>
-            <input type="text" name="entry.1779292264" required placeholder="Pl: 9.Ekny, 9.E, 11.IB">
+            <select id="myList" onchange="updateOsztaly()">
+                <option>9.Akny</option>
+                <option>9.Bkny</option>
+                <option>9.Ckny</option>
+                <option>9.Ekny</option>
+
+                <option>9.A</option>
+                <option>9.B</option>
+                <option>9.C</option>
+                <option>9.D</option>
+                <option>9.E</option>
+
+                <option>10.A</option>
+                <option>10.B</option>
+                <option>10.C</option>
+                <option>10.D</option>
+                <option>10.E</option>
+
+                <option>11.A</option>
+                <option>11.B</option>
+                <option>11.C</option>
+                <option>11.D</option>
+                <option>11.E</option>
+                <option>11.IB</option>
+
+                <option>12.A</option>
+                <option>12.B</option>
+                <option>12.C</option>
+                <option>12.D</option>
+                <option>12.E</option>
+                <option>12.IB</option>
+            </select>
+            <input type="text" name="entry.1779292264" id="osztaly" required placeholder="Pl: 9.Ekny, 9.E, 11.IB">
         </div>
         <div class="form-element">
             <span>Batthyány Lajos volt Magyarország első, felelős, alkotmányos miniszterelnöke. Ősrégi főnemesi származású, és október 6-án őt is kivégezték 13 bajtársával együtt, amivel vértanúvá vált. Ítélete kötél általi halál lett volna, ám az utolsó pillanatban golyó általira cserélték le.</span>
@@ -79,6 +111,5 @@
     </form>
     </main>
     
-<!-- <p>This is my text</p> -->    
 </body>
 </html>

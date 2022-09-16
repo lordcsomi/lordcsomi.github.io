@@ -118,15 +118,19 @@ main form{
     width: 300px;
 }
 
-.form-element span{
+.form-element span, #myList{
     margin-bottom: 10px;
 }
 
-input, textarea{
+input, textarea, #myList{
     border: 1px solid #ccc;
     line-height: 2;
     padding: 5px;
     border-radius: 5px;
+}
+
+#osztaly{
+    display: none;
 }
 
 form button{
