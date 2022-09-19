@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>imgae upload and display</title>
-  </head>
-  <body>
-        <div class="fifth-inner-right">
-            <form action="https://formspree.io/f/xgedbjre" method="POST">
-            <input type="email" name="email" placeholder="Your Email">
-            <textarea name="message" placeholder="Your lovely message"></textarea>
-            <input type="file" name="attachment" accept="image/png, image/jpeg">
-    <button type="submit">Send</button>
-    </form>
-    </div>
-  </body>
+<html lang="en">
+  
+<head>
+    <script src="jpgToBase64.js"></script>
+</head>
+  
+<body>
+    <input type="file" name="" id="fileId" 
+        onchange="imageUploaded()">
+    <br><br>
+  
+    <button onclick="displayString()">
+        Display String
+    </button>
+</body>
+  
 </html>
