@@ -10,6 +10,20 @@ body{
 
     font-family: "Arial", Helvetica, sans-serif;
 }
+
+.hidden{
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateX(-100px);
+    transition: all 0.6s;
+}
+
+.show{
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateX(0px);
+}
+
 i{
     font-size: 2em;
     cursor: pointer;
@@ -139,7 +153,7 @@ input, textarea, #myList{
     border-radius: 5px;
 }
 
-#osztaly{
+#osztaly, #osztaly2{
     display: none;
 }
 
@@ -161,5 +175,11 @@ form button{
 @media screen and (max-width: 600px) { /* 600px wide or less */
     body {
                 
+    }
+}
+
+@media(prefers-reduced-motion) {
+    .hidden{
+        transition: none;
     }
 }
