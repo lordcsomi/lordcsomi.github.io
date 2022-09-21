@@ -33,7 +33,7 @@
     <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSds-5hM3c_cSprj30ad-PHWF8EstOU4azz-qw8BaTCkL6Dasw/formResponse" method="post">
         <div class="form-element">
             <span>Mi a karinthys e-mail-címed?</span>
-            <input type="email" autocomplete="email"  name="emailAddress" required>
+            <input type="email" id="email" autocomplete="email"  name="emailAddress" required onchange="checkEmail()">
         </div>
 
         <div class="form-element">
@@ -94,14 +94,14 @@
                 <span>Utolsó vértanú, akin az ítéletet végrehajtották, ezért végig kellett néznie a többiek kínhalálát.</span>
                 <input type="text" name="entry.65920498" required placeholder="">
             </div>
-        </div>
+        </div> <!-- end of 2.kerdes -->
      
         <div id="3.kerdes">
             <div class="form-element">
                 <span>A világosi fegyverletétel jelentette az 1848-49-es forradalom és szabadságharc keserédes végét, ugyanis véres megtorlás követte az osztrák Haynau rémuralma alatt. Az elnevezésével ellentétben azonban nem Világoson tették le a fegyvert a csapatok.</span>
                 <input type="text" name="entry.191967015" required placeholder="Hol történt ez meg végül?">
             </div>
-        </div>
+        </div> <!-- end of 3.kerdes -->
         
         <div id="4.kerdes">
             <div class="form-element">
@@ -120,8 +120,12 @@
                 <span>Arad</span>
                 <input type="text" name="entry.1947272240" required placeholder="">
             </div>
-        </div>
+        </div> <!-- end of 4.kerdes -->
         
+        <div id="photo_upload">
+            <p>Upload img</p>
+            <input name="entry.1711184309" id="osztaly2">
+        </div> <!-- end of photo_upload -->
         <button type="submit">Submit</button>
     </form>
     </main>

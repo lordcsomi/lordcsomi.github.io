@@ -18,4 +18,17 @@ function updateOsztaly(){
     console.log('Changed osztály');
     var mylist = document.getElementById("myList");
     document.getElementById("osztaly").value = mylist.options[mylist.selectedIndex].text;
+    document.getElementById("osztaly2").value = mylist.options[mylist.selectedIndex].text;
+}
+
+
+function checkEmail(){
+    var email = document.getElementById("email").value;
+    let myString = "@karinthy.hu";
+    let result = email.includes(myString);
+    console.log(result);
+    if(result == false){
+        alert("Nem karinthy email címet adtál meg!");
+        document.getElementById("email").value = "";
+    }
 }
