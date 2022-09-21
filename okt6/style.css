@@ -11,6 +11,7 @@ body{
     font-family: "Arial", Helvetica, sans-serif;
 }
 
+
 .hidden{
     opacity: 0;
     filter: blur(3px);
@@ -137,8 +138,11 @@ main form{
     flex-direction: column;
     align-items: center;
     width: 300px;
-    border-radius: 15px;
-    
+    border-radius: 15px;   
+}
+
+.img{
+    padding-bottom: 10px;
 }
 
 .form-element span, #myList{
@@ -157,6 +161,10 @@ input, textarea, #myList{
     display: none;
 }
 
+pre{
+    padding-top: 15px;
+    border-radius: 5px;
+}
 form button{
     border: none;
     background-color: #da251c;

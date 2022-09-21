@@ -7,10 +7,12 @@ toggle.addEventListener('click', function(){
         body.style.background = 'white';
         body.style.color = 'black';
         body.style.transition = '2s';
+        body.style.filter = 'grayscale(0%)';
     }else{
         body.style.background = 'black';
         body.style.color = 'white';
         body.style.transition = '2s';
+        body.style.filter = 'grayscale(100%)';
     }
 });
 
@@ -35,7 +37,6 @@ function checkEmail(){
 
 const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            console.log(entry)
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
             } else {
