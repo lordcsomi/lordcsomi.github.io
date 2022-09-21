@@ -118,8 +118,18 @@ main form{
     width: 300px;
 }
 
+.form-element img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border-radius: 15px;
+    
+}
+
 .form-element span, #myList{
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 input, textarea, #myList{
