@@ -16,7 +16,7 @@ body{
     opacity: 0;
     filter: blur(3px);
     transform: translateX(-100px);
-    transition: all 0.6s;
+    transition: all 0.5s;
 }
 
 .show{
@@ -100,7 +100,7 @@ header ul li {
 }
 
 main {
-    padding-top: 230px;
+    padding-top: 150px;
     align-items: center;
     text-align: center;
     padding-bottom: 30px;
@@ -111,18 +111,17 @@ main h1 {
 
 }
 
-main p {
-    font-size: 1.2em;
+#mainTitle{
+    margin-bottom: 130px;
 }
 
-#maintext{
-    padding-top: 50px;
-    padding-bottom: 80px;
+main a{ /*hiba*/
+    font-size: 1em;
     width: 300px;
 }
 
-main form{
-    padding-top: 10px;
+form{
+    padding-top: 300px;
 }
 
 .form-element{
