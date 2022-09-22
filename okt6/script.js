@@ -1,5 +1,6 @@
 const toggle = document.getElementById('toggleDark');
 const body = document.querySelector('body');
+const headerLi = document.querySelectorAll('header li a');
 
 toggle.addEventListener('click', function(){
     this.classList.toggle('bi-moon');
@@ -8,11 +9,19 @@ toggle.addEventListener('click', function(){
         body.style.color = 'black';
         body.style.transition = '2s';
         body.style.filter = 'grayscale(0%)';
+        /*make all the headerLi elements black */
+        headerLi.forEach(function(item){
+            item.style.color = 'black';
+        });
     }else{
         body.style.background = 'black';
         body.style.color = 'white';
         body.style.transition = '2s';
         body.style.filter = 'grayscale(70%)';
+        /*make all the headerLi elements white */
+        headerLi.forEach(function(item){
+            item.style.color = 'white';
+        });
     }
 });
 
@@ -40,7 +49,7 @@ const observer = new IntersectionObserver((entries) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
             } else {
-                entry.target.classList.remove('show');
+                /*entry.target.classList.remove('show');*/
             }
 
         });

@@ -53,12 +53,14 @@ header {
     /*background-color: #a31b14;*/
 }
 
-header a{
-    font-size: 2em;
-    text-transform: uppercase;
-    font-weight: 700;
-    white-space: nowrap;
-    padding-right: 20px;
+header li a{
+    list-style: none;
+    padding-right: 10px; 
+    padding-left: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    list-style: none;
+    color: black;
 }
 
 #circle{

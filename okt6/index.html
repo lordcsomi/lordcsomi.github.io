@@ -13,8 +13,8 @@
     <header>
             <a href="https://www.karinthy.hu/" target="_blank"><img src="https://www.karinthy.hu/web/kepek/logo.png" alt="Karinthy Logo"></a>
         <ul>
-            <li>idővonal</li>
-            <li id="keretes">Queez</li>
+            <li><a href="./sources.html" target="_blank">Források</a></li>
+            <li id="keretes"><a href="#getEmail">Quiz</a></li>
             <li><i class="bi bi-brightness-high-fill" id="toggleDark"></i></li>
         </ul>
     </header> 
@@ -31,7 +31,7 @@
         
         <div id="getEmail" class="hidden">
             <div class="form-element">
-                <span>Mi a karinthys e-mail-címed?</span>
+                <span class="hidden">Mi a karinthys e-mail-címed?</span>
                 <input type="email" id="email" autocomplete="email"  name="emailAddress" required onchange="checkEmail()" placeholder="Példa@karinthy.hu">
             </div> 
         </div> <!-- end of get email -->
@@ -80,19 +80,19 @@
         </div> <!-- end of 1.kerdes -->
        
         <div id="2.kerdes" class="hidden">
-            <div class="form-element">
+            <div class="form-element hidden">
                 <span>A legfiatalabb vértanú volt, egyben a legmagasabb is. Kivégzés előtti utolsó mondata: „A világ feleszmél majd, ha látja a hóhérok munkáját.</span>
                 <input type="text" name="entry.1463338916" required placeholder="Ki volt ő?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <span>Ő, és Vécsey Károly gróf ítélete a többi vértanúval ellentétben szeptember 21-én lett kikiáltva. Akasztás helyett Haynau végzett vele.</span>
                 <input type="text" name="entry.762546358" required placeholder="Ki volt ő?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <span>Az 54. születésnapján várt rá a kivégzés, viszont arra nem került sor, mert előtte rosszul lett és szívroham végzett vele. A “Magyar Golgota” című film viseli az emlékét.</span>
                 <input type="text" name="entry.2008087406" required placeholder="Ki volt ő?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <span>Utolsó vértanú, akin az ítéletet végrehajtották, ezért végig kellett néznie a többiek kínhalálát.</span>
                 <input type="text" name="entry.65920498" required placeholder="Ki volt ő?">
             </div>
@@ -100,32 +100,32 @@
      
         <div id="3.kerdes" class="hidden">
             <div class="form-element">
-                <img src="./images/image7.png" alt="világosi fegyverletétel">
+                <img class="hidden" src="./images/image7.png" alt="világosi fegyverletétel">
                 <span>A világosi fegyverletétel jelentette az 1848-49-es forradalom és szabadságharc keserédes végét, ugyanis véres megtorlás követte az osztrák Haynau rémuralma alatt. Az elnevezésével ellentétben azonban nem Világoson tették le a fegyvert a csapatok.</span>
                 <input type="text" name="entry.191967015" required placeholder="Hol történt ez meg végül?">
             </div>
         </div> <!-- end of 3.kerdes -->
         
         <div id="4.kerdes" class="hidden">
-            <div class="form-element">
+            <div class="form-element hidden">
                 <div class="img">
                     <img src="./images/image2.png" alt="kép1">
                 </div>
                 <input type="text" name="entry.493962117" required placeholder="Mi a neve a helyésgnek?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <div class="img">
                     <img src="./images/image4.png" alt="kép2">
                 </div>
                 <input type="text" name="entry.49504723" required placeholder="Ki látható a képen?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <div class="img">
                     <img src="./images/image6.png" alt="kép3">
                 </div>
                 <input type="text" name="entry.1032714022" required placeholder="Ki látható a képen?">
             </div>
-            <div class="form-element">
+            <div class="form-element hidden">
                 <div class="img">
                     <img src="./images/image5.png" alt="kép4">
                 </div>
@@ -138,9 +138,9 @@
 
     <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfa1o-b_BoKleV0OCQX-7Q3glnRBF_KGeEQ1WBJNv-93dQ4vg/formResponse" method="POST">
         <div>
-            <div class="form-element">
-                <span>Ez a mű az aradi vértanúk emlékére született. Miután elolvastad rajzolj hozzá egy illusztrációt!</span>
-                <span><pre>
+            <div class="form-element hidden">
+                <span class="hidden">Ez a mű az aradi vértanúk emlékére született. Miután elolvastad rajzolj hozzá egy illusztrációt!</span>
+                <span><pre class="hidden">
 Ady Endre: Október 6.
 Őszi napnak mosolygása,
 Őszi rózsa hervadása,
