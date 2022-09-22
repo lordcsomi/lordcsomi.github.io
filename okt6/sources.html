@@ -30,27 +30,40 @@
         <img src="./images/image6.png">
         <img src="./images/image7.png">
     </div>
-    
-        <div id="links">
-            <a target="_blank" href="https://vasarnap.hu/wp-content/uploads/2020/10/Grof_batthyany_lajos_elso_miniszterelnokunk_kivegzese.jpg">Batthyany Lajos kivegzese</a>
-            <a target="_blank" href="https://hirado.hu/wp-content/uploads/sites/7/2019/10/FCSER19870307018.jpg">Kivégzés</a>
-            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/4/40/Vil%C3%A1gosi_fegyverlet%C3%A9tel.jpg">Világosi fegyverletétel</a>
-            <a target="_blank" href="https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/17917720_1011236985677224_4979025333962140534_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=i2UaAx01uEUAX-7iZkS&_nc_ht=scontent.fbud5-1.fna&oh=00_AT9ULbQ6iXMYZ3eFxUDvXexHBm5b6I8DEdN5ySUrXzxwig&oe=6351DE60">kép</a>
-            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/9/91/Haynau_v%C3%B6r%C3%B6s_gall%C3%A9rral.jpg">Haynau</a>
-            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/7/72/L%C3%A1z%C3%A1r_Vilmos_painting.jpg">Vilmos</a>
-            <a target="_blank" href="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/5d/b8/44/primaria-veche-arad.jpg?w=1400&h=-1&s=1">Arad</a>
-        </div>
+    <div id="links">
+        <a target="_blank" href="https://vasarnap.hu/wp-content/uploads/2020/10/Grof_batthyany_lajos_elso_miniszterelnokunk_kivegzese.jpg">Batthyany Lajos kivegzese</a>
+        <a target="_blank" href="https://hirado.hu/wp-content/uploads/sites/7/2019/10/FCSER19870307018.jpg">Kivégzés</a>
+        <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/4/40/Vil%C3%A1gosi_fegyverlet%C3%A9tel.jpg">Világosi fegyverletétel</a>
+        <a target="_blank" href="https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/17917720_1011236985677224_4979025333962140534_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=i2UaAx01uEUAX-7iZkS&_nc_ht=scontent.fbud5-1.fna&oh=00_AT9ULbQ6iXMYZ3eFxUDvXexHBm5b6I8DEdN5ySUrXzxwig&oe=6351DE60">kép</a>
+        <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/9/91/Haynau_v%C3%B6r%C3%B6s_gall%C3%A9rral.jpg">Haynau</a>
+        <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/7/72/L%C3%A1z%C3%A1r_Vilmos_painting.jpg">Vilmos</a>
+        <a target="_blank" href="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/5d/b8/44/primaria-veche-arad.jpg?w=1400&h=-1&s=1">Arad</a>
+    </div>
+    <div id="credits">
+        <h1>Credits</h1>
+        <p>Thanks to the following people for their help in this project:</p>
+        <div id="card"></div>
+    </div>
+        
 
         <style>
             *{
+                padding: 0;
+                margin: 0;
                 box-sizing: border-box;
+                scroll-behavior: smooth;
+                margin: 0 auto;
+                text-align: center;
             }
             
             #top{
-                padding-top: 50px;
+                padding-top: 90px;
+                width: auto;
+                padding-left: 10px;
+                padding-right: 10px;
             }
 
-            h1{
+            #top h1{
                 text-align: center;
                 margin-bottom: 5px; 
             }
@@ -100,14 +113,6 @@
                 height: auto;
             }
 
-
-            .bi-brightness-high-fill::before, .bi-moon::before{
-                transform: translateY(-5%);
-            }
-            .bi-moon::before{
-                transform: translateY(-15%);
-            }
-
             header ul {
                 display: flex;
                 align-items: center;   
@@ -130,6 +135,11 @@
             #links a {
                 padding: 0px 10px;
                 color: aliceblue;
+            }
+
+            #credits{
+                margin-top: 100px;
+                margin-bottom: 100px;
             }
 
             #darkbox { width:1280px; height:720px; position:absolute;
@@ -190,19 +200,34 @@
             }*/
         </style>
         <script>
-            let darkBoxVisible = false;
-        
-            window.addEventListener('load', (event) => {
-                let images = document.querySelectorAll("img");
-                if(images !== null && images !== undefined && images.length > 0) {
-                    images.forEach(function(img) {
-                        img.addEventListener('click', (evt) => {
-                            showDarkbox(img.src);
-                        });
+            const toggle = document.getElementById('toggleDark');
+            const body = document.querySelector('body');
+            const headerLi = document.querySelectorAll('header li a');
+
+            toggle.addEventListener('click', function(){
+                this.classList.toggle('bi-moon');
+                if(this.classList.toggle('bi-brightness-high-fill')){
+                    body.style.background = 'white';
+                    body.style.color = 'black';
+                    body.style.transition = '2s';
+                    body.style.filter = 'grayscale(0%)';
+                    /*make all the headerLi elements black */
+                    headerLi.forEach(function(item){
+                        item.style.color = 'black';
+                    });
+                }else{
+                    body.style.background = 'black';
+                    body.style.color = 'white';
+                    body.style.transition = '2s';
+                    body.style.filter = 'grayscale(70%)';
+                    /*make all the headerLi elements white */
+                    headerLi.forEach(function(item){
+                        item.style.color = 'white';
                     });
                 }
             });
-        
+
+            let darkBoxVisible = false;
             function showDarkbox(url) {
                 if(!darkBoxVisible) {
                     let x = (window.innerWidth - 1280) / 2;
