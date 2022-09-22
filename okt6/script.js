@@ -12,7 +12,7 @@ toggle.addEventListener('click', function(){
         body.style.background = 'black';
         body.style.color = 'white';
         body.style.transition = '2s';
-        body.style.filter = 'grayscale(100%)';
+        body.style.filter = 'grayscale(70%)';
     }
 });
 
