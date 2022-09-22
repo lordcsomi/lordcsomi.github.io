@@ -5,15 +5,237 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sources</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </head>
 <body>
-    <p>https://vasarnap.hu/wp-content/uploads/2020/10/Grof_batthyany_lajos_elso_miniszterelnokunk_kivegzese.jpg</p>
-    <p>https://hirado.hu/wp-content/uploads/sites/7/2019/10/FCSER19870307018.jpg</p>
-    <p>https://upload.wikimedia.org/wikipedia/commons/4/40/Vil%C3%A1gosi_fegyverlet%C3%A9tel.jpg</p>
-    <p>https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/17917720_1011236985677224_4979025333962140534_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=i2UaAx01uEUAX-7iZkS&_nc_ht=scontent.fbud5-1.fna&oh=00_AT9ULbQ6iXMYZ3eFxUDvXexHBm5b6I8DEdN5ySUrXzxwig&oe=6351DE60</p>
-    <p>https://upload.wikimedia.org/wikipedia/commons/9/91/Haynau_v%C3%B6r%C3%B6s_gall%C3%A9rral.jpg</p>
-    <p>https://upload.wikimedia.org/wikipedia/commons/7/72/L%C3%A1z%C3%A1r_Vilmos_painting.jpg</p>
-    <p>https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/5d/b8/44/primaria-veche-arad.jpg?w=1400&h=-1&s=1</p>
-    <p></p>
+    <header>
+        <a href="https://www.karinthy.hu/" target="_blank"><img src="https://www.karinthy.hu/web/kepek/logo.png" alt="Karinthy Logo"></a>
+    <ul>
+        <li><a href="./index.html" target="_blank">Quiz</a></li>
+        <li id="keretes"><a href="#credits">Credits</a></li>
+        <li><i class="bi bi-brightness-high-fill" id="toggleDark"></i></li>
+    </ul>
+    </header> 
+    <div id="top">
+        <h1>Sources & Credits</h1>
+        <p>This is the place for the links and the list who helpd in this project</p>
+    </div>
+
+    <div id="gallery">
+        <img src="./images/image1.png">
+        <img src="./images/image2.png">
+        <img src="./images/image3.png">
+        <img src="./images/image4.png">
+        <img src="./images/image5.png">
+        <img src="./images/image6.png">
+        <img src="./images/image7.png">
+    </div>
+    
+        <div id="links">
+            <a target="_blank" href="https://vasarnap.hu/wp-content/uploads/2020/10/Grof_batthyany_lajos_elso_miniszterelnokunk_kivegzese.jpg">Batthyany Lajos kivegzese</a>
+            <a target="_blank" href="https://hirado.hu/wp-content/uploads/sites/7/2019/10/FCSER19870307018.jpg">Kivégzés</a>
+            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/4/40/Vil%C3%A1gosi_fegyverlet%C3%A9tel.jpg">Világosi fegyverletétel</a>
+            <a target="_blank" href="https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/17917720_1011236985677224_4979025333962140534_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=i2UaAx01uEUAX-7iZkS&_nc_ht=scontent.fbud5-1.fna&oh=00_AT9ULbQ6iXMYZ3eFxUDvXexHBm5b6I8DEdN5ySUrXzxwig&oe=6351DE60">kép</a>
+            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/9/91/Haynau_v%C3%B6r%C3%B6s_gall%C3%A9rral.jpg">Haynau</a>
+            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/7/72/L%C3%A1z%C3%A1r_Vilmos_painting.jpg">Vilmos</a>
+            <a target="_blank" href="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/5d/b8/44/primaria-veche-arad.jpg?w=1400&h=-1&s=1">Arad</a>
+        </div>
+
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+            
+            #top{
+                padding-top: 50px;
+            }
+
+            h1{
+                text-align: center;
+                margin-bottom: 5px; 
+            }
+
+            p{
+                text-align: center;
+                font-size: 1em;
+                margin-top: 0px;
+            }
+
+            header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 10000;
+                padding-top: 20px;
+                padding-left: 20px;
+                justify-content: space-between;
+
+                /*background-color: #a31b14;*/
+            }
+
+            header li a{
+                list-style: none;
+                padding-right: 10px; 
+                padding-left: 10px;
+                text-decoration: none;
+                font-size: 16px;
+                list-style: none;
+                color: black;
+            }
+
+            #circle{
+                background-color: white;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+
+            }
+
+            header img{
+                width: 50px;
+                height: auto;
+            }
+
+
+            .bi-brightness-high-fill::before, .bi-moon::before{
+                transform: translateY(-5%);
+            }
+            .bi-moon::before{
+                transform: translateY(-15%);
+            }
+
+            header ul {
+                display: flex;
+                align-items: center;   
+            }
+
+            header ul li {
+                list-style: none;
+                padding-right: 10px; 
+                padding-left: 10px;
+            }
+
+            #keretes{
+                border-style: solid;
+            }
+
+            #links{
+                background-color: #333;
+            }
+
+            #links a {
+                padding: 0px 10px;
+                color: aliceblue;
+            }
+
+            #darkbox { width:1280px; height:720px; position:absolute;
+            top:0; left:0; background-color:#333; overflow: hidden; text-align:center;}
+            .darkboximg { padding:5%; max-width: 1216px; max-height: 684px; }
+    
+            #gallery {
+            line-height:0;
+            -webkit-column-count:5;
+            -webkit-column-gap:5px;
+            -moz-column-count:5;
+            -moz-column-gap:5px;
+            column-count:5;
+            column-gap:5px;
+            margin-top:2rem;
+            padding-top: 50px;
+            }
+    
+            #gallery img {
+            width: 100% !important;
+            height: auto !important;
+            margin-bottom:5px;
+            filter: grayscale(100%);
+            transition: filter 2s;
+            }
+    
+            #gallery img:hover {
+            filter:none;
+            }
+    
+            @media (max-width: 1200px) {
+            #gallery {
+                -moz-column-count:    4;
+                -webkit-column-count: 4;
+                column-count:         4;
+            }
+            }
+            @media (max-width: 1000px) {
+            #gallery {
+                -moz-column-count:    3;
+                -webkit-column-count: 3;
+                column-count:         3;
+            }
+            }
+            @media (max-width: 800px) {
+            #gallery {
+                -moz-column-count:    2;
+                -webkit-column-count: 2;
+                column-count:         2;
+            }
+            }
+            /*@media (max-width: 400px) {
+            #gallery {
+                -moz-column-count:    1;
+                -webkit-column-count: 1;
+                column-count:         1;
+            }
+            }*/
+        </style>
+        <script>
+            let darkBoxVisible = false;
+        
+            window.addEventListener('load', (event) => {
+                let images = document.querySelectorAll("img");
+                if(images !== null && images !== undefined && images.length > 0) {
+                    images.forEach(function(img) {
+                        img.addEventListener('click', (evt) => {
+                            showDarkbox(img.src);
+                        });
+                    });
+                }
+            });
+        
+            function showDarkbox(url) {
+                if(!darkBoxVisible) {
+                    let x = (window.innerWidth - 1280) / 2;
+                    let y = window.scrollY + 50;
+        
+                    // Create the darkBox
+                    var div = document.createElement("div");
+                    div.id = "darkbox";
+                    div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
+                    document.body.appendChild(div);
+                    let box = document.getElementById("darkbox");
+                    box.style.left = x.toString()+"px";
+                    box.style.top = y.toString()+"px";
+                    box.style.height = 'auto';
+                    box.addEventListener('click', (event) => {
+                        // Remove it
+                        let element = document.getElementById("darkbox");
+                        element.parentNode.removeChild(element);
+        
+                        darkBoxVisible = false;
+                    })
+        
+                    darkBoxVisible = true;
+        
+                } else {
+                    // Remove it
+                    let element = document.getElementById("darkbox");
+                    element.parentNode.removeChild(element);
+        
+                    darkBoxVisible = false;
+                }
+            }
+            </script>
 </body>
+
 </html>
