@@ -1,3 +1,6 @@
+var windowWidth = window.screen.availWidth;
+console.log(windowWidth);
+
 const toggle = document.getElementById('toggleDark');
 const body = document.querySelector('body');
 const headerLi = document.querySelectorAll('header li a');
@@ -57,3 +60,16 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
+
+window.addEventListener('resize', reportWindowSize);
+
+function reportWindowSize() {
+    windowWidth = 0;
+    windowWidth = window.screen.availWidth;    
+    console.log(windowWidth);
+}
+
+var num = 0;
+console.log(num);
+num = num + 1;
+console.log(num);
