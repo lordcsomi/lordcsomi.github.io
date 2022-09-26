@@ -1,18 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    margin: 0 auto
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
-
-body{
-
+    margin: 0 auto;
     font-family: "Arial", Helvetica, sans-serif;
 }
-
 
 .hidden{
     opacity: 0;
@@ -25,15 +19,6 @@ body{
     opacity: 1;
     filter: blur(0px);
     transform: translateX(0px);
-}
-
-i{
-    font-size: 2em;
-    cursor: pointer;
-}
-h1, p{
-    text-align: center;
-    font-size: 3em;
 }
 
 header {
@@ -49,8 +34,6 @@ header {
     padding-left: 20px;
     padding-bottom: 10px;
     justify-content: space-between;
-
-    /*background-color: #a31b14;*/
 }
 
 header li a{
@@ -61,14 +44,6 @@ header li a{
     font-size: 16px;
     list-style: none;
     color: black;
-}
-
-#circle{
-    background-color: white;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-
 }
 
 header img{
@@ -95,13 +70,20 @@ header ul li {
     padding-left: 10px;
 }
 
+header i {
+    font-size: 2em;
+    cursor: pointer;
+}
+
 #keretes{
     border-style: solid;
 }
 
+/*   ---------------------------STYLE BACKGROUND below----------------------------   */
+
 .bg {
     position: absolute;
-    top: 90px;
+    top: 90px; /* a header miatt */
     left: 0;
     z-index: -1;
     opacity: 0.15;
@@ -113,78 +95,75 @@ header ul li {
     margin: 0 auto;
 }
 
+/*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+
 main {
-    padding-top: 150px;
+    padding-top: 150px; /* a header miatt, távolság a text és legteteke */
     align-items: center;
     text-align: center;
     padding-bottom: 30px;
-}
-
-main h1 {
-    font-weight: 1000;
-
-}
-
-#mainTitle{
-    margin-bottom: 130px;
-}
-
-main a{ /*hiba*/
-    font-size: 1em;
     width: 300px;
 }
 
+.mainTitle h1{
+    text-align: center;
+    font-size: 3em;
+}
+
+.mainTitle a{ 
+    font-size: 1em;
+}
+
+.mainTitle h1 {
+    font-weight: 1000; /* amíg nincs jobb font*/
+}
+
 form{
-    padding-top: 50px;
+    padding-top: 50px; /* a header és a kérdések közti távolság */
 }
 
-.getEmail, .classSelector{
-
-}
-
-.form-element{
+.form-element{ /* kérdések */
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
 }
 
-.form-element img{
+.form-element img{ /* kérdések képei */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    border-radius: 15px;   
+    border-radius: 15px;
+    width: 300px;   
 }
 
 .img{
-    padding-bottom: 10px;
+    padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
 }
 
-.form-element span, #myList{
+.form-element span, #myList{ /* kérdések szövegei */
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-input, textarea, #myList{
+input, textarea, #myList{ /* inputok */
     border: 1px solid #ccc;
     line-height: 2;
     padding: 5px;
     border-radius: 5px;
 }
 
-#osztaly, #osztaly2{
+#osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
     display: none;
 }
 
-pre{
+pre{ /* a vers stílusa */
     padding-top: 15px;
     border-radius: 5px;
-    font-family: 'Fascinate', cursive;
-    font-weight: 200;
+    font-family: 'Fascinate', cursive; /* amíg nincs jobb font*/
+    font-weight: 400;
 }
-form button{
+form button{ /* gombok stílusa */
     border: none;
     background-color: #da251c;
     color: #fff;
@@ -192,6 +171,12 @@ form button{
     border-radius: 5px;
     cursor: pointer;
 }
+
+#photo_upload{
+    transform: translateY(-40px);
+}
+
+/*   ---------------------------MEDIA QUERIES DOWN----------------------------   */
 
 @media screen and (max-width: 992px) { /* 992px wide or less */
     body {
