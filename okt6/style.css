@@ -41,7 +41,6 @@ header li a{
     padding-right: 10px; 
     padding-left: 10px;
     text-decoration: none;
-    font-size: 16px;
     list-style: none;
     color: black;
 }
@@ -71,7 +70,7 @@ header ul li {
 }
 
 header i {
-    font-size: 2em;
+    font-size: 1em;
     cursor: pointer;
 }
 
@@ -134,7 +133,7 @@ form{
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
-    width: 300px;   
+
 }
 
 .img{
@@ -179,9 +178,187 @@ form button{ /* gombok stílusa */
 
 /*   ---------------------------MEDIA QUERIES DOWN----------------------------   */
 
-@media screen and (max-width: 992px) { /* 992px wide or less */
-    body {
 
+@media screen and (min-width: 601px) { /* 992px wide or less */
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        font-family: "Arial", Helvetica, sans-serif;
+    }
+    
+    .hidden{
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 0.5s;
+    }
+    
+    .show{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0px);
+    }
+    
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10000;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 10px;
+        justify-content: space-between;
+    }
+    
+    header li a{
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+        text-decoration: none;
+        list-style: none;
+        color: black;
+    }
+    
+    header img{
+        width: 50px;
+        height: auto;
+    }
+    
+    
+    .bi-brightness-high-fill::before, .bi-moon::before{
+        transform: translateY(-5%);
+    }
+    .bi-moon::before{
+        transform: translateY(-15%);
+    }
+    
+    header ul {
+        display: flex;
+        align-items: center;   
+    }
+    
+    header ul li {
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
+    
+    header i {
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    
+    #keretes{
+        border-style: solid;
+    }
+    
+    /*   ---------------------------STYLE BACKGROUND below----------------------------   */
+    
+    .bg {
+        position: absolute;
+        top: 90px; /* a header miatt */
+        left: 0;
+        z-index: -1;
+        opacity: 0.15;
+    }
+    
+    .bg img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    /*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+    body {
+        font-size: 2em;
+    }
+
+    main {
+        padding-top: 400px; /* a header miatt, távolság a text és legteteke */
+        align-items: center;
+        text-align: center;
+        padding-bottom: 30px;
+        width: 95%;
+    }
+    
+    .mainTitle h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .mainTitle a{ 
+        font-size: 1.5em;
+    }
+    
+    .mainTitle h1 {
+        font-weight: 1000; /* amíg nincs jobb font*/
+    }
+    
+    form{
+        padding-top: 220px; /* a header és a kérdések közti távolság */
+    }
+    
+    .form-element{ /* kérdések */
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-element img{ /* kérdések képei */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        width: 95%;   
+    }
+    
+    .img{
+        padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
+    }
+    
+    .form-element span, #myList{ /* kérdések szövegei */
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    input, textarea, #myList{ /* inputok */
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+    
+    #osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
+        display: none;
+    }
+    
+    pre{ /* a vers stílusa */
+        padding-top: 15px;
+        border-radius: 5px;
+        font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+        font-weight: 800;
+        font-size: 1.8em;
+    }
+    form button{ /* gombok stílusa */
+        border: none;
+        background-color: #da251c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    #photo_upload{
+        transform: translateY(-40px);
     }
 }
 
@@ -228,7 +405,6 @@ form button{ /* gombok stílusa */
         padding-right: 10px; 
         padding-left: 10px;
         text-decoration: none;
-        font-size: 16px;
         list-style: none;
         color: black;
     }
@@ -408,7 +584,6 @@ form button{ /* gombok stílusa */
         padding-right: 10px; 
         padding-left: 10px;
         text-decoration: none;
-        font-size: 16px;
         list-style: none;
         color: black;
     }
@@ -588,7 +763,6 @@ form button{ /* gombok stílusa */
         padding-right: 10px; 
         padding-left: 10px;
         text-decoration: none;
-        font-size: 16px;
         list-style: none;
         color: black;
     }
@@ -768,7 +942,6 @@ form button{ /* gombok stílusa */
         padding-right: 10px; 
         padding-left: 10px;
         text-decoration: none;
-        font-size: 16px;
         list-style: none;
         color: black;
     }
@@ -904,8 +1077,6 @@ form button{ /* gombok stílusa */
         transform: translateY(-40px);
     }
 }
-
-
 
 @media(prefers-reduced-motion) {
     .hidden{

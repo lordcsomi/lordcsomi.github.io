@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Egy quiz az 1849 október 6. eseményekről">
+    <meta name="keywords" content="quiz, 1948 okt. 6., 1948 október 6., aradi vértanúk, nemzeti gyásznap">
+    <meta name="author" content="Csomós Ádám">
+    <title>Okt. 6</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+</head>
+<body>
+    <header>
+            <a href="https://www.karinthy.hu/" target="_blank"><img src="https://www.karinthy.hu/web/kepek/logo.png" alt="Karinthy Logo"></a>
+        <ul>
+            <li><a href="./sources.html" target="_blank">Források</a></li>
+            <li id="keretes"><a href="#leadas">Leadás</a></li>
+            <li><i class="bi bi-brightness-high-fill" id="toggleDark"></i></li>
+        </ul>
+    </header> 
+    <div class="bg">
+        <img src="./images/aradi_vertanuk_blurry.webp" alt="Aradi vértanúk">
+        <!-- <img src="https://felvidek.ma/wp-content/uploads/2016/09/Az-aradi-tizenh%C3%A1rom.jpg" alt="Aradi vértanúk"> -->
+    </div>
+    <main>
+        <div class="mainTitle">
+            <h1>Nemzeti Gyásznap</h1>
+            <a>Kvíz az Aradi vértanúk emléknapjára</a>
+        </div>       
+
+        <div id="classSelector" class="hidden">
+            <div class="form-element">
+                <span>Melyik osztályba jársz?</span>
+                <select id="myList" onchange="updateOsztaly()">
+                    <option>9.Akny</option>
+                    <option>9.Bkny</option>
+                    <option>9.Ckny</option>
+                    <option>9.Ekny</option>
+                    <option>9.A</option>
+                    <option>9.B</option>
+                    <option>9.C</option>
+                    <option>9.D</option>
+                    <option>9.E</option>
+                    <option>10.A</option>
+                    <option>10.B</option>
+                    <option>10.C</option>
+                    <option>10.D</option>
+                    <option>10.E</option>
+                    <option>11.A</option>
+                    <option>11.B</option>
+                    <option>11.C</option>
+                    <option>11.D</option>
+                    <option>11.E</option>
+                    <option>11.IB</option>
+                    <option>12.A</option>
+                    <option>12.B</option>
+                    <option>12.C</option>
+                    <option>12.D</option>
+                    <option>12.E</option>
+                    <option>12.IB</option>
+                </select>
+                <input type="text" name="entry.1779292264" id="osztaly" required placeholder="Pl: 9.Ekny, 9.E, 11.IB">
+            </div> 
+        </div> <!-- end of Melyik osztályba jársz? -->
+    <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfa1o-b_BoKleV0OCQX-7Q3glnRBF_KGeEQ1WBJNv-93dQ4vg/formResponse" method="POST">
+        <div>
+            <div class="form-element hidden">
+                <div class="hiden chapter">
+                    <h2>5.Feladat</h2>
+                    <h3>Rajz</h3>
+                </div>
+                <span class="hidden">Ez a mű az aradi vértanúk emlékére született. Miután elolvastad rajzolj hozzá egy illusztrációt!</span>
+                <span><pre class="hidden">
+Ady Endre: Október 6.
+Őszi napnak mosolygása,
+Őszi rózsa hervadása,
+Őszi szélnek bús keserve
+Egy-egy könny a szentelt helyre,
+Hol megváltott - hősi áron -
+Becsületet, dicsőséget
+Az aradi tizenhárom.
+Az aradi Golgotára
+Ráragyog a nap sugára,
+Oda hull az őszi rózsa,
+Hulló levél búcsucsókja;
+Bánat sír a száraz ágon,
+Ott alussza csendes álmát
+Az aradi tizenhárom.
+Őszi napnak csendes fénye,
+Tűzz reá a fényes égre,
+Bús szivünknek enyhe fényed
+Adjon nyugvást, békességet;
+Sugáridon szellem járjon
+S keressen fel küzdelminkben
+Az aradi tizenhárom.
+                </pre>
+                    </span>
+            </div>
+        </div>
+        <div id="photo_upload" class="hidden">
+            <button type="submit">Fénykép feltöltése</button>
+            <input name="entry.1711184309" id="osztaly2">
+        </div> <!-- end of photo_upload -->
+    </form>
+    </main>
+    
+</body>
+</html>
