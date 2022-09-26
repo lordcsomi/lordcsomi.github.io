@@ -186,10 +186,726 @@ form button{ /* gombok stílusa */
 }
 
 @media screen and (max-width: 600px) { /* 600px wide or less */
-    body {
-                
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        font-family: "Arial", Helvetica, sans-serif;
+    }
+    
+    .hidden{
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 0.5s;
+    }
+    
+    .show{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0px);
+    }
+    
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10000;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 10px;
+        justify-content: space-between;
+    }
+    
+    header li a{
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        list-style: none;
+        color: black;
+    }
+    
+    header img{
+        width: 50px;
+        height: auto;
+    }
+    
+    
+    .bi-brightness-high-fill::before, .bi-moon::before{
+        transform: translateY(-5%);
+    }
+    .bi-moon::before{
+        transform: translateY(-15%);
+    }
+    
+    header ul {
+        display: flex;
+        align-items: center;   
+    }
+    
+    header ul li {
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
+    
+    header i {
+        font-size: 2em;
+        cursor: pointer;
+    }
+    
+    #keretes{
+        border-style: solid;
+    }
+    
+    /*   ---------------------------STYLE BACKGROUND below----------------------------   */
+    
+    .bg {
+        position: absolute;
+        top: 90px; /* a header miatt */
+        left: 0;
+        z-index: -1;
+        opacity: 0.15;
+    }
+    
+    .bg img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    /*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+    
+    main {
+        padding-top: 230px; /* a header miatt, távolság a text és legteteke */
+        align-items: center;
+        text-align: center;
+        padding-bottom: 30px;
+        width: 450px;
+    }
+    
+    .mainTitle h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .mainTitle a{ 
+        font-size: 1em;
+    }
+    
+    .mainTitle h1 {
+        font-weight: 1000; /* amíg nincs jobb font*/
+    }
+    
+    form{
+        padding-top: 220px; /* a header és a kérdések közti távolság */
+    }
+    
+    .form-element{ /* kérdések */
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-element img{ /* kérdések képei */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        width: 300px;   
+    }
+    
+    .img{
+        padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
+    }
+    
+    .form-element span, #myList{ /* kérdések szövegei */
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    input, textarea, #myList{ /* inputok */
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    #osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
+        display: none;
+    }
+    
+    pre{ /* a vers stílusa */
+        padding-top: 15px;
+        border-radius: 5px;
+        font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+        font-weight: 800;
+        font-size: 1.8em;
+    }
+    form button{ /* gombok stílusa */
+        border: none;
+        background-color: #da251c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    #photo_upload{
+        transform: translateY(-40px);
     }
 }
+
+@media screen and (max-width: 500px) {
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        font-family: "Arial", Helvetica, sans-serif;
+    }
+    
+    .hidden{
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 0.5s;
+    }
+    
+    .show{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0px);
+    }
+    
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10000;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 10px;
+        justify-content: space-between;
+    }
+    
+    header li a{
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        list-style: none;
+        color: black;
+    }
+    
+    header img{
+        width: 50px;
+        height: auto;
+    }
+    
+    
+    .bi-brightness-high-fill::before, .bi-moon::before{
+        transform: translateY(-5%);
+    }
+    .bi-moon::before{
+        transform: translateY(-15%);
+    }
+    
+    header ul {
+        display: flex;
+        align-items: center;   
+    }
+    
+    header ul li {
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
+    
+    header i {
+        font-size: 2em;
+        cursor: pointer;
+    }
+    
+    #keretes{
+        border-style: solid;
+    }
+    
+    /*   ---------------------------STYLE BACKGROUND below----------------------------   */
+    
+    .bg {
+        position: absolute;
+        top: 90px; /* a header miatt */
+        left: 0;
+        z-index: -1;
+        opacity: 0.15;
+    }
+    
+    .bg img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    /*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+    
+    main {
+        padding-top: 170px; /* a header miatt, távolság a text és legteteke */
+        align-items: center;
+        text-align: center;
+        padding-bottom: 30px;
+        width: 450px;
+    }
+    
+    .mainTitle h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .mainTitle a{ 
+        font-size: 1em;
+    }
+    
+    .mainTitle h1 {
+        font-weight: 1000; /* amíg nincs jobb font*/
+    }
+    
+    form{
+        padding-top: 100px; /* a header és a kérdések közti távolság */
+    }
+    
+    .form-element{ /* kérdések */
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-element img{ /* kérdések képei */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        width: 300px;   
+    }
+    
+    .img{
+        padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
+    }
+    
+    .form-element span, #myList{ /* kérdések szövegei */
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    input, textarea, #myList{ /* inputok */
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    #osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
+        display: none;
+    }
+    
+    pre{ /* a vers stílusa */
+        padding-top: 15px;
+        border-radius: 5px;
+        font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+        font-weight: 800;
+        font-size: 1.8em;
+    }
+    form button{ /* gombok stílusa */
+        border: none;
+        background-color: #da251c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    #photo_upload{
+        transform: translateY(-40px);
+    }
+}
+
+@media screen and (max-width: 400px) { /* 400px wide or less */
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        font-family: "Arial", Helvetica, sans-serif;
+    }
+    
+    .hidden{
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 0.5s;
+    }
+    
+    .show{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0px);
+    }
+    
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10000;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 10px;
+        justify-content: space-between;
+    }
+    
+    header li a{
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        list-style: none;
+        color: black;
+    }
+    
+    header img{
+        width: 50px;
+        height: auto;
+    }
+    
+    
+    .bi-brightness-high-fill::before, .bi-moon::before{
+        transform: translateY(-5%);
+    }
+    .bi-moon::before{
+        transform: translateY(-15%);
+    }
+    
+    header ul {
+        display: flex;
+        align-items: center;   
+    }
+    
+    header ul li {
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
+    
+    header i {
+        font-size: 2em;
+        cursor: pointer;
+    }
+    
+    #keretes{
+        border-style: solid;
+    }
+    
+    /*   ---------------------------STYLE BACKGROUND below----------------------------   */
+    
+    .bg {
+        position: absolute;
+        top: 90px; /* a header miatt */
+        left: 0;
+        z-index: -1;
+        opacity: 0.15;
+    }
+    
+    .bg img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    /*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+    
+    main {
+        padding-top: 150px; /* a header miatt, távolság a text és legteteke */
+        align-items: center;
+        text-align: center;
+        padding-bottom: 30px;
+        width: 300px;
+    }
+    
+    .mainTitle h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .mainTitle a{ 
+        font-size: 1em;
+    }
+    
+    .mainTitle h1 {
+        font-weight: 1000; /* amíg nincs jobb font*/
+    }
+    
+    form{
+        padding-top: 50px; /* a header és a kérdések közti távolság */
+    }
+    
+    .form-element{ /* kérdések */
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-element img{ /* kérdések képei */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        width: 300px;   
+    }
+    
+    .img{
+        padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
+    }
+    
+    .form-element span, #myList{ /* kérdések szövegei */
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    input, textarea, #myList{ /* inputok */
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    #osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
+        display: none;
+    }
+    
+    pre{ /* a vers stílusa */
+        padding-top: 15px;
+        border-radius: 5px;
+        font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+        font-weight: 800;
+        font-size: 1.8em;
+    }
+    form button{ /* gombok stílusa */
+        border: none;
+        background-color: #da251c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    #photo_upload{
+        transform: translateY(-40px);
+    }
+}
+
+@media screen and (max-width: 300px) { /* 300px wide or less */
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        font-family: "Arial", Helvetica, sans-serif;
+    }
+    
+    .hidden{
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 0.5s;
+    }
+    
+    .show{
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0px);
+    }
+    
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10000;
+        padding-top: 20px;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        justify-content: space-between;
+    }
+    
+    header li a{
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        list-style: none;
+        color: black;
+    }
+    
+    header img{
+        width: 50px;
+        height: auto;
+    }
+    
+    
+    .bi-brightness-high-fill::before, .bi-moon::before{
+        transform: translateY(-5%);
+    }
+    .bi-moon::before{
+        transform: translateY(-15%);
+    }
+    
+    header ul {
+        display: flex;
+        align-items: center;   
+    }
+    
+    header ul li {
+        list-style: none;
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
+    
+    header i {
+        font-size: 2em;
+        cursor: pointer;
+    }
+    
+    #keretes{
+        border-style: solid;
+    }
+    
+    /*   ---------------------------STYLE BACKGROUND below----------------------------   */
+    
+    .bg {
+        position: absolute;
+        top: 90px; /* a header miatt */
+        left: 0;
+        z-index: -1;
+        opacity: 0.15;
+    }
+    
+    .bg img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    /*   ---------------------------TEXT STYLE DOWN below----------------------------   */
+    
+    main {
+        padding-top: 120px; /* a header miatt, távolság a text és legteteke */
+        align-items: center;
+        text-align: center;
+        padding-bottom: 30px;
+        width: 250px;
+    }
+    
+    .mainTitle h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .mainTitle a{ 
+        font-size: 1em;
+    }
+    
+    .mainTitle h1 {
+        font-weight: 1000; /* amíg nincs jobb font*/
+    }
+    
+    form{
+        padding-top: 50px; /* a header és a kérdések közti távolság */
+    }
+    
+    .form-element{ /* kérdések */
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .form-element img{ /* kérdések képei */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        width: 250px;   
+    }
+    
+    .img{
+        padding-bottom: 10px; /* képek allatti hely csak ahol nincs szöveg a kép alatt*/
+    }
+    
+    .form-element span, #myList{ /* kérdések szövegei */
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    input, textarea, #myList{ /* inputok */
+        border: 1px solid #ccc;
+        line-height: 2;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    #osztaly, #osztaly2{ /* osztályválasztó input elrejtése */
+        display: none;
+    }
+    
+    pre{ /* a vers stílusa */
+        padding-top: 15px;
+        border-radius: 5px;
+        font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+        font-weight: 800;
+        font-size: 1.5em;
+    }
+    form button{ /* gombok stílusa */
+        border: none;
+        background-color: #da251c;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    #photo_upload{
+        transform: translateY(-40px);
+    }
+}
+
+
 
 @media(prefers-reduced-motion) {
     .hidden{
