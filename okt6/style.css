@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -160,8 +160,9 @@ input, textarea, #myList{ /* inputok */
 pre{ /* a vers stílusa */
     padding-top: 15px;
     border-radius: 5px;
-    font-family: 'Fascinate', cursive; /* amíg nincs jobb font*/
-    font-weight: 400;
+    font-family: 'Ms Madi', cursive; /* amíg nincs jobb font*/
+    font-weight: 800;
+    font-size: 1.8em;
 }
 form button{ /* gombok stílusa */
     border: none;
