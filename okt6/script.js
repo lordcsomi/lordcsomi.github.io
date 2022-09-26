@@ -32,9 +32,10 @@ function updateOsztaly(){
     console.log('Changed osztály');
     var mylist = document.getElementById("myList");
     document.getElementById("osztaly").value = mylist.options[mylist.selectedIndex].text;
-    document.getElementById("osztaly2").value = mylist.options[mylist.selectedIndex].text;
+    if (document.getElementById("osztaly2")){
+        document.getElementById("osztaly2").value = mylist.options[mylist.selectedIndex].text;}
+    document.cookie = "osztaly=" + mylist.options[mylist.selectedIndex].text;
 }
-
 
 function checkEmail(){
     var email = document.getElementById("email").value;
@@ -44,6 +45,9 @@ function checkEmail(){
     if(result == false){
         alert("Nem karinthy email címet adtál meg!");
         document.getElementById("email").value = "";
+    }
+    else{
+        document.cookie = "email=" + email;
     }
 }
 
@@ -60,3 +64,29 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
+
+function onload(){
+    var osztaly = getCookie("osztaly");
+    var email = getCookie("email");
+    document.getElementById("osztaly").value = osztaly;
+    document.getElementById("myList").value = osztaly;
+    if (document.getElementById("osztaly2")){
+    document.getElementById("osztaly2").value = osztaly;}
+    document.getElementById("email").value = email; 
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
