@@ -26,10 +26,21 @@
         <!-- <img src="https://felvidek.ma/wp-content/uploads/2016/09/Az-aradi-tizenh%C3%A1rom.jpg" alt="Aradi vértanúk"> -->
     </div>
     <main>
-        <div class="mainTitle">
-            <h1>Nemzeti Gyásznap</h1>
-            <a>Kvíz az Aradi vértanúk emléknapjára</a>
-        </div>       
+        <div id="mainConainer">
+            <div class="mainTitle">
+                <h1>Nemzeti Gyásznap</h1>
+                <a>Kvíz az aradi vértanúk emléknapjára</a>
+            </div>
+        </div>    
+
+    <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfa1o-b_BoKleV0OCQX-7Q3glnRBF_KGeEQ1WBJNv-93dQ4vg/formResponse" method="POST">
+
+        <div id="name" class="hidden">
+            <div class="form-element">
+            <span>Mi a neved?</span>
+            <input type="text" name="entry.772893637" required placeholder="">
+            </div>
+        </div> <!-- end of name -->
 
         <div id="classSelector" class="hidden">
             <div class="form-element">
@@ -62,10 +73,11 @@
                     <option>12.E</option>
                     <option>12.IB</option>
                 </select>
-                <input type="text" name="entry.1779292264" id="osztaly" required placeholder="Pl: 9.Ekny, 9.E, 11.IB">
+                <input type="text" name="entry.1711184309" id="osztaly" required placeholder="Pl: 9.Ekny, 9.E, 11.IB">
             </div> 
-        </div> <!-- end of Melyik osztályba jársz? -->
-    <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSfa1o-b_BoKleV0OCQX-7Q3glnRBF_KGeEQ1WBJNv-93dQ4vg/formResponse" method="POST">
+        </div> <!-- end of classSelector -->
+
+
         <div>
             <div class="form-element hidden">
                 <div class="hiden chapter">

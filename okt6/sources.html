@@ -16,9 +16,9 @@
         <li><i class="bi bi-brightness-high-fill" id="toggleDark"></i></li>
     </ul>
     </header> 
-    <div id="top">
+    <div id="text">
         <h1>Források & Credits</h1>
-        <p>Ezen az oldalon megtalálod hogy mik a források és hogy kik vettesk részt ebben projectben</p>
+        <p>Ezen az oldalon megtalálod a forrásokat és azokat, akik részt vettek ebben a projektben</p>
     </div>
 
     <div id="gallery">
@@ -52,78 +52,6 @@
         <h2>Készítette:</h2>
         <h2>Csomós Ádám</h2>
     </div>
-
-
-
-    <script type="module">
-        import { default as interact} from 'https://unpkg.com/interactjs/dist/interact.min.js'
-        var pixelSize = 16
-
-        interact('.rainbow-pixel-canvas').draggable({
-            max: Infinity,
-            maxPerElement: Infinity,
-            origin: 'self',
-            modifiers: [
-            interact.modifiers.snap({
-                // snap to the corners of a grid
-                targets: [
-                interact.snappers.grid({ x: pixelSize, y: pixelSize })
-                ]
-            })
-            ],
-            listeners: {
-            // draw colored squares on move
-            move: function (event) {
-                var context = event.target.getContext('2d')
-                // calculate the angle of the drag direction
-                var dragAngle = 180 * Math.atan2(event.dx, event.dy) / Math.PI
-
-                // set color based on drag angle and speed
-                context.fillStyle =
-                'hsl(' +
-                dragAngle +
-                ', 86%, ' +
-                (30 + Math.min(event.speed / 1000, 1) * 50) +
-                '%)'
-
-                // draw squares
-                context.fillRect(
-                event.pageX - pixelSize / 2,
-                event.pageY - pixelSize / 2,
-                pixelSize,
-                pixelSize
-                )
-            }
-            }
-        })
-        // clear the canvas on doubletap
-        .on('doubletap', function (event) {
-            var context = event.target.getContext('2d')
-
-            context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-            resizeCanvases()
-        })
-
-        function resizeCanvases () {
-        [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (
-            canvas
-        ) {
-            delete canvas.width
-            delete canvas.height
-
-            var rect = canvas.getBoundingClientRect()
-
-            canvas.width = rect.width
-            canvas.height = rect.height
-        })
-        }
-
-        resizeCanvases()
-
-        // interact.js can also add DOM event listeners
-        interact(window).on('resize', resizeCanvases)
-
-    </script>
         
     <style>
         *{
@@ -291,7 +219,57 @@
         }
         }*/
     </style>
+
     <script>
+        const textDisplay = document.getElementById('text')
+        const phrases = ['Források', 'Credits', 'Special thanks']
+        let i = 0
+        let j = 0 
+        let currentPhrase = []
+        let isDeleting = false
+        let isEnd = false
+
+        function loop () {
+        isEnd = false
+        textDisplay.innerHTML = currentPhrase.join('')
+
+        if (i < phrases.length) {
+
+            if (!isDeleting && j <= phrases[i].length) {
+            currentPhrase.push(phrases[i][j])
+            j++
+            textDisplay.innerHTML = currentPhrase.join('')
+            }
+
+            if(isDeleting && j <= phrases[i].length) {
+            currentPhrase.pop(phrases[i][j])
+            j--
+            textDisplay.innerHTML = currentPhrase.join('')
+            }
+
+            if (j == phrases[i].length) {
+            isEnd = true
+            isDeleting = true
+            }
+
+            if (isDeleting && j === 0) {
+            currentPhrase = []
+            isDeleting = false
+            i++
+            if (i === phrases.length) {
+                i = 0
+            }
+            }
+        }
+        const spedUp = Math.random() * (80 -50) + 50
+        const normalSpeed = Math.random() * (300 -200) + 200
+        const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed
+        setTimeout(loop, time)
+        }
+
+        loop()
+
+
         const toggle = document.getElementById('toggleDark');
         const body = document.querySelector('body');
         const headerLi = document.querySelectorAll('header li a');
