@@ -26,15 +26,17 @@
         <!-- <img src="https://felvidek.ma/wp-content/uploads/2016/09/Az-aradi-tizenh%C3%A1rom.jpg" alt="Aradi vértanúk"> -->
     </div>
     <main>
-        <div class="mainTitle">
-            <h1>Nemzeti Gyásznap</h1>
-            <a>Kvíz az Aradi vértanúk emléknapjára</a>
+        <div id="mainConainer">
+            <div class="mainTitle">
+                <h1>Nemzeti Gyásznap</h1>
+                <a>Kvíz az Aradi vértanúk emléknapjára</a>
+            </div>
         </div>
     <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSds-5hM3c_cSprj30ad-PHWF8EstOU4azz-qw8BaTCkL6Dasw/formResponse" method="post">
         
         <div id="getEmail" class="hidden">
             <div class="form-element">
-                <span class="hidden">Mi a karinthys e-mail-címed?</span>
+                <span>Mi a karinthys e-mail-címed?</span>
                 <input type="email" id="email" autocomplete="email"  name="emailAddress" required onchange="checkEmail()" placeholder="Példa@karinthy.hu">
             </div> 
         </div> <!-- end of get email -->
@@ -76,7 +78,7 @@
 
         <div id="1.kerdes" class="hidden">
             <div class="hiden chapter">
-                <h2>1.Feladat</h2>
+                <h2>1.feladat</h2>
                 <h3>Batthyány Lajos</h3>
             </div>
             <div class="form-element">
@@ -88,7 +90,7 @@
        
         <div id="2.kerdes" class="hidden">
             <div class="hiden chapter">
-                <h2>2.Feladat</h2>
+                <h2>2.feladat</h2>
                 <h3>Az aradi vértanúk</h3>
             </div>
             <div class="form-element hidden">
@@ -111,7 +113,7 @@
      
         <div id="3.kerdes" class="hidden">
             <div class="hiden chapter">
-                <h2>3.Feladat</h2>
+                <h2>3.feladat</h2>
                 <h3>A “Világosi” fegyverletétel</h3>
             </div>
             <div class="form-element">
@@ -123,14 +125,14 @@
         
         <div id="4.kerdes" class="hidden">
             <div class="hiden chapter">
-                <h2>4.Feladat</h2>
+                <h2>4.feladat</h2>
                 <h3>Képfelismerés</h3>
             </div>
             <div class="form-element hidden">
                 <div class="img">
                     <img src="./images/image2.webp" alt="kép1">
                 </div>
-                <input type="text" name="entry.493962117" required placeholder="Mi a neve a helyésgnek?">
+                <input type="text" name="entry.493962117" required placeholder="Mi a neve a helységnek?">
             </div>
             <div class="form-element hidden">
                 <div class="img">
@@ -148,7 +150,7 @@
                 <div class="img">
                     <img src="./images/image5.webp" alt="kép4">
                 </div>
-                <input type="text" name="entry.1947272240" required placeholder="Mi a neve a helyésgnek?">
+                <input type="text" name="entry.1947272240" required placeholder="Mi a neve a helységnek?">
             </div>
         </div> <!-- end of 4.kerdes -->
 
@@ -159,7 +161,7 @@
         <div>
             <div class="form-element hidden">
                 <div class="hiden chapter">
-                    <h2>5.Feladat</h2>
+                    <h2>5.feladat</h2>
                     <h3>Rajz</h3>
                 </div>
                 <span class="hidden">Ez a mű az aradi vértanúk emlékére született. Miután elolvastad rajzolj hozzá egy illusztrációt!</span>

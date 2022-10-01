@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lilita+One');
 *{
     padding: 0;
     margin: 0;
@@ -54,6 +55,7 @@ header img{
 .bi-brightness-high-fill::before, .bi-moon::before{
     transform: translateY(-5%);
 }
+
 .bi-moon::before{
     transform: translateY(-15%);
 }
@@ -70,7 +72,7 @@ header ul li {
 }
 
 header i {
-    font-size: 1em;
+    font-size: 1.2em;
     cursor: pointer;
 }
 
@@ -104,21 +106,64 @@ main {
     width: 300px;
 }
 
+#mainConainer{
+    width: 300px;
+    height: 150px;
+}
+
 .mainTitle h1{
     text-align: center;
-    font-size: 3em;
+    text-align: center;
+    width: 300px;
+    letter-spacing: 2px;
+    font: bold 45pt 'Lilita One';
+    text-shadow:
+        1px 1px 0 #aaa,
+        2px 2px 0 #bbb,
+        3px 3px 0 #bbb,
+        4px 4px 0 #bbb,
+        4px 4px 15px #888,
+        4px 4px 5px #444;
+    -moz-transform: scale(1) rotate(0deg) translate(0px, 0px);
+    -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px);
+    -o-transform: scale(1) rotate(0deg) translate(0px, 0px);
+    -ms-transform: scale(1) rotate(0deg) translate(0px, 0px);
+    transform: scale(1) rotate(0deg) translate(0px, 0px);
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+    padding-bottom: 5px;
 }
 
-.mainTitle a{ 
+.mainTitle h1:hover{
+    padding-top: 20px;
+    text-shadow:
+        1px 1px 0 #aaa,
+        2px 2px 0 #bbb,
+        3px 3px 0 #bbb,
+        4px 4px 0 #bbb,
+        13px 13px 35px #888,
+        13px 13px 20px #444;
+        -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-1deg, -1deg);
+        -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-1deg, -1deg);
+        -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-1deg, -1deg);
+        -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-1deg, -1deg);
+        transform: scale(1) rotate(0deg) translate(0px, 0px) skew(-1deg, -1deg);
+
+}
+
+.mainTitle a{   
     font-size: 1em;
-}
-
-.mainTitle h1 {
-    font-weight: 1000; /* amíg nincs jobb font*/
 }
 
 form{
     padding-top: 50px; /* a header és a kérdések közti távolság */
+}
+
+option{
+    align-items: center;
+    text-align: center;
 }
 
 .form-element{ /* kérdések */
@@ -133,6 +178,7 @@ form{
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
+    width: 300px;
 
 }
 
@@ -163,6 +209,7 @@ pre{ /* a vers stílusa */
     font-weight: 800;
     font-size: 1.8em;
 }
+
 form button{ /* gombok stílusa */
     border: none;
     background-color: #da251c;
