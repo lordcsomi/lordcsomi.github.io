@@ -166,6 +166,14 @@ option{
     text-align: center;
 }
 
+:placeholder-shown{
+    text-align: center;
+}
+
+::placeholder{
+    text-align: center;
+}
+
 .form-element{ /* kérdések */
     margin-bottom: 30px;
     display: flex;
