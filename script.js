@@ -29,27 +29,25 @@ toggle.addEventListener('click', function(){
 });
 
 function updateOsztaly(){
-    console.log('Changed osztály');
     var mylist = document.getElementById("myList");
     document.getElementById("osztaly").value = mylist.options[mylist.selectedIndex].text;
-    if (document.getElementById("osztaly2")){
-        document.getElementById("osztaly2").value = mylist.options[mylist.selectedIndex].text;}
+
     document.cookie = "osztaly=" + mylist.options[mylist.selectedIndex].text;
 }
 
-function checkEmail(){
-    var email = document.getElementById("email").value;
-    let myString = "@karinthy.hu";
-    let result = email.includes(myString);
-    console.log(result);
-    if(result == false){
-        alert("Nem karinthy email címet adtál meg!");
-        document.getElementById("email").value = "";
-    }
-    else{
-        document.cookie = "email=" + email;
-    }
+function updateName(){
+    console.log('Changed name');
+    document.cookie = "name=" + document.getElementById("name").value;
 }
+
+function onload(){
+    var osztaly = getCookie("osztaly");
+    var name = getCookie("name");
+    document.getElementById("osztaly").value = osztaly;
+    document.getElementById("myList").value = osztaly;
+    document.getElementById("name").value = name; 
+}
+
 
 const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -64,16 +62,6 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
-
-function onload(){
-    var osztaly = getCookie("osztaly");
-    var email = getCookie("email");
-    document.getElementById("osztaly").value = osztaly;
-    document.getElementById("myList").value = osztaly;
-    if (document.getElementById("osztaly2")){
-    document.getElementById("osztaly2").value = osztaly;}
-    document.getElementById("email").value = email; 
-}
 
 function getCookie(cname) {
     var name = cname + "=";

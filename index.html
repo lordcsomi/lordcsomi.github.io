@@ -35,10 +35,10 @@
         </div>
     <form action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSds-5hM3c_cSprj30ad-PHWF8EstOU4azz-qw8BaTCkL6Dasw/formResponse" method="post">
 
-        <div id="name" class="hidden">
+        <div class="hidden">
             <div class="form-element">
             <span>Mi a neved?</span>
-            <input type="text" name="entry.93328434" required placeholder="">
+            <input type="text" name="entry.93328434" onchange="updateName()" id="name" required placeholder="">
             </div>
         </div> <!-- end of name -->
 
@@ -158,5 +158,8 @@
         <button id="leadas" type="submit" class="hidden">Quiz leadása</button>
     </form>
     </main>
+    <footer>
+        <p>Ha valami nem megy vagy hibát észleltél küldj egy e-mailt csomi@karinthy.hu címre vagy keress meg élőben!</p>
+    </footer>
 </body>
 </html>

@@ -17,12 +17,12 @@
         <li><i class="bi bi-brightness-high-fill" id="toggleDark"></i></li>
     </ul>
     </header> 
-    <div id="top">
+    <div id="top" class="hidden">
         <h1>Források & Credits</h1>
         <p>Ezen az oldalon megtalálod a forrásokat és azokat, akik részt vettek ebben a projektben</p>
     </div>
 
-    <div id="gallery">
+    <div id="gallery" class="hidden">
         <img src="./images/image1.png">
         <img src="./images/image2.png">
         <img src="./images/image3.png">
@@ -33,7 +33,7 @@
         <img src="images/flag_hungary.png">
     </div>
 
-    <div id="links">
+    <div id="links" class="hidden">
         <a target="_blank" href="https://vasarnap.hu/wp-content/uploads/2020/10/Grof_batthyany_lajos_elso_miniszterelnokunk_kivegzese.jpg">Batthyany Lajos kivegzese</a>
         <a target="_blank" href="https://hirado.hu/wp-content/uploads/sites/7/2019/10/FCSER19870307018.jpg">Kivégzés</a>
         <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/4/40/Vil%C3%A1gosi_fegyverlet%C3%A9tel.jpg">Világosi fegyverletétel</a>
@@ -43,16 +43,35 @@
         <a target="_blank" href="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/5d/b8/44/primaria-veche-arad.jpg?w=1400&h=-1&s=1">Arad</a>
         <a target="_blank" href="https://www.holocaustremembrance.com/sites/default/files/2018-01/flag_hungary.png">Hungarian Flag</a>
     </div>
-
+    
     <div id="credits">
         <h1>Credits</h1>
-        <p>Köszönöm a következő osztálytársaim (10.E) segítségét:</p>
-        <p>Feladatok megfogalmazása és illusztrációk összegyűjtése - Maurer Alexandra és Kónya Lilla</p>
-        <p>Űrlapok szerkesztése és plakátok tervezése - Kovács Aurél Péter</p>
-        <p>Szakmai hozzájárulás (extra help 😃) - Hámori Márton</p>
-        <p>Weblapot készítette: Csomós Ádám</p>
+        <p>Köszönöm a következő (10.E-s) osztálytársaim segítségét:</p>
+    </div>
+
+    <div class="grid-container hidden">
+        <div class="grid-item left doubleRow">Feladatok megfogalmazása és illusztrációk összegyűjtése</div>
+        <div class="grid-item right name">Maurer Alexandra</div>
+        <div class="grid-item right name">Kónya Lilla</div>
+
+        <div class="grid-item left">Űrlapok szerkesztése és plakátok tervezése</div>
+        <div class="grid-item right name">Kovács Aurél Péter</div>
+
+        <div class="grid-item left">Szakmai hozzájárulás (extra help 😃)</div>
+        <div class="grid-item right name">Hámori Márton</div>
+
+        <div class="grid-item left">Weblapot <span id="text"></span> </div>
+        <div class="grid-item right name">Csomós Ádám</div>
     </div>
         
+    <div>
+
+    </div>
+
+    <footer>
+        <p>Ha valami nem megy vagy hibát észleltél küldj egy e-mailt csomi@karinthy.hu címre vagy keress meg élőben!</p>
+    </footer>
+
     <style>
         *{
             padding: 0;
@@ -63,6 +82,18 @@
             text-align: center;
         }
         
+        .hidden{
+            opacity: 0;
+            filter: blur(3px);
+            transform: translateX(-100px);
+            transition: all 0.5s;
+        }
+
+        .show{
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateX(0px);
+        }
         #top{
             padding-top: 90px;
             width: auto;
@@ -214,11 +245,87 @@
             column-count:         1;
         }
         }*/
+
+        .grid-container {
+            margin-top: 50px;
+            display: grid;
+            column-gap: 10px;
+            row-gap: 40px;
+            grid-template-columns: 50% 50%;
+            padding: 10px;
+            width: 300px;
+        }
+
+        .right{
+            text-align: right;
+        }
+
+        .left{
+            text-align: left;
+        }
+
+        .doubleRow{
+            grid-row: span 2;
+        }
+
+        .name{ 
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        footer{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            font-size: 0.8em;
+        }
     </style>
 
     <script>
+
+        const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    } else {
+                        /*entry.target.classList.remove('show');*/
+                    }
+
+                });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        const toggle = document.getElementById('toggleDark');
+        const body = document.querySelector('body');
+        const headerLi = document.querySelectorAll('header li a');
+
+        toggle.addEventListener('click', function(){
+            this.classList.toggle('bi-moon');
+            if(this.classList.toggle('bi-brightness-high-fill')){
+                body.style.background = 'white';
+                body.style.color = 'black';
+                body.style.transition = '2s';
+                body.style.filter = 'grayscale(0%)';
+                /*make all the headerLi elements black */
+                headerLi.forEach(function(item){
+                    item.style.color = 'black';
+                });
+            }else{
+                body.style.background = 'black';
+                body.style.color = 'white';
+                body.style.transition = '2s';
+                body.style.filter = 'grayscale(70%)';
+                /*make all the headerLi elements white */
+                headerLi.forEach(function(item){
+                    item.style.color = 'white';
+                });
+            }
+        });
+
         const textDisplay = document.getElementById('text')
-        const phrases = ['Források', 'Credits', 'Special thanks']
+        const phrases = ['tervezte', 'dizájnolta', 'fejlesztette', 'tesztelte', 'készítette']
         let i = 0
         let j = 0 
         let currentPhrase = []
@@ -264,68 +371,6 @@
         }
 
         loop()
-
-
-        const toggle = document.getElementById('toggleDark');
-        const body = document.querySelector('body');
-        const headerLi = document.querySelectorAll('header li a');
-
-        toggle.addEventListener('click', function(){
-            this.classList.toggle('bi-moon');
-            if(this.classList.toggle('bi-brightness-high-fill')){
-                body.style.background = 'white';
-                body.style.color = 'black';
-                body.style.transition = '2s';
-                body.style.filter = 'grayscale(0%)';
-                /*make all the headerLi elements black */
-                headerLi.forEach(function(item){
-                    item.style.color = 'black';
-                });
-            }else{
-                body.style.background = 'black';
-                body.style.color = 'white';
-                body.style.transition = '2s';
-                body.style.filter = 'grayscale(70%)';
-                /*make all the headerLi elements white */
-                headerLi.forEach(function(item){
-                    item.style.color = 'white';
-                });
-            }
-        });
-
-        let darkBoxVisible = false;
-        function showDarkbox(url) {
-            if(!darkBoxVisible) {
-                let x = (window.innerWidth - 1280) / 2;
-                let y = window.scrollY + 50;
-    
-                // Create the darkBox
-                var div = document.createElement("div");
-                div.id = "darkbox";
-                div.innerHTML = '<img class="darkboximg" src="'+url+'" />';
-                document.body.appendChild(div);
-                let box = document.getElementById("darkbox");
-                box.style.left = x.toString()+"px";
-                box.style.top = y.toString()+"px";
-                box.style.height = 'auto';
-                box.addEventListener('click', (event) => {
-                    // Remove it
-                    let element = document.getElementById("darkbox");
-                    element.parentNode.removeChild(element);
-    
-                    darkBoxVisible = false;
-                })
-    
-                darkBoxVisible = true;
-    
-            } else {
-                // Remove it
-                let element = document.getElementById("darkbox");
-                element.parentNode.removeChild(element);
-    
-                darkBoxVisible = false;
-            }
-        }
         </script>
 </body>
 
