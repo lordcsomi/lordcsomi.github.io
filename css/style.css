@@ -1,0 +1,50 @@
+/* Path: lookingforcoleges\css\style.css */
+body {
+    background: radial-gradient(circle at 100% 50%, #3c58ba 0%, #ff4576 100%);
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* header*/
+header {
+    padding: 20px 0;
+    text-align: center;
+
+}
+
+#branding {
+    /* boxshadow */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+/* class="highlight" */
+.highlight {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    /* alignli items horizontaly */    
+
+}
+nav li, a{
+    list-style: none;
+    text-decoration: none;
+    margin: 5px;
+    color: #fff;
+}
+
