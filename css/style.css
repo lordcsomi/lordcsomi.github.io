@@ -1,4 +1,9 @@
 /* Path: lookingforcoleges\css\style.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body {
     background: radial-gradient(circle at 100% 50%, #3c58ba 0%, #ff4576 100%);
     background-size: cover;
@@ -96,15 +101,17 @@ nav li, a{
 }
 
 .card p {
-    padding: 10px;
+    
     text-align: left;
     letter-spacing: 1px;
     padding-left: 10%;
+    padding-right: 10%;
+    margin: 5px;
 }
 
 span {
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
