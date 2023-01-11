@@ -31,6 +31,7 @@ h3, h4 {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     width: max-content;
     margin: 0 auto;
+    display: flex;
 }
 
 /* class="highlight" */
@@ -81,7 +82,7 @@ nav li, a{
     letter-spacing: 1px;
     padding-top: 20px;
 }
-/* cards */
+
 .cards {
     flex-wrap: wrap;
     justify-content: center;
@@ -91,12 +92,22 @@ nav li, a{
 }
 
 .card {
+    cursor:pointer;
     border: 3px solid #fff;
     border-radius: 8px;
     margin: 10px;
     width: 45%;
     height: 45%;
     margin-top: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+/* handel on hover event*/
+.card:hover {
+    transform: translateY(-5px);
+    /* boxshadow */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: all 0.3s ease;
 }
 
 .top{
@@ -150,4 +161,12 @@ footer a{
         width: 80%;
         height: 80%;
     }
+}
+
+.more {
+    padding: 10px;
+}
+
+.more ul{
+    list-style: inside;
 }
