@@ -5,7 +5,7 @@
     padding: 0;
 }
 body {
-    background: radial-gradient(circle at 100% 50%, #3c58ba 0%, #ff4576 100%);
+    background: radial-gradient(circle at 100% 50%, #1e5128 0%, #191a19 170%);
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Open Sans', sans-serif;
@@ -32,6 +32,7 @@ h3, h4 {
     width: max-content;
     margin: 0 auto;
     display: flex;
+    border-radius: 5px;
 }
 
 /* class="highlight" */
@@ -112,7 +113,7 @@ nav li, a{
 
 .top{
     border-radius: 5px 5px 0px 0px;
-    background-color: #ff4576;
+    background-color: #4e9f3d;
     height: 40px;
     padding-top: 10px;
     display: flex;
@@ -165,7 +166,7 @@ footer a{
 
 .more {
     padding: 10px;
-    background-color: #ff4576;
+    background-color: #4e9f3d;
     border-radius: 5px;
     margin-right: 10%;
     margin-left: 10%;
@@ -173,6 +174,7 @@ footer a{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: #fff solid 3px;
 }
 
 .more ul{
@@ -205,6 +207,7 @@ footer a{
     max-height: 1000px;
     padding: 5px;
     border: #fff solid 3px;
+    border-top: none;
     transition: max-height 0.2s ease-in;
 }
 
@@ -253,7 +256,7 @@ footer a{
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #ff4576;
+    background-color: #4e9f3d;
     color: #fff;
     cursor: pointer;
 }

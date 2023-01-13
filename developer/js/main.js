@@ -22,17 +22,20 @@ brandCard.addEventListener("click", () => {
 // event listeners check if the user clicks on the why than add the class open to the whyItems and rotate arrow 180 degrees
 why.addEventListener("click", () => {
   whyItems.classList.toggle("open");
+  why.classList.toggle("open");
   arrow1.classList.toggle("rotate");
 });
 
 // event listeners check if the user clicks on the expectations than add the class open to the expectationsItems and rotate arrow 180 degrees
 expectations.addEventListener("click", () => {
     expectationsItems.classList.toggle("open");
+    expectations.classList.toggle("open");
     arrow2.classList.toggle("rotate");
 });
 
 // event listeners check if the user clicks on the apply than add the class open to the applyItems and rotate arrow 180 degrees
 apply.addEventListener("click", () => {
     applyItems.classList.toggle("open");
+    apply.classList.toggle("open");
     arrow3.classList.toggle("rotate");
 });

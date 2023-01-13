@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Designer</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="img/zybeg_final.png" type="image/png" sizes="16x16">
 </head>
 <body>
     <header>
@@ -16,48 +17,76 @@
     <div class="cards">
         <div class="card">
             <h2 class="top">Designer</h2>
-            <img src="img/img2.png" alt="developer">
+            <img src="img/img1.jpeg" alt="developer">
             <p>Generated with:<a href="https://www.midjourney.com/" style="cursor: pointer; text-decoration: underline;" target="_blank">Midjourney</a></p>
         </div>
     </div>
 
-    
+
     <div class="section"> <!-- Why to join -->
         <div class="more" id="why">
             <div><h2>Why to join:</h2></div>
-            <div class="arrow-down1"> </div>
+            <div class="arrow-down" id="arrow-down1"> </div>
         </div>
-    </div>
-
-
-    <div class="section"> <!-- Expectations -->
-        <div class="more" id="expectations">
-            <div><h2>Expectations:</h2></div>
-            <div class="arrow-down2"> </div>
-        </div>
-        <ul class="more_dropdown" id="expectations_li">
-            <li>Strong graphic design skills: You should have a solid understanding of design principles such as composition, color theory, and typography, and should be able to create visually engaging and polished artwork.</li>
-            <li>Experience with game development: You should have experience creating art assets for games and should be familiar with the technical requirements of creating game art, such as file formats, resolution, and performance considerations.</li>
-            <li>Familiarity with Unreal Engine 5: As the game is using Unreal Engine 5, it would be a plus if you have experience working with this engine and can use its tools to create assets and integrate them into the game.</li>
-            <li>Strong portfolio: You should have a strong portfolio that showcases your experience, skills and style. It should include examples of game art as well as other relevant work.</li>
-            <li>Strong communication and collaboration skills: You should be able to work well with other team members, such as programmers and other designers, and should be able to clearly communicate your ideas and progress.</li>
-            <li>Ability to work within a defined style: You should be able to create art that aligns with the game's concept and visual style.</li>
-            <li>Good time management: You should be able to work efficiently and meet deadlines.</li>
-            <li>Open to feedback and revisions: You should be open to feedback and revisions and should be able to incorporate them into your work.</li>
+        <ul class="more_dropdown" id="why_li">
+            <li>Exciting opportunity to work on a cutting-edge project</li>
+            <li>Earn a percentage of the profits</li>
+            <li>Chance to work on a project you're passionate about</li>
+            <li>Opportunity to learn and grow in your field</li>
+            <li>Satisfaction of seeing your contributions come to life in a finished product</li>
+            <li>Potential for future opportunities</li>
+            <li>Flexibility to work remotely</li>
+            <li>Use of technology you're interested in</li>
         </ul>
     </div>
+
+
+    <div class="section">
+        <div class="more" id="expectations"> <!-- Expectations -->
+            <div><h2>Expectations:</h2></div>
+            <div class="arrow-down" id="arrow-down2"> </div>
+        </div>
+        <ul class="more_dropdown" id="expectations_li">
+            <li>Create and design game assets such as characters, environments, and props that align with the game's art style and story</li>
+            <li>Collaborate with the development team to ensure that the assets are optimized for performance and meet technical requirements</li>
+            <li>Participate in the creation of the overall game design and ensure that it aligns with the game's story, mechanics and goals</li>
+            <li>Continuously iterate and improve designs based on feedback from the development team and stakeholders</li>
+            <li>Stay up-to-date with industry trends and techniques to create visually compelling and high-quality assets</li>
+            <li>Meet deadlines and deliver assets on time</li>
+            <li>Have the ability to work independently and take <span>ownership</span> of the design aspect of the project</li>
+            <li>Bonus skills in Ai would be a valuable asset.</li>
+        </ul>
+    </div>
+    
+
     <div class="section"> <!-- Apply with dropdown-->
         <div class="more" id="apply">
             <div><h2>Apply:</h2></div>
-            <div class="arrow-down3"> </div>
+            <div class="arrow-down" id="arrow-down3"> </div>
         </div>
-        <ul class="more_dropdown" id="apply_li">
-            <li></li>
-        </ul>
+        <form class="more_dropdown" id="apply_li" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfHhC4fCA6j1p2R0iMosotIjRyqd2H-45uXl1RrahURUPuAYQ/formResponse" method="POST" target="_self">
+            <div class="form-group">
+                <label for="name">Your email address</label>
+                <input type="email" name="emailAddress" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="email">Your name</label>
+                <input type="text" name="entry.2066985067" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="message">Enter the title what you want to apply for</label>
+                <input type="text" name="entry.2024874478" placeholder="Titel"></input>
+            </div>
+            <div class="form-group">
+                <label for="message">How much time can you dedicate to the project</label>
+                <input type="text" name="entry.286225911" placeholder="Time"></input>
+            </div>
+            <input type="submit" value="Submit" class="button">
+        </form>
     </div>
-    
-    
-    <script src="./developer.js"></script>
+
+
+    <script src="./js/main.js"></script>
     <footer>
         <p>Created by: <a href="https://www.instagram.com/zybeg_studio/">Zybeg Studio</a> © 2023</p>
     </footer>
