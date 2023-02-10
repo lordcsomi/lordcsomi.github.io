@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* make the canvas the full screen */
+canvas {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+/* stats class */
+.stats {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+    z-index: 100;
+}
