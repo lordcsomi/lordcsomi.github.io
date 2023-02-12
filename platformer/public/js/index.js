@@ -433,23 +433,47 @@ function updateDebugDisplay(deltaTime) {
 // GAME LOOP
 //------------------------------------------------------------
 
-var maxFps = 60;
-var step = 1 / maxFps;
-var deltaTime = 0;
-var now, last = Date.now();
-let frameRates = [];
-let sumFrameRates = 0;
+// Fixed Fps - same as in Unity
+const targetFPS = 60;
+const fixedDeltatime = 1 / targetFPS;
+const maxDeltaTime = 1 / 10 // "if fps drops below 10"
+var deltaTime;
+var currentTime;
+var lastTime = Date.now();
+var nSubSteps;
+var remainder = 0;
 
 function frame() {
-  now = Date.now();
-  deltaTime = deltaTime + Math.min(1, (now - last) / 1000);
-  updateDebugDisplay(deltaTime);
-  while (deltaTime > step) {
-    deltaTime -= step;
-    update(deltaTime);
+  currentTime = Date.now();
+  
+  // Date.now() gives miliseconds -> division by 1000 for conversion into seconds
+  deltaTime = (currentTime - lastTime) / 1000;  // deltatime is "resetted" in every frame
+  lastTime = currentTime
+
+  
+  // Cap on delta time
+  if (deltaTime > maxDeltaTime) {
+    deltaTime = maxDeltaTime
   }
+  // Calculate necessary number of substeps and keep track of remainder
+  nSubSteps = Math.floor((deltaTime + remainder) / fixedDeltatime);
+  remainder += deltaTime - (nSubSteps * fixedDeltatime)
+  
+  
+  // Update controlls
+  updateInput()
+  
+  // SubStepping
+  // Do the physics with fixed delta time
+  for (let i = 0; i < nSubSteps; i++) {
+    updatePlayer(fixedDeltatime)
+  }
+
+  // Update camera's state
+  updateCamera()
+
+  // Do the render stuff
   draw();
-  last = now;
   requestAnimationFrame(frame);
 }
 
