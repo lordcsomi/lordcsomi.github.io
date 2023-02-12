@@ -73,6 +73,8 @@ var player = {
   y: 640,
   dX: 0,
   dY: 0,
+  ddX: 0,
+  ddY: 0,
   left: false,
   right: false,
   jump: false,
@@ -82,14 +84,17 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.81*0.1, // gravity
-  maxDX: 9, // max horizontal speed
-  maxDY: 50, // max falling speed
-  jumpForce: 10, // big burst of speed
-  acceleration: 0.8,
-  friction: 0.9, // 1 = 100% friction
+  gravity: 9.8*6*16, // gravity
+  maxDX: 20, // max horizontal speed
+  maxDY: 200, // max falling speed
+  prevDirection: 0, // buffer for direction of X and its a sign (-1, 0, 1)
+  jumpForce: 1500 * 32 * 2, // big burst of speed
+  acceleration: 60,
+  friction: 20, // 1 = 100% friction
+  // Vertical states
   grounded: false,
   jumping: false,
+  falling: false,
   doubleJumpingAllowed: true,
   doubleJumping: false,
   jumpCooldown: 0.3, // seconds
@@ -205,73 +210,97 @@ function update() {
 
 function updatePlayer(deltaTime) {
   // check if current position is valid
-  if (checkIFValidPosition(player.x, player.y)===false) {
+  if (!checkIFValidPosition(player)) {
     console.log('invalid position', 'x:',player.x, 'y:',player.y, 'dX:',player.dX, 'dY:',player.dY);
-    while (checkIFValidPosition(player.x, player.y)===false) {
-      player.x -= player.dX;
-      player.y -= player.dY;
+    while (!checkIFValidPosition(player)) {
+      player.x -= (player.dX);
+      player.y -= (player.dY);
       player.dX *= 0.9;
       player.dY *= 0.9;
+      console.log(!(checkIFValidPosition(player)));
     }
+    console.log("im done with correcting bad physics state");
   }
 
+  
   // move the player according to the input
   if (player.left) { // left
-    player.dX -= player.acceleration;
-  } else if (player.right) { // right
-    player.dX += player.acceleration;
-  } else { // no horizontal input
-    player.dX *= player.friction;
+    player.ddX -= player.acceleration;
+    // player.ddX += player.friction * (0.5 * player.falling) // friction is less in air
   }
+  if (player.right) { // right
+    player.ddX += player.acceleration;
+    // player.ddX -= player.friction * (0.5 * player.falling) // friction is less in air
+  } 
+  if (!player.left && !player.right) { // no horizontal input
+    // player.dX *= player.friction;
+    player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
+  }
+  
+  player.ddY = player.gravity;
   if (player.jump && player.grounded) { // jump
-    player.dY -= player.jumpForce;
+    player.ddY -= player.jumpForce;
     player.jumping = true;
     player.doubleJumpingAllowed = true;
   } else if (player.jump && player.doubleJumpingAllowed) { // double jump
-    player.dY -= player.jumpForce;
+    player.ddY -= player.jumpForce;
     player.doubleJumping = true;
     player.doubleJumpingAllowed = false;
   }
+  // Idont understand how this works yet
   if (player.jumpCooldown > 0) { // jump cooldown
     player.jumpCooldown -= deltaTime;
   } else { // reset jump cooldown
     player.jumping = false;
     player.doubleJumping = false;
   }
-  if (player.dX > player.maxDX) { // max speed
-    player.dX = player.maxDX;
-  }
-  if (player.dX < -player.maxDX) { // max speed
-    player.dX = -player.maxDX;
-  }
-  if (player.dY > player.maxDY) { // max falling speed
-    player.dY = player.maxDY;
-  }
-  if (player.dY < -player.maxDY) { // max falling speed
-    player.dY = -player.maxDY;
-  }
-  player.dY += player.gravity;
-  player.x += player.dX;
-  player.x = Math.round(player.x);
-  player.y += player.dY;
 
-  // check if the player is colliding with a platform
+  // Update velocities
+  player.dX += player.ddX * deltaTime
+  player.dY += player.ddY * deltaTime
+  // Put a cap/Clamp max speed in both direciton
+  player.dX = clamp(player.dX, -player.maxDX, player.maxDX)
+  player.dY = clamp(player.dY, -player.maxDY, player.maxDY)
+  console.log("dY", player.dY, "dX", player.dX)
+  // Update position
+  player.x += player.dX * deltaTime
+  player.y += player.dY * deltaTime
+  // Handle terminal friction
+  currentDirection = Math.sign(player.dX)
+  if (player.prevDirection * currentDirection == -1) {
+    console.log("something is not wrong");
+    player.dX = 0;
+    player.ddX = 0;
+    currentDirection = 0;
+  }
+  player.prevDirection = currentDirection
+  
+  // check and handle if the player is colliding with a platform
   collisionCheck();
   checkIFValidPosition
 
 }
 
-function checkIFValidPosition(x, y) { 
-  for (var i = 0; i < platforms.length; i++) {
-    if (x + player.width > platforms[i].x && x < platforms[i].x + platforms[i].width) {
-      if (y + player.height > platforms[i].y && y < platforms[i].y + platforms[i].height) {
-        return false;
-      }
+function checkIFValidPosition(enity) { 
+  for (let platform of platforms) {
+    if (collisionAABB(enity, platform)) {
+      return false;
     }
   }
   return true;
 }
 
+function collisionAABB(rect1, rect2) {
+  return (
+    rect1.x < rect2.x+rect2.width &&
+    rect1.x+rect1.width > rect2.x &&
+    rect1.y < rect2.y+rect2.height &&
+    rect1.y+rect1.height > rect2.y)
+}
+
+function clamp(val, min, max) {
+  return Math.min(max, Math.max(min, val));
+}
 
 function collisionCheck() { // <----- The problem is here probably
   player.collision.bottom = false;
@@ -280,8 +309,13 @@ function collisionCheck() { // <----- The problem is here probably
   player.collision.right = false;
   player.grounded = false;
   
-  for (let i = 0; i < platforms.length; i++) {
-    let platform = platforms[i];
+  for (let platform of platforms) {
+    // Only check platform that have collision with player
+    if (!collisionAABB(player, platform)) {
+      continue;
+    }
+
+    // buffered positional datas
     let pX = player.x;
     let pY = player.y;
     let pW = player.width;
@@ -292,7 +326,9 @@ function collisionCheck() { // <----- The problem is here probably
     let platH = platform.height;
     
     // check bottom collision
-    if (pY + pH >= platY && pY + pH <= platY + 10 &&
+    // - player alja lejjeb van mint a platform teteje &&
+    // - 
+    if (pY + pH > platY && pY + pH <= platY + 10 &&
       pX >= platX && pX <= platX + platW) {
       player.collision.bottom = true;
       player.y = platY - pH;
@@ -434,7 +470,7 @@ function updateDebugDisplay(deltaTime) {
 //------------------------------------------------------------
 
 // Fixed Fps - same as in Unity
-const targetFPS = 60;
+const targetFPS = 30;
 const fixedDeltatime = 1 / targetFPS;
 const maxDeltaTime = 1 / 10 // "if fps drops below 10"
 var deltaTime;
@@ -467,6 +503,8 @@ function frame() {
   // Do the physics with fixed delta time
   for (let i = 0; i < nSubSteps; i++) {
     updatePlayer(fixedDeltatime)
+    updateDebugDisplay(fixedDeltatime)
+    console.log(i)
   }
 
   // Update camera's state
