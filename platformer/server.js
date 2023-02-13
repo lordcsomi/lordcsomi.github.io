@@ -8,3 +8,6 @@ app.use(express.static('public'));
 server.listen(3000, function () {
   console.log('listening on *:3000');
 });
+
+
+// oks ez egy teszt
