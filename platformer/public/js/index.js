@@ -1,6 +1,7 @@
 //--------------------------------------------------------------------------------
 // SETUP
 //--------------------------------------------------------------------------------
+const socket = io();
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = true;
@@ -20,6 +21,7 @@ const wallJumpingLeft = document.getElementById('wallJumpingLeft');
 const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
 
+var invalidPositions = [];
 var keys = [];
 var KEYS = {
   LEFT: 37,
@@ -47,6 +49,7 @@ var platforms = [
   {x: -1000, y: 200, width: 1000, height: 100, color: 'green'},
   {x: -600, y: -400, width: 100, height: 500, color: 'white'},
   {x: -300, y: -400, width: 100, height: 500, color: 'white'},
+  {x: 580, y: 600, width: 100, height: 100, color: 'white'},
   {x: 1000, y: 600, width: 1000, height: 100, color: 'green'},
   {x: 2000, y: 500, width: 1000, height: 100, color: 'green'},
   {x: 3000, y: 400, width: 1000, height: 100, color: 'green'},
@@ -70,7 +73,7 @@ var player = {
   height: 20,
   color: 'red',
   x: 600,
-  y: 640,
+  y: 0,
   dX: 0,
   dY: 0,
   left: false,
@@ -121,7 +124,9 @@ var camera = {
       x: 0,
       y: 0
     }
-  }
+  },
+  renderWidth: canvas.width,
+  renderHeight: canvas.height,
 }
 
 //--------------------------------------------------------------------------------
@@ -204,9 +209,23 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
-  // check if current position is valid
+  
+  // ---------------------------- Error Checking ----------------------------
   if (checkIFValidPosition(player.x, player.y)===false) {
-    console.log('invalid position', 'x:',player.x, 'y:',player.y, 'dX:',player.dX, 'dY:',player.dY);
+    console.log('invalid position', 'x:',player.x, 'y:',player.y, 'dX:',player.dX, 'dY:',player.dY, 'grounded:',player.grounded, 'jumping:',player.jumping, 'doubleJumping:',player.doubleJumping, 'wallJumpingLeft:',player.wallJumpingLeft, 'wallJumpingRight:',player.wallJumpingRight, 'wallJumping:',player.wallJumping, 'collision:',player.collision); 
+    invalidPositions.push({
+      x: player.x,
+      y: player.y,
+      dX: player.dX,
+      dY: player.dY,
+      grounded: player.grounded,
+      jumping: player.jumping,
+      doubleJumping: player.doubleJumping,
+      wallJumpingLeft: player.wallJumpingLeft,
+      wallJumpingRight: player.wallJumpingRight,
+      wallJumping: player.wallJumping,
+      collision: player.collision
+    });
     while (checkIFValidPosition(player.x, player.y)===false) {
       player.x -= player.dX;
       player.y -= player.dY;
@@ -257,10 +276,9 @@ function updatePlayer(deltaTime) {
 
   // check if the player is colliding with a platform
   collisionCheck();
-  checkIFValidPosition
-
 }
 
+// ---------------------------- Error Checking ----------------------------
 function checkIFValidPosition(x, y) { 
   for (var i = 0; i < platforms.length; i++) {
     if (x + player.width > platforms[i].x && x < platforms[i].x + platforms[i].width) {
@@ -270,6 +288,12 @@ function checkIFValidPosition(x, y) {
     }
   }
   return true;
+}
+
+function sendInvalidPositions() {
+  console.log('sending invalid positions');
+  socket.emit('invalidPositions', invalidPositions);
+  invalidPositions = [];
 }
 
 
@@ -297,7 +321,6 @@ function collisionCheck() { // <----- The problem is here probably
       player.collision.bottom = true;
       player.y = platY - pH;
       player.dY = 0;
-      player.collision.bottom = true;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
@@ -337,7 +360,7 @@ function collisionCheck() { // <----- The problem is here probably
 //------------------------------------------------------------
 
 function draw() {
-  ctx.clearRect(0, 200, 1000, 1000);
+  ctx.clearRect(camera.x, camera.y, camera.width, camera.height);
   drawBackground();
   drawPlatforms();
   drawPlayer();
@@ -364,7 +387,7 @@ function drawImage(image, x, y, width, height) {
 function drawBackground() {
   for (var i = 0; i < background.length; i++) {
     drawRect(background[i].x, background[i].y, background[i].width, background[i].height, background[i].color);
-  }
+  }  
 }
 function drawPlatforms() {
   for (var i = 0; i < platforms.length; i++) {
@@ -385,6 +408,7 @@ function updateCamera() {
   camera.x = player.x - canvas.width / 2;
   camera.y = player.y - canvas.height / 2;
   ctx.setTransform(1, 0, 0, 1, -camera.x, -camera.y);
+  //console.log('camera:',camera.x, camera.y);
 }
 
 function drawCamera() {
