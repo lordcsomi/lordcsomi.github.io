@@ -318,24 +318,23 @@ function collisionCheck() { // <----- The problem is here probably
     }
 
     // buffered positional datas
-    let pX = player.x;
-    let pY = player.y;
-    let pW = player.width;
-    let pH = player.height;
+    // player's coordinates cannot be buffered
+    // because otherwise 2 different collision check might want to 
+    // set its coordinate to 2 different values
     let platX = platform.x;
     let platY = platform.y;
     let platW = platform.width;
     let platH = platform.height;
     
     // Helper expressions
-    let interceptX = pX + pW > platX && pX < platX + platW;
-    let interceptY = pY + pH > platY && pY < platY + platH;
+    let interceptX = () => {return player.x + player.width > platX && player.x < platX + platW};
+    let interceptY = () => {return player.y + player.height > platY && player.y < platY + platH};
 
     // check bottom collision
-    let pBottom = pY + pH; 
-    if (pBottom+1 > platY && pBottom < platY + 10 && interceptX) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
+    let pBottom = player.y + player.height;
+    if (pBottom+1 > platY && pBottom < platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
       player.collision.bottom = true;
-      player.y = platY - pH;
+      player.y = platY - player.height;
       player.dY = 0;
       player.grounded = true;
       player.doubleJumping = false;
@@ -345,25 +344,26 @@ function collisionCheck() { // <----- The problem is here probably
     
     // check top collision
     let platBottom = platY + platH;
-    if (pY >= platBottom - 10 && pY <= platBottom && interceptX) {
+    if (player.y >= platBottom - 10 && player.y <= platBottom && interceptX()) {
       player.collision.top = true;
       player.y = platY + platH;
       player.dY = 0;
+      player.ddY = 0
       console.log('top collision');
     }
     
     // check right collision
-    let pRight = pX + pW;
-    if (pRight <= platX + 10 && pRight >= platX && interceptY) {
+    let pRight = player.x + player.width;
+    if (pRight <= platX + 10 && pRight >= platX && interceptY()) {
       player.collision.right = true;
-      player.x = platX - pW;
+      player.x = platX - player.width;
       player.dX = 0;
       console.log('right collision');
     }
     
     // check left collision
     let platRight = platX + platW;
-    if (pX >= platRight - 10 && pX <= platRight && interceptY) {
+    if (player.x >= platRight - 10 && player.x <= platRight && interceptY()) {
       player.collision.left = true;
       player.x = platX + platW;
       player.dX = 0;
