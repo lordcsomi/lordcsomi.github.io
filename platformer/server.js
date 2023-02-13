@@ -31,3 +31,4 @@ io.on('connection', function (socket) {
     invalidPositionsToFile('./temporary/invalidPositions.txt', invalidPositions, ';');
   });
 });
+// test
