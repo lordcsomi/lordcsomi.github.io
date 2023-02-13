@@ -214,28 +214,15 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
-  // check if current position is valid
-  // while (!checkIFValidPosition(player)) {
-  //   player.x -= (player.dX);
-  //   player.y -= (player.dY);
-  //   player.dX *= 0.9;
-  //   player.dY *= 0.9;
-  //   console.log(!(checkIFValidPosition(player)));
-  // }
-
-
   
   // move the player according to the input
   if (player.left) { // left
     player.ddX -= player.acceleration;
-    // player.ddX += player.friction * (0.5 * player.falling) // friction is less in air
   }
   if (player.right) { // right
     player.ddX += player.acceleration;
-    // player.ddX -= player.friction * (0.5 * player.falling) // friction is less in air
   } 
   if (!player.left && !player.right) { // no horizontal input
-    // player.dX *= player.friction;
     player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
   }
   
@@ -279,7 +266,6 @@ function updatePlayer(deltaTime) {
   
   // check and handle if the player is colliding with a platform
   collisionCheck();
-  checkIFValidPosition
 
 }
 
@@ -332,14 +318,13 @@ function collisionCheck() { // <----- The problem is here probably
 
     // check bottom collision
     let pBottom = player.y + player.height;
-    if (pBottom+1 > platY && pBottom < platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
+    if (pBottom > platY && pBottom < platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
       player.collision.bottom = true;
       player.y = platY - player.height;
       player.dY = 0;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
-      console.log('bottom collision')
     }
     
     // check top collision
@@ -349,7 +334,6 @@ function collisionCheck() { // <----- The problem is here probably
       player.y = platY + platH;
       player.dY = 0;
       player.ddY = 0
-      console.log('top collision');
     }
     
     // check right collision
@@ -358,7 +342,7 @@ function collisionCheck() { // <----- The problem is here probably
       player.collision.right = true;
       player.x = platX - player.width;
       player.dX = 0;
-      console.log('right collision');
+
     }
     
     // check left collision
@@ -367,7 +351,6 @@ function collisionCheck() { // <----- The problem is here probably
       player.collision.left = true;
       player.x = platX + platW;
       player.dX = 0;
-      console.log('left collision');
     }
   }
 }
@@ -494,10 +477,11 @@ function frame() {
   toConsume += deltaTime;
   while (toConsume >= fixedDeltatime) {
     updatePlayer(fixedDeltatime);
-    updateDebugDisplay(deltaTime);
     toConsume -= fixedDeltatime;
   }
   
+  // Update debug display's state
+  updateDebugDisplay(deltaTime + toConsume);
   
   // Update camera's state
   updateCamera();
