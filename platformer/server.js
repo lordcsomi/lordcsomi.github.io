@@ -10,4 +10,4 @@ server.listen(3000, function () {
 });
 
 
-// merge conflikt test
+// teszt passed
