@@ -234,10 +234,7 @@ function updatePlayer(deltaTime) {
     player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
   }
   
-  player.ddY = player.gravity;
-  if (player.grounded) {
-    player.ddY = 0;
-  }
+  player.ddY += player.gravity;
   if (player.jump && player.grounded) { // jump
     player.ddY -= player.jumpForce;
     player.jumping = true;
@@ -307,7 +304,7 @@ function collisionCheck() { // <----- The problem is here probably
   player.collision.top = false;
   player.collision.left = false;
   player.collision.right = false;
-  // player.grounded = false;
+  player.grounded = false
   
   for (let platform of platforms) {
     // Only check platform that have collision with player
@@ -315,7 +312,6 @@ function collisionCheck() { // <----- The problem is here probably
       continue;
     }
 
-    
     // buffered positional datas
     let pX = player.x;
     let pY = player.y;
@@ -331,12 +327,11 @@ function collisionCheck() { // <----- The problem is here probably
     let interceptY = pY + pH > platY && pY < platY + platH;
 
     // check bottom collision
-    let pHeight = pY + pH;
-    if (pHeight > platY && pHeight < platY + 10 && interceptX) {
+    let pBottom = pY + pH; 
+    if (pBottom+1 > platY && pBottom < platY + 10 && interceptX) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
       player.collision.bottom = true;
       player.y = platY - pH;
       player.dY = 0;
-      player.collision.bottom = true;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
@@ -345,7 +340,7 @@ function collisionCheck() { // <----- The problem is here probably
     
     // check top collision
     let platBottom = platY + platH;
-    if (pY > platBottom - 10 && pY < platBottom && interceptX) {
+    if (pY >= platBottom - 10 && pY <= platBottom && interceptX) {
       player.collision.top = true;
       player.y = platY + platH;
       player.dY = 0;
@@ -353,22 +348,20 @@ function collisionCheck() { // <----- The problem is here probably
     }
     
     // check right collision
-    let pWidth = pX + pW;
-    if (pWidth < platX + 10 && pWidth > platX && interceptY) {
+    let pRight = pX + pW;
+    if (pRight <= platX + 10 && pRight >= platX && interceptY) {
       player.collision.right = true;
       player.x = platX - pW;
       player.dX = 0;
-      player.collision.right = true;
       console.log('right collision');
     }
     
     // check left collision
     let platRight = platX + platW;
-    if (pX > platRight - 10 && pX < platRight && interceptY) {
+    if (pX >= platRight - 10 && pX <= platRight && interceptY) {
       player.collision.left = true;
       player.x = platX + platW;
       player.dX = 0;
-      player.collision.left = true;
       console.log('left collision');
     }
   }
@@ -478,7 +471,7 @@ function updateDebugDisplay(deltaTime) {
 
 // Fixed Fps - almost the same as in Unity
 
-const fixedDeltatime = 1 / 30;
+const fixedDeltatime = 1 / 60;
 var deltaTime;
 var currentTime;
 var lastTime = Date.now();
@@ -496,10 +489,10 @@ function frame() {
   toConsume += deltaTime;
   while (toConsume >= fixedDeltatime) {
     updatePlayer(fixedDeltatime);
+    updateDebugDisplay(deltaTime);
     toConsume -= fixedDeltatime;
   }
   
-  updateDebugDisplay(deltaTime);
   
   // Update camera's state
   updateCamera();
