@@ -89,13 +89,12 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.8 * 4, // gravity
+  gravity: 9.8 * 4.5, // gravity
   maxDX: 300, // max horizontal speed
   maxDY: 300, // max falling speed
-  prevDirection: 0, // buffer for direction of X and its a sign (-1, 0, 1)
-  jumpForce: 1500 * 5, // big burst of speed
+  jumpForce: 1500 * 2, // big burst of speed
   acceleration: 30,
-  friction: 20, // 1 = 100% friction
+  friction: 90,
   // Vertical states
   grounded: false,
   jumping: false,
@@ -214,18 +213,27 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
-  
+  // steal smart stuff from oindex.js
+  let wasleft = player.dX < 0;
+  let wasright = player.dX > 0;
+
+
   // move the player according to the input
   if (player.left) { // left
     player.ddX -= player.acceleration;
+  } else if (wasleft) {
+    player.ddX += player.friction;
   }
   if (player.right) { // right
     player.ddX += player.acceleration;
+  } else if (wasright) {
+    player.ddX -= player.friction;
   } 
-  if (!player.left && !player.right) { // no horizontal input
-    player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
-  }
-  
+
+  // if (!player.left && !player.right) { // no horizontal input
+  //   player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
+  // }
+    
   player.ddY += player.gravity;
   if (player.jump && player.grounded) { // jump
     player.ddY -= player.jumpForce;
@@ -256,13 +264,12 @@ function updatePlayer(deltaTime) {
   player.x += player.dX * deltaTime
   player.y += player.dY * deltaTime
   // Handle terminal friction
-  currentDirection = Math.sign(player.dX)
-  if (player.prevDirection * currentDirection == -1) {
+  // Check if direction is fluctuating frame by frame
+  // Meaning player reached "sticky friction"
+  if ((wasleft && player.dX > 0) || (wasright && player.dX < 0)) {
     player.dX = 0;
     player.ddX = 0;
-    currentDirection = 0;
   }
-  player.prevDirection = currentDirection
   
   // check and handle if the player is colliding with a platform
   collisionCheck();
@@ -332,8 +339,11 @@ function collisionCheck() { // <----- The problem is here probably
     if (player.y >= platBottom - 10 && player.y <= platBottom && interceptX()) {
       player.collision.top = true;
       player.y = platY + platH;
-      player.dY = 0;
-      player.ddY = 0
+      // Early stage implementation of not falling
+      if (player.dY < 0) {
+        player.dY = 0;
+        player.ddY = 0
+      }
     }
     
     // check right collision
@@ -341,7 +351,7 @@ function collisionCheck() { // <----- The problem is here probably
     if (pRight <= platX + 10 && pRight >= platX && interceptY()) {
       player.collision.right = true;
       player.x = platX - player.width;
-      player.dX = 0;
+      // player.dX = 0;
 
     }
     
@@ -350,7 +360,7 @@ function collisionCheck() { // <----- The problem is here probably
     if (player.x >= platRight - 10 && player.x <= platRight && interceptY()) {
       player.collision.left = true;
       player.x = platX + platW;
-      player.dX = 0;
+      // player.dX = 0;
     }
   }
 }
