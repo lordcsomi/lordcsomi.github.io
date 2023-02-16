@@ -10,8 +10,8 @@ ctx.scale(1, 1);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+//debug display
 const fps = document.getElementById('fps');
-const nameInput = document.getElementById('nameInput');
 const position = document.getElementById('position');
 const velocity = document.getElementById('velocity');
 const grounded = document.getElementById('grounded');
@@ -20,6 +20,12 @@ const doubleJumping = document.getElementById('doubleJumping');
 const wallJumpingLeft = document.getElementById('wallJumpingLeft');
 const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
+
+// name form
+const landingPage = document.getElementById('landing-page-container');
+const nameInput = document.getElementById('name');
+const singlePlayerButton = document.getElementById('singlePlayer');
+const multiPlayerButton = document.getElementById('multiPlayer');
 
 var invalidPositions = [];
 var keys = [];
@@ -50,6 +56,7 @@ var platforms = [
   {x: -600, y: -400, width: 100, height: 500, color: 'white'},
   {x: -300, y: -400, width: 100, height: 500, color: 'white'},
   {x: 580, y: 600, width: 100, height: 100, color: 'white'},
+  {x: 50, y: 300, width: 100, height: 100, color: 'white'},
   {x: 1000, y: 600, width: 1000, height: 100, color: 'green'},
   {x: 2000, y: 500, width: 1000, height: 100, color: 'green'},
   {x: 3000, y: 400, width: 1000, height: 100, color: 'green'},
@@ -164,6 +171,8 @@ window.addEventListener('mouseup', function(e) {
 window.addEventListener("resize", function() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  camera.width = canvas.width;
+  camera.height = canvas.height;
   drawCamera();
   console.log('resized');
 });
@@ -180,10 +189,56 @@ document.addEventListener('visibilitychange', function() {
   }
 });
 
+// name input  
+
+singlePlayerButton.addEventListener('click', function() {
+  if (nameInput.value.length > 0) {
+    myName = nameInput.value;
+    nameInput.value = '';
+    console.log('my name is ' + myName);
+    landingPage.style.display = 'none';
+    game.style.display = 'block';
+    frame();
+  }
+});
+
+multiPlayerButton.addEventListener('click', function() {
+  // check if name is valid
+  if (nameInput.value.length > nameRules.minLength) {
+    if (nameInput.value.length < nameRules.maxLength) {
+      // check if name only contains letters and numbers
+      if (nameInput.value.match(/^[a-zA-Z0-9]+$/)) {
+        myName = nameInput.value;
+        nameInput.value = '';
+        // send name to server
+        socket.emit('setName', myName);
+      } else {
+        console.log('name contains invalid characters');
+      }
+    } else {
+      console.log('name is too long');
+    }
+  } else {
+    console.log('name is too short');
+  }
+});
+
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
 //--------------------------------------------------------------------------------
+// listen for initialData
+socket.on('initialData', function(data) {
+  console.log('initialData received');
+  nameRules = data.validName;
+});
 
+// listen for start the game
+socket.on('startGame', function(data) {
+  console.log('startGame received');
+  landingPage.style.display = 'none';
+  game.style.display = 'block';
+  frame();
+});
 
 //--------------------------------------------------------------------------------
 // UPDATE FUNCTIONS
@@ -480,6 +535,5 @@ function frame() {
   draw();
   last = now;
   requestAnimationFrame(frame);
-}
+};
 
-frame();
