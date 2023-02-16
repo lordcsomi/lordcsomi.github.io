@@ -16,6 +16,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 //debug display
+const nameDebug = document.getElementById('nameInput');
 const fps = document.getElementById('fps');
 const position = document.getElementById('position');
 const velocity = document.getElementById('velocity');
@@ -118,6 +119,7 @@ var player = {
   wallJumping: false,
   freemode: true,
 }
+mode = 'lobby';
 
 var camera = {
   x: 0,
@@ -203,10 +205,11 @@ document.addEventListener('visibilitychange', function() {
 
 singlePlayerButton.addEventListener('click', function() {
   if (nameInput.value.length > 0) {
+    mode = 'singlePlayer';
     myName = nameInput.value;
-    nameInput.value = '';
+    player.name = myName;
     console.log('my name is ' + myName);
-    landingPage.style.display = 'none';
+    landingPage.style.display = 'none'  ;
     game.style.display = 'block';
     frame();
   }
@@ -219,17 +222,21 @@ multiPlayerButton.addEventListener('click', function() {
       // check if name only contains letters and numbers
       if (nameInput.value.match(/^[a-zA-Z0-9]+$/)) {
         myName = nameInput.value;
-        nameInput.value = '';
+        myId = socket.id;
         // send name to server
         socket.emit('setName', myName);
+        mode = 'multiPlayer';
       } else {
         console.log('name contains invalid characters');
+        nameInput.value = 'name contains invalid characters';
       }
     } else {
       console.log('name is too long');
+      nameInput.value = 'name is too long';
     }
   } else {
     console.log('name is too short');
+    nameInput.value = 'name is too short';
   }
 });
 
@@ -456,7 +463,7 @@ function drawCircle(x, y, radius, color) {
 }
 function drawText(text, x, y, color) {
   ctx.fillStyle = color;
-  ctx.font = '30px Arial';
+  ctx.font = '15px Arial';
   ctx.fillText(text, x, y);
 }
 function drawImage(image, x, y, width, height) {
@@ -474,6 +481,8 @@ function drawPlatforms() {
 }
 function drawPlayer() {
   drawRect(player.x, player.y, player.width, player.height, player.color);
+  // username text above player center myName
+  drawText(myName, player.x - myName.length * 2.5, player.y - 5, player.color);
 }
 function drawProjectiles() {
   for (var i = 0; i < projectiles.length; i++) {
@@ -507,6 +516,33 @@ function drawCamera() {
 }
 
 function updateDebugDisplay(deltaTime) {
+  // check if mode is single player or multiplayer
+  if (mode === 'singlePlayer') {
+    nameDebug.innerHTML = myName;// + ' id:  ' + myId; //+ 'ip: ' + myIp;
+    position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
+    fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
+    velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
+    grounded.innerHTML = 'grounded: ' + player.grounded + '';
+    jumping.innerHTML = 'jumping: ' + player.jumping + '';
+    doubleJumping.innerHTML = 'doubleJumping: ' + player.doubleJumping + '';
+    wallJumpingLeft.innerHTML = 'wallJumpingLeft: ' + player.wallJumpingLeft + '';
+    wallJumpingRight.innerHTML = 'wallJumpingRight: ' + player.wallJumpingRight + '';
+    var collision = [];
+    if (player.collision.right === true) {
+      collision.push('right');
+    }
+    if (player.collision.left === true) {
+      collision.push('left');
+    }
+    if (player.collision.top === true) {
+      collision.push('top');
+    }
+    if (player.collision.bottom === true) {
+      collision.push('bottom');
+    }
+    colisionDisplay.innerHTML = 'collisions: ' + collision + '';
+} else if (mode === 'multiPlayer') {
+  nameDebug.innerHTML = myName + ' id:  ' + myId; //+ 'ip: ' + myIp;
   position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
   fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
   velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
@@ -530,6 +566,7 @@ function updateDebugDisplay(deltaTime) {
     collision.push('bottom');
   }
   colisionDisplay.innerHTML = 'collisions: ' + collision + '';
+}
 }
 
 //------------------------------------------------------------
