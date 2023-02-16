@@ -6,6 +6,7 @@
 //--------------------------------------------------------------------------------
 // SETUP
 //--------------------------------------------------------------------------------
+const socket = io();
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 ctx.imageSmoothingEnabled = true;
@@ -14,8 +15,8 @@ ctx.scale(1, 1);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+//debug display
 const fps = document.getElementById('fps');
-const nameInput = document.getElementById('nameInput');
 const position = document.getElementById('position');
 const velocity = document.getElementById('velocity');
 const acceleration = document.getElementById('acceleration');
@@ -26,6 +27,13 @@ const wallJumpingLeft = document.getElementById('wallJumpingLeft');
 const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
 
+// name form
+const landingPage = document.getElementById('landing-page-container');
+const nameInput = document.getElementById('name');
+const singlePlayerButton = document.getElementById('singlePlayer');
+const multiPlayerButton = document.getElementById('multiPlayer');
+
+var invalidPositions = [];
 var keys = [];
 var KEYS = {
   LEFT: 37,
@@ -53,6 +61,8 @@ var platforms = [
   {x: -1000, y: 200, width: 1000, height: 100, color: 'green'},
   {x: -600, y: -400, width: 100, height: 500, color: 'white'},
   {x: -300, y: -400, width: 100, height: 500, color: 'white'},
+  {x: 580, y: 600, width: 100, height: 100, color: 'white'},
+  {x: 50, y: 300, width: 100, height: 100, color: 'white'},
   {x: 1000, y: 600, width: 1000, height: 100, color: 'green'},
   {x: 2000, y: 500, width: 1000, height: 100, color: 'green'},
   {x: 3000, y: 400, width: 1000, height: 100, color: 'green'},
@@ -76,7 +86,7 @@ var player = {
   height: 20,
   color: 'red',
   x: 600,
-  y: 640,
+  y: 0,
   dX: 0,
   dY: 0,
   ddX: 0,
@@ -131,7 +141,9 @@ var camera = {
       x: 0,
       y: 0
     }
-  }
+  },
+  renderWidth: canvas.width,
+  renderHeight: canvas.height,
 }
 
 //--------------------------------------------------------------------------------
@@ -169,6 +181,8 @@ window.addEventListener('mouseup', function(e) {
 window.addEventListener("resize", function() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  camera.width = canvas.width;
+  camera.height = canvas.height;
   drawCamera();
   console.log('resized');
 });
@@ -183,6 +197,57 @@ document.addEventListener('visibilitychange', function() {
   } else {
     console.log('tab visible');
   }
+});
+
+// name input  
+
+singlePlayerButton.addEventListener('click', function() {
+  if (nameInput.value.length > 0) {
+    myName = nameInput.value;
+    nameInput.value = '';
+    console.log('my name is ' + myName);
+    landingPage.style.display = 'none';
+    game.style.display = 'block';
+    frame();
+  }
+});
+
+multiPlayerButton.addEventListener('click', function() {
+  // check if name is valid
+  if (nameInput.value.length > nameRules.minLength) {
+    if (nameInput.value.length < nameRules.maxLength) {
+      // check if name only contains letters and numbers
+      if (nameInput.value.match(/^[a-zA-Z0-9]+$/)) {
+        myName = nameInput.value;
+        nameInput.value = '';
+        // send name to server
+        socket.emit('setName', myName);
+      } else {
+        console.log('name contains invalid characters');
+      }
+    } else {
+      console.log('name is too long');
+    }
+  } else {
+    console.log('name is too short');
+  }
+});
+
+//--------------------------------------------------------------------------------
+// SOCKET LISTENERS
+//--------------------------------------------------------------------------------
+// listen for initialData
+socket.on('initialData', function(data) {
+  console.log('initialData received');
+  nameRules = data.validName;
+});
+
+// listen for start the game
+socket.on('startGame', function(data) {
+  console.log('startGame received');
+  landingPage.style.display = 'none';
+  game.style.display = 'block';
+  frame();
 });
 
 //--------------------------------------------------------------------------------
@@ -214,10 +279,10 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
+
   // steal smart stuff from oindex.js
   let wasleft = player.dX < 0;
   let wasright = player.dX > 0;
-
 
   // move the player according to the input
   if (player.left) { // left
@@ -373,7 +438,7 @@ function collisionCheck() { // <----- The problem is here probably
 //------------------------------------------------------------
 
 function draw() {
-  ctx.clearRect(0, 200, 1000, 1000);
+  ctx.clearRect(camera.x, camera.y, camera.width, camera.height);
   drawBackground();
   drawPlatforms();
   drawPlayer();
@@ -400,7 +465,7 @@ function drawImage(image, x, y, width, height) {
 function drawBackground() {
   for (var i = 0; i < background.length; i++) {
     drawRect(background[i].x, background[i].y, background[i].width, background[i].height, background[i].color);
-  }
+  }  
 }
 function drawPlatforms() {
   for (var i = 0; i < platforms.length; i++) {
@@ -421,6 +486,7 @@ function updateCamera() {
   camera.x = player.x - canvas.width / 2;
   camera.y = player.y - canvas.height / 2;
   ctx.setTransform(1, 0, 0, 1, -camera.x, -camera.y);
+  //console.log('camera:',camera.x, camera.y);
 }
 
 function drawCamera() {
@@ -503,6 +569,6 @@ function frame() {
   draw();
   requestAnimationFrame(frame);
 
-}
+};
 
-frame();
+
