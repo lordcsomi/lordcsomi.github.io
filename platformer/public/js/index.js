@@ -18,6 +18,7 @@ const fps = document.getElementById('fps');
 const nameInput = document.getElementById('nameInput');
 const position = document.getElementById('position');
 const velocity = document.getElementById('velocity');
+const acceleration = document.getElementById('acceleration');
 const grounded = document.getElementById('grounded');
 const jumping = document.getElementById('jumping');
 const doubleJumping = document.getElementById('doubleJumping');
@@ -329,6 +330,7 @@ function collisionCheck() { // <----- The problem is here probably
       player.collision.bottom = true;
       player.y = platY - player.height;
       player.dY = 0;
+      player.ddY = 0;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
@@ -442,6 +444,7 @@ function updateDebugDisplay(deltaTime) {
   position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
   fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
   velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
+  acceleration.innerHTML = 'ddX: ' + player.ddX.toFixed(2) + ', ddY: ' + player.ddY.toFixed(2) + '';
   grounded.innerHTML = 'grounded: ' + player.grounded + '';
   jumping.innerHTML = 'jumping: ' + player.jumping + '';
   doubleJumping.innerHTML = 'doubleJumping: ' + player.doubleJumping + '';
