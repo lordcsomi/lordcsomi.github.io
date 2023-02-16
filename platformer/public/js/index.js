@@ -464,7 +464,7 @@ function drawPlatforms() {
 function drawPlayer() {
   drawRect(player.x, player.y, player.width, player.height, player.color);
   // username text above player center myName
-  drawText(player.name, player.x - player.name.length * 2.5, player.y - 5, player.color);
+  drawText(myName, player.x - myName.length * 2.5, player.y - 5, player.color);
 }
 function drawProjectiles() {
   for (var i = 0; i < projectiles.length; i++) {
