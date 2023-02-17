@@ -3,6 +3,8 @@
   <head>
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <!-- disable zooming -->
+    <title>PlatformR</title>
   </head>
   <body>
     <div class="landing-page-container" id="landing-page-container">
@@ -31,6 +33,35 @@
       <div id="colisionDisplay">test collison</div>
     </div>
     <canvas id="game" width="100%" height="100%"></canvas>
+    <div class="settings" id="settings">
+      <img src="./assets/img/settings.png" alt="setting" id="setting"/>
+      <!-- full screen, music, debug display, back to landing page(reload the page)-->
+      <div id="setting-container">
+        <div class="setting-title">Settings</div>
+        <div class="setting-content">
+          <div class="setting-item">
+            <div class="setting-item-title">Full Screen</div>
+            <div class="setting-item-content">
+              <input type="checkbox" id="fullScreen" name="fullScreen" value="fullScreen">
+              <label for="fullScreen">Full Screen</label>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-item-title">Music</div>
+            <div class="setting-item-content">
+              <input type="checkbox" id="music" name="music" value="music">
+              <label for="music">Music</label>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-item-title">Debug Display</div>
+            <div class="setting-item-content">
+              <input type="checkbox" id="debugDisplay" name="debugDisplay" value="debugDisplay">
+              <label for="debugDisplay">Debug Display</label>
+            </div>
+          </div>
+        </div>
+    </div>
     <script src="./js/index.js"></script>
   </body>
 </html>

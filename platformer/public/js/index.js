@@ -28,6 +28,10 @@ const wallJumpingLeft = document.getElementById('wallJumpingLeft');
 const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
 
+// settings
+const settingsImg = document.getElementById('settings');
+const settingContainer = document.getElementById('setting-container');
+
 // name form
 const landingPage = document.getElementById('landing-page-container');
 const nameInput = document.getElementById('name');
@@ -54,7 +58,7 @@ var mouse = {
 };
 
 var background = [
-  {x: -3000, y: -3000, width: 7000, height: 7000, color: 'black'}
+  {x: -3000, y: -3000, width: 7000, height: 7000, color: 'gray'},
 ]
 var platforms = [
   {x: 0, y: 700, width: 1000, height: 100, color: 'green'},
@@ -101,12 +105,12 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.8 * 4.5, // gravity
-  maxDX: 300, // max horizontal speed
-  maxDY: 300, // max falling speed
-  jumpForce: 1500 * 2, // big burst of speed
-  acceleration: 30,
-  friction: 90,
+  gravity: 9.8 * 40.5, // gravity
+  maxDX: 1300, // max horizontal speed
+  maxDY: 1300, // max falling speed
+  jumpForce: 1500 * 5, // big burst of speed
+  acceleration: 300 ,
+  friction: 900,
   // Vertical states
   grounded: false,
   jumping: false,
@@ -202,7 +206,6 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // name input  
-
 singlePlayerButton.addEventListener('click', function() {
   if (nameInput.value.length > 0) {
     mode = 'singlePlayer';
@@ -239,6 +242,13 @@ multiPlayerButton.addEventListener('click', function() {
     nameInput.value = 'name is too short';
   }
 });
+
+// settings img is clicked
+// settingsImg.addEventListener('click', function() {
+  
+
+
+
 
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
