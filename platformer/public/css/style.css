@@ -2,8 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    /*overflow-x: hidden;
+    overflow-y: hidden;*/
 }
 
 img {
@@ -33,7 +33,6 @@ canvas {
     height: 100vh;
 }
 
-/* stats class */
 .stats {
     display: block;
     position: absolute;
@@ -48,35 +47,34 @@ canvas {
     z-index: 100;
 }
 
-.settings {
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.settings img {
-    display: absolute;
-    top : 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
+/*settings*/
+.settings-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 
-
-#setting-container {
-    display: none;
-    padding: 10px;
+.settings-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    font-family: monospace;
-    font-size: 1rem;
-    line-height: 1.5;
-    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
 }
 
+.settings-icon:hover {
+    transform: rotate(15deg);
+}
+    
 .landing-page-container {
     display: flex;
     justify-content: center;
@@ -86,7 +84,59 @@ canvas {
     height: 100vh;
 }
 
+.settings-options {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 150px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
 
+.settings-container.open .settings-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(10px);
+}
+
+.settings-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-options li {
+    border-bottom: 1px solid #ccc;
+}
+
+.settings-options li:last-child {
+    border-bottom: none;
+}
+
+.settings-options li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.settings-options li a:hover {
+    background-color: #f0f0f0;
+}
+    
+/* Add a checkmark next to the selected option */
+.selected-option:before {
+    content: "\2713";
+    float: right;
+    color: green;
+}
+    
 .title {
     color: white;
     font-size: 5rem;

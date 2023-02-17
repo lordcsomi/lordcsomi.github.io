@@ -32,35 +32,20 @@
       <div id="wallJumpingRight"> test wall jumping right</div>
       <div id="colisionDisplay">test collison</div>
     </div>
+    <!--CANVAS-->
     <canvas id="game" width="100%" height="100%"></canvas>
-    <div class="settings" id="settings">
-      <img src="./assets/img/settings.png" alt="setting" id="setting"/>
-      <!-- full screen, music, debug display, back to landing page(reload the page)-->
-      <div id="setting-container">
-        <div class="setting-title">Settings</div>
-        <div class="setting-content">
-          <div class="setting-item">
-            <div class="setting-item-title">Full Screen</div>
-            <div class="setting-item-content">
-              <input type="checkbox" id="fullScreen" name="fullScreen" value="fullScreen">
-              <label for="fullScreen">Full Screen</label>
-            </div>
-          </div>
-          <div class="setting-item">
-            <div class="setting-item-title">Music</div>
-            <div class="setting-item-content">
-              <input type="checkbox" id="music" name="music" value="music">
-              <label for="music">Music</label>
-            </div>
-          </div>
-          <div class="setting-item">
-            <div class="setting-item-title">Debug Display</div>
-            <div class="setting-item-content">
-              <input type="checkbox" id="debugDisplay" name="debugDisplay" value="debugDisplay">
-              <label for="debugDisplay">Debug Display</label>
-            </div>
-          </div>
-        </div>
+    <div class="settings-container">
+      <div class="settings-icon">
+        <img src="./assets/img/settings.png" width="30px" height="30px">
+      </div>
+      <div class="settings-options">
+        <ul>
+          <li><a href="#">Option 1</a></li>
+          <li><a href="#">Option 2</a></li>
+          <li><a href="#">Option 3</a></li>
+          <li><a href="#">Option 4</a></li>
+        </ul>
+      </div>
     </div>
     <script src="./js/index.js"></script>
   </body>

@@ -29,8 +29,8 @@ const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
 
 // settings
-const settingsImg = document.getElementById('settings');
-const settingContainer = document.getElementById('setting-container');
+const settingsContainer = document.querySelector('.settings-container');
+const options = document.querySelectorAll('.settings-options li');
 
 // name form
 const landingPage = document.getElementById('landing-page-container');
@@ -243,12 +243,53 @@ multiPlayerButton.addEventListener('click', function() {
   }
 });
 
-// settings img is clicked
-// settingsImg.addEventListener('click', function() {
+// settings
+settingsContainer.addEventListener('click', () => {
+  settingsContainer.classList.toggle('open');
+});
   
 
+options.forEach(option => {
+  option.addEventListener('click', () => {
+    options.forEach(o => o.classList.remove('selected'));
+    option.classList.add('selected');
+    const optionText = option.textContent.trim();
+    switch (optionText) {
+      case 'Option 1':
+        runOption1Function();
+        break;
+      case 'Option 2':
+        runOption2Function();
+        break;
+      case 'Option 3':
+        runOption3Function();
+        break;
+      case 'Option 4':
+        runOption4Function();
+        break;
+    }
+  });
+});
 
+function runOption1Function() {
+  console.log('Option 1 was clicked!');
+  // Add your code to run for Option 1 here
+}
 
+function runOption2Function() {
+  console.log('Option 2 was clicked!');
+  // Add your code to run for Option 2 here
+}
+
+function runOption3Function() {
+  console.log('Option 3 was clicked!');
+  // Add your code to run for Option 3 here
+}
+
+function runOption4Function() {
+  console.log('Option 4 was clicked!');
+  // Add your code to run for Option 4 here
+}
 
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
