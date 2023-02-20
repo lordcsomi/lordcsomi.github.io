@@ -16,6 +16,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 //debug display
+const stats = document.getElementById('stats');
 const nameDebug = document.getElementById('nameInput');
 const fps = document.getElementById('fps');
 const position = document.getElementById('position');
@@ -31,6 +32,9 @@ const colisionDisplay = document.getElementById('colisionDisplay');
 // settings
 const settingsContainer = document.querySelector('.settings-container');
 const options = document.querySelectorAll('.settings-options li');
+const backToHome = document.getElementById('home');
+const toggleFullscreen = document.getElementById('fullScreen');
+const toggleDebug = document.getElementById('debugDisplay');
 
 // name form
 const landingPage = document.getElementById('landing-page-container');
@@ -106,8 +110,8 @@ var player = {
     right: false
   },
   gravity: 9.8 * 40.5, // gravity
-  maxDX: 1300, // max horizontal speed
-  maxDY: 1300, // max falling speed
+  maxDX: 1000, // max horizontal speed
+  maxDY: 1000, // max falling speed
   jumpForce: 1500 * 5, // big burst of speed
   acceleration: 300 ,
   friction: 900,
@@ -151,6 +155,7 @@ var camera = {
   renderWidth: canvas.width,
   renderHeight: canvas.height,
 }
+debug = true;
 
 //--------------------------------------------------------------------------------
 // EVENT LISTENERS
@@ -247,49 +252,33 @@ multiPlayerButton.addEventListener('click', function() {
 settingsContainer.addEventListener('click', () => {
   settingsContainer.classList.toggle('open');
 });
-  
 
-options.forEach(option => {
-  option.addEventListener('click', () => {
-    options.forEach(o => o.classList.remove('selected'));
-    option.classList.add('selected');
-    const optionText = option.textContent.trim();
-    switch (optionText) {
-      case 'Option 1':
-        runOption1Function();
-        break;
-      case 'Option 2':
-        runOption2Function();
-        break;
-      case 'Option 3':
-        runOption3Function();
-        break;
-      case 'Option 4':
-        runOption4Function();
-        break;
-    }
-  });
+// detect if the togleDebug button is clicked
+toggleDebug.addEventListener('click', () => {
+  debug = !debug;
+  if (debug) {
+    stats.style.display = 'block';
+  } else {
+    stats.style.display = 'none';
+  }
 });
 
-function runOption1Function() {
-  console.log('Option 1 was clicked!');
-  // Add your code to run for Option 1 here
-}
+// detect if the fullscreen button is clicked
+toggleFullscreen.addEventListener('click', () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen();
+  }
+});
 
-function runOption2Function() {
-  console.log('Option 2 was clicked!');
-  // Add your code to run for Option 2 here
-}
-
-function runOption3Function() {
-  console.log('Option 3 was clicked!');
-  // Add your code to run for Option 3 here
-}
-
-function runOption4Function() {
-  console.log('Option 4 was clicked!');
-  // Add your code to run for Option 4 here
-}
+// detect if the home button is clicked
+backToHome.addEventListener('click', () => {
+  player.x = 0;
+  player.y = 0;
+  player.dx = 0;
+  player.dy = 0;
+});
 
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
