@@ -16,6 +16,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 //debug display
+const stats = document.getElementById('stats');
 const nameDebug = document.getElementById('nameInput');
 const fps = document.getElementById('fps');
 const position = document.getElementById('position');
@@ -27,6 +28,13 @@ const doubleJumping = document.getElementById('doubleJumping');
 const wallJumpingLeft = document.getElementById('wallJumpingLeft');
 const wallJumpingRight = document.getElementById('wallJumpingRight');
 const colisionDisplay = document.getElementById('colisionDisplay');
+
+// settings
+const settingsContainer = document.querySelector('.settings-container');
+const options = document.querySelectorAll('.settings-options li');
+const backToHome = document.getElementById('home');
+const toggleFullscreen = document.getElementById('fullScreen');
+const toggleDebug = document.getElementById('debugDisplay');
 
 // name form
 const landingPage = document.getElementById('landing-page-container');
@@ -54,7 +62,7 @@ var mouse = {
 };
 
 var background = [
-  {x: -3000, y: -3000, width: 7000, height: 7000, color: 'black'}
+  {x: -3000, y: -3000, width: 7000, height: 7000, color: 'gray'},
 ]
 var platforms = [
   {x: 0, y: 700, width: 1000, height: 100, color: 'green'},
@@ -101,12 +109,12 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.8 * 4.5, // gravity
-  maxDX: 300, // max horizontal speed
-  maxDY: 300, // max falling speed
-  jumpForce: 1500 * 2, // big burst of speed
-  acceleration: 30,
-  friction: 90,
+  gravity: 9.8 * 40.5, // gravity
+  maxDX: 1000, // max horizontal speed
+  maxDY: 1000, // max falling speed
+  jumpForce: 1500 * 5, // big burst of speed
+  acceleration: 300 ,
+  friction: 900,
   // Vertical states
   grounded: false,
   jumping: false,
@@ -147,6 +155,7 @@ var camera = {
   renderWidth: canvas.width,
   renderHeight: canvas.height,
 }
+debug = true;
 
 //--------------------------------------------------------------------------------
 // EVENT LISTENERS
@@ -202,7 +211,6 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // name input  
-
 singlePlayerButton.addEventListener('click', function() {
   if (nameInput.value.length > 0) {
     mode = 'singlePlayer';
@@ -238,6 +246,38 @@ multiPlayerButton.addEventListener('click', function() {
     console.log('name is too short');
     nameInput.value = 'name is too short';
   }
+});
+
+// settings
+settingsContainer.addEventListener('click', () => {
+  settingsContainer.classList.toggle('open');
+});
+
+// detect if the togleDebug button is clicked
+toggleDebug.addEventListener('click', () => {
+  debug = !debug;
+  if (debug) {
+    stats.style.display = 'block';
+  } else {
+    stats.style.display = 'none';
+  }
+});
+
+// detect if the fullscreen button is clicked
+toggleFullscreen.addEventListener('click', () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen();
+  }
+});
+
+// detect if the home button is clicked
+backToHome.addEventListener('click', () => {
+  player.x = 0;
+  player.y = 0;
+  player.dx = 0;
+  player.dy = 0;
 });
 
 //--------------------------------------------------------------------------------

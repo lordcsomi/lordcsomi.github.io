@@ -35,12 +35,12 @@ const serverSettings = {
 //---------------------------------
 players = [];
 userNames = [];
+userInfos = [];
 spectators = [];
 rooms = [];
 exampleplayer = {
   name: 'example',
   id: '0123456789',
-  ip: '012.345.678.910',
   room: 'exampleRoom',
   width: 20,
   height: 20,
@@ -75,9 +75,24 @@ exampleplayer = {
   freemode: true,
 };
 
+exmapleUser = {
+  name: 'example',
+  id: '0123456789',
+  ip: '123.456.789.012',
+  screen: {
+    width: 1920,
+    height: 1080,
+  },
+    
+};
+
 // socket connection
 io.on('connection', function (socket) {
   console.log('a user connected id:', socket.id, 'ip:', socket.handshake.address);
+  const userAgent = socket.handshake.headers['user-agent'];
+  const isMobile = /Mobile/.test(userAgent);
+  console.log(`User-Agent: ${userAgent}`);
+  console.log(`Is mobile: ${isMobile}`);
 
   // send initial data
   socket.emit('initialData', {

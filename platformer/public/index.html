@@ -3,6 +3,8 @@
   <head>
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <!-- disable zooming -->
+    <title>PlatformR</title>
   </head>
   <body>
     <div class="landing-page-container" id="landing-page-container">
@@ -17,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="stats">
+    <div class="stats" id="stats">
       <div id="nameInput">test name</div>
       <div id="fps">test fps</div>
       <div id="position">test X test Y</div>
@@ -30,7 +32,20 @@
       <div id="wallJumpingRight"> test wall jumping right</div>
       <div id="colisionDisplay">test collison</div>
     </div>
+    <!--CANVAS-->
     <canvas id="game" width="100%" height="100%"></canvas>
+    <div class="settings-container">
+      <div class="settings-icon">
+        <img src="./assets/img/settings.png" width="30px" height="30px">
+      </div>
+      <div class="settings-options">
+        <ul>
+          <li id="home">Home</li>
+          <li id="fullScreen">Full screen</li>
+          <li id="debugDisplay">Debug Display</li>
+        </ul>
+      </div>
+    </div>
     <script src="./js/index.js"></script>
   </body>
 </html>
