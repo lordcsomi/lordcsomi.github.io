@@ -64,7 +64,7 @@ canvas {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    color: #fff;
+    opacity: 0.5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,6 +96,7 @@ canvas {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease-in-out;
+    opacity: 0.5;
 }
 
 .settings-container.open .settings-options {
@@ -189,3 +190,37 @@ canvas {
     margin-bottom: 10px;
     cursor: pointer;
 }
+
+#virtual-keyboard {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50%;
+  }
+  
+  .key {
+    width: 30%;
+    height: 80%;
+    border: 1px solid black;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  #left-arrow:before {
+    content: "<";
+  }
+  
+  #right-arrow:before {
+    content: ">";
+  }
+  
+  #jump:before {
+    content: "^";
+  }

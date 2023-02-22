@@ -1,9 +1,4 @@
 //--------------------------------------------------------------------------------
-// IMPORT
-//--------------------------------------------------------------------------------
-// import { Rect } from "./rect.js";
-
-//--------------------------------------------------------------------------------
 // SETUP
 //--------------------------------------------------------------------------------
 const socket = io();
@@ -32,15 +27,24 @@ const colisionDisplay = document.getElementById('colisionDisplay');
 // settings
 const settingsContainer = document.querySelector('.settings-container');
 const options = document.querySelectorAll('.settings-options li');
-const backToHome = document.getElementById('home');
-const toggleFullscreen = document.getElementById('fullScreen');
-const toggleDebug = document.getElementById('debugDisplay');
+const backToHome = document.getElementById('homeButton');
+const toggleFullscreen = document.getElementById('fullScreenButton');
+const toggleDebug = document.getElementById('debugDisplayButton');
+const toggleMusic = document.getElementById('music');
+const toggleSound = document.getElementById('sound');
+const toggleKeyboard = document.getElementById('virtualKeyboardButton');
 
 // name form
 const landingPage = document.getElementById('landing-page-container');
 const nameInput = document.getElementById('name');
 const singlePlayerButton = document.getElementById('singlePlayer');
 const multiPlayerButton = document.getElementById('multiPlayer');
+
+// virtual keyboard
+const keyboard = document.getElementById("virtual-keyboard");
+const left = document.getElementById("left-arrow");
+const right = document.getElementById("right-arrow");
+const up = document.getElementById("jump");
 
 var invalidPositions = [];
 var keys = [];
@@ -253,10 +257,8 @@ settingsContainer.addEventListener('click', () => {
   settingsContainer.classList.toggle('open');
 });
 
-// detect if the togleDebug button is clicked
 toggleDebug.addEventListener('click', () => {
-  debug = !debug;
-  if (debug) {
+  if (stats.style.display === 'none') {
     stats.style.display = 'block';
   } else {
     stats.style.display = 'none';
@@ -272,13 +274,35 @@ toggleFullscreen.addEventListener('click', () => {
   }
 });
 
-// detect if the home button is clicked
 backToHome.addEventListener('click', () => {
   player.x = 0;
   player.y = 0;
   player.dx = 0;
   player.dy = 0;
 });
+
+toggleKeyboard.addEventListener('click', () => {
+  if (keyboard.style.display === 'none') {
+    keyboard.style.display = 'block';
+  } else {
+    keyboard.style.display = 'none';
+  }
+}
+);
+
+// virtual keyboard mimicking the physical keyboard
+keyboard.addEventListener('click', (e) => {
+  console.log(e.target.id);
+  if (e.target.id === 'left-arrow') { 
+    keys[37] = true;
+  } else if (e.target.id === 'right-arrow') {
+    keys[39] = true;
+  } else if (e.target.id === 'up-arrow') {
+    keys[38] = true;
+  }
+});
+
+
 
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
