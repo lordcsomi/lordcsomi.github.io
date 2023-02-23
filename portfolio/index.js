@@ -1,9 +1,9 @@
 const grid = document.getElementById('grid');
 const letters = 'abcdefghijklmnopqrstuvwxyz';
-const gridSize = 100;
-const letterSize = 70;
+const gridSize = 60;
+const letterSize = 18;
 const letterColors = ['#ff0000', '#00ff00', '#0000ff'];
-const radius = 80;
+const radius = 45;
 
 // Populate the grid with letters
 for (let i = 0; i < gridSize * gridSize; i++) {
@@ -48,4 +48,25 @@ window.addEventListener('resize', () => {
     }
 });
 
-
+// on click, from the mouse position, while the radius not exceed a given max radious, change the color of the letters on the perimeter of the radius and the ones that are not on the perimetr of the radius back to original color and increase the radius in every 100ms
+document.addEventListener('click', (e) => {
+    const letters = document.querySelectorAll('#grid div');
+    let radius = 0;
+    const interval = setInterval(() => {
+        for (let i = 0; i < letters.length; i++) {
+            const letter = letters[i];
+            const x = letter.offsetLeft + letterSize / 2;
+            const y = letter.offsetTop + letterSize / 2;
+            const distance = Math.sqrt(Math.pow(e.clientX - x, 2) + Math.pow(e.clientY - y, 2));
+            if (distance < radius) {
+            letter.style.color = letterColors[Math.floor(Math.random() * letterColors.length)];
+            } else {
+            letter.style.color = '#999';
+            }
+        }
+        radius += 5;
+        if (radius > 100) {
+            clearInterval(interval);
+        }
+    }, 30);
+});
