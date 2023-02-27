@@ -669,7 +669,6 @@ function frame() {
   // Do the render stuff
   draw();
   requestAnimationFrame(frame);
-
 };
 
 

@@ -4,16 +4,17 @@ const os = require('os');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+require('dotenv').config();
 
-app.use(express.static('public'));
+// Settings from .env file 
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
+const version = process.env.VERSION || '0.0.0';
+const environment = process.env.NODE_ENV || 'development';
+const maxConnections = process.env.MAX_CONNECTIONS || 40;
+const maxPlayers = process.env.MAX_PLAYERS || 10;
+bannedIPs = process.env.BANNED_IPS || [];
 
-server.listen(3000, function () {
-  const ip = Object.values(os.networkInterfaces())
-    .flatMap((iface) => iface.filter((info) => info.family === 'IPv4' && !info.internal))
-    .map((info) => info.address)[0];
-
-  console.log(`Server listening on http://${ip}:3000`);
-});
 //---------------------------------
 // SETTINGS
 //---------------------------------
@@ -86,8 +87,33 @@ exmapleUser = {
     
 };
 
+app.use(express.static('public'));
+
+server.listen(port, function () {
+  const ip = Object.values(os.networkInterfaces())
+    .flatMap((iface) => iface.filter((info) => info.family === 'IPv4' && !info.internal))
+    .map((info) => info.address)[0];
+  console.log(`Server listening on http://${ip}:3000`);
+});
+
 // socket connection
 io.on('connection', function (socket) {
+  // detect if the ip is banned
+  if (bannedIPs.includes(socket.handshake.address)) {
+    console.log('banned ip tried to connect:', socket.handshake.address);
+    socket.disconnect();
+    return;
+  }
+  else if (players.length >= maxPlayers) {
+    console.log('max players reached:', socket.handshake.address);
+    socket.disconnect();
+    return;
+  }
+  else if (io.engine.clientsCount >= maxConnections) {
+    console.log('max connections reached:', socket.handshake.address);
+    socket.disconnect();
+    return;
+  }
   console.log('a user connected id:', socket.id, 'ip:', socket.handshake.address);
   const userAgent = socket.handshake.headers['user-agent'];
   const isMobile = /Mobile/.test(userAgent);
