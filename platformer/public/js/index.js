@@ -233,11 +233,28 @@ multiPlayerButton.addEventListener('click', function() {
     if (nameInput.value.length < nameRules.maxLength) {
       // check if name only contains letters and numbers
       if (nameInput.value.match(/^[a-zA-Z0-9]+$/)) {
-        myName = nameInput.value;
-        myId = socket.id;
-        // send name to server
-        socket.emit('setName', myName);
-        mode = 'multiPlayer';
+        // check if name is not in takenNames
+        if (takenNames.indexOf(nameInput.value) === -1) {
+          // set name
+          myName = nameInput.value;
+          myId = socket.id;
+          // send name to server
+          socket.emit('playerUpdate', {
+            id: myId,
+            name: myName,
+            deviceInfo : {
+              width: window.innerWidth,
+              height: window.innerHeight,
+              userAgent: navigator.userAgent,
+              ratio : window.devicePixelRatio
+          }
+          });
+          mode = 'multiPlayer';
+          console.log('my name is ' + myName);
+        } else {
+          console.log('name is taken');
+          nameInput.value = 'name is taken';
+        }
       } else {
         console.log('name contains invalid characters');
         nameInput.value = 'name contains invalid characters';
@@ -311,14 +328,24 @@ keyboard.addEventListener('click', (e) => {
 socket.on('initialData', function(data) {
   console.log('initialData received');
   nameRules = data.validName;
+  takenNames = data.takenNames;
 });
 
-// listen for start the game
-socket.on('startGame', function(data) {
-  console.log('startGame received');
-  landingPage.style.display = 'none';
-  game.style.display = 'block';
-  frame();
+
+// listen for updatePack
+socket.on('updatePack', function(data) {
+  // check if takenNames is in data
+  if (data.takenNames) {
+    takenNames = data.takenNames;
+    console.log('takenNames updated');
+    console.log(takenNames);
+  }
+});
+
+// listen for forceDiscConnect (even single player is not allowed)
+socket.on('forceDiscConnect', function(data) {
+  console.log('forceDiscConnect received');
+  socket.disconnect();
 });
 
 //--------------------------------------------------------------------------------
@@ -537,6 +564,7 @@ function drawBackground() {
   for (var i = 0; i < background.length; i++) {
     drawRect(background[i].x, background[i].y, background[i].width, background[i].height, background[i].color);
   }  
+  // parallax scrolling background
 }
 function drawPlatforms() {
   for (var i = 0; i < platforms.length; i++) {

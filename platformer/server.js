@@ -34,9 +34,9 @@ const serverSettings = {
 //---------------------------------
 // GLOBAL VARIABLES
 //---------------------------------
-players = [];
+players = {};
 userNames = [];
-userInfos = [];
+userInfos = {};
 spectators = [];
 rooms = [];
 exampleplayer = {
@@ -73,7 +73,7 @@ exampleplayer = {
   wallJumpingLeft: false,
   wallJumpingRight: false,
   wallJumping: false,
-  freemode: true,
+  freemode: false,
 };
 
 exmapleUser = {
@@ -101,6 +101,7 @@ io.on('connection', function (socket) {
   // detect if the ip is banned
   if (bannedIPs.includes(socket.handshake.address)) {
     console.log('banned ip tried to connect:', socket.handshake.address);
+    socket.emit('forceDiscConnect', true);
     socket.disconnect();
     return;
   }
@@ -117,74 +118,52 @@ io.on('connection', function (socket) {
   console.log('a user connected id:', socket.id, 'ip:', socket.handshake.address);
   const userAgent = socket.handshake.headers['user-agent'];
   const isMobile = /Mobile/.test(userAgent);
-  console.log(`User-Agent: ${userAgent}`);
-  console.log(`Is mobile: ${isMobile}`);
 
   // send initial data
   socket.emit('initialData', {
     'validName': validName,
+    'takenNames': userNames,
   });
 
-  // on setName
-  socket.on('setName', function (name) {
-    userNames.push(name);
-    socket.emit('setName', name);
-    players.push({
-      name: name,
-      id: socket.id,
-      ip: socket.handshake.address,
-      room: 'main',
-      width: 20,
-      height: 20,
-      color: 'red',
-      x: 600,
-      y: 0,
-      dX: 0,
-      dY: 0,
-      left: false,
-      right: false,
-      jump: false,
-      collision : {
-        top: false,
-        bottom: false,
-        left: false,
-        right: false
-      },
-      gravity: 9.81*0.1,
-      maxDX: 9,
-      maxDY: 50,
-      jumpForce: 10,
-      acceleration: 0.8,
-      friction: 0.9,
-      grounded: false,
-      jumping: false,
-      doubleJumpingAllowed: true,
-      doubleJumping: false,
-      jumpCooldown: 0.3,
-      wallJumpingLeft: false,
-      wallJumpingRight: false,
-      wallJumping: false,
-      freemode: true,
-    });
-    //socket.join('main');
-    //socket.emit('joinRoom', 'main');
-    socket.emit('updatePlayers', players);
-    socket.broadcast.emit('updatePlayers', players);
-    socket.emit('startGame'); // for now testing
-    console.log('user with id:', socket.id, 'and name:', name, 'and ip:', socket.handshake.address, 'connected');
+  // on playerUpdate
+  socket.on('playerUpdate', function (player) {
+    // check if the player is already in the players array
   });
+    
 
   
   // disconnect
   socket.on('disconnect', function () {
-    if (players[socket.id] && players[socket.id].name && players[socket.id].ip) {
-      console.log('user disconnected with id:', socket.id, 'and name:', players[socket.id].name, 'and ip:', players[socket.id].ip);
-      userNames.splice(userNames.indexOf(players[socket.id].name), 1);
-      players.splice(players.indexOf(players[socket.id]), 1);
-      socket.broadcast.emit('updatePlayers', players);
-    } else {
-      console.log('user disconnected with id:', socket.id);
+    console.log('user disconnected id:', socket.id, 'ip:', socket.handshake.address);
+    // remove player
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].id === socket.id) {
+        players.splice(i, 1);
+        break;
+      }
     }
+    // remove user
+    for (let i = 0; i < userInfos.length; i++) {
+      if (userInfos[i].id === socket.id) {
+        userInfos.splice(i, 1);
+        break;
+      }
+    }
+    // remove name
+    for (let i = 0; i < userNames.length; i++) {
+      if (userNames[i] === socket.id) {
+        userNames.splice(i, 1);
+        break;
+      }
+    }
+    
+    // send to all clients the player
+    socket.emit('updatePack', {
+      'takenNames': userNames,
+    });
+    socket.broadcast.emit('updatePack', {
+      'takenNames': userNames,
+    });
   });
 
   // invalid positions
