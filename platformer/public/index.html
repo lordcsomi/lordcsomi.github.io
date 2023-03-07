@@ -19,18 +19,26 @@
         </div>
       </div>
     </div>
-    <div class="stats" id="stats">
+    <div class="stats" id="stats" style="display: none;">
       <div id="nameInput">test name</div>
       <div id="fps">test fps</div>
       <div id="position">test X test Y</div>
       <div id="velocity">test velocity</div>
-      <div id="acceleration">test acceleration</div>
       <div id="grounded">test grounded</div>
       <div id="jumping">test jumping</div>
       <div id="doubleJumping">test doubleJumping</div>
       <div id="wallJumpingLeft">test wall jumping left</div>
       <div id="wallJumpingRight"> test wall jumping right</div>
       <div id="colisionDisplay">test collison</div>
+    </div>
+    <div id="virtual-keyboard" style="display: none;">
+      <div class="row">
+        <div class="key" id="left-arrow"></div>
+        <div class="key" id="right-arrow"></div>
+      </div>
+      <div class="row">
+        <div class="key" id="jump"></div>
+      </div>
     </div>
     <!--CANVAS-->
     <canvas id="game" width="100%" height="100%"></canvas>
@@ -40,9 +48,10 @@
       </div>
       <div class="settings-options">
         <ul>
-          <li id="home">Home</li>
-          <li id="fullScreen">Full screen</li>
-          <li id="debugDisplay">Debug Display</li>
+          <li id="homeButton">Home</li>
+          <li id="fullScreenButton">Full screen</li>
+          <li id="debugDisplayButton">Debug Display</li>
+          <li id="virtualKeyboardButton">Virtual Keyboard</li>
         </ul>
       </div>
     </div>

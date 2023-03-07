@@ -1,9 +1,4 @@
 //--------------------------------------------------------------------------------
-// IMPORT
-//--------------------------------------------------------------------------------
-// import { Rect } from "./rect.js";
-
-//--------------------------------------------------------------------------------
 // SETUP
 //--------------------------------------------------------------------------------
 const socket = io();
@@ -32,15 +27,24 @@ const colisionDisplay = document.getElementById('colisionDisplay');
 // settings
 const settingsContainer = document.querySelector('.settings-container');
 const options = document.querySelectorAll('.settings-options li');
-const backToHome = document.getElementById('home');
-const toggleFullscreen = document.getElementById('fullScreen');
-const toggleDebug = document.getElementById('debugDisplay');
+const backToHome = document.getElementById('homeButton');
+const toggleFullscreen = document.getElementById('fullScreenButton');
+const toggleDebug = document.getElementById('debugDisplayButton');
+const toggleMusic = document.getElementById('music');
+const toggleSound = document.getElementById('sound');
+const toggleKeyboard = document.getElementById('virtualKeyboardButton');
 
 // name form
 const landingPage = document.getElementById('landing-page-container');
 const nameInput = document.getElementById('name');
 const singlePlayerButton = document.getElementById('singlePlayer');
 const multiPlayerButton = document.getElementById('multiPlayer');
+
+// virtual keyboard
+const keyboard = document.getElementById("virtual-keyboard");
+const left = document.getElementById("left-arrow");
+const right = document.getElementById("right-arrow");
+const up = document.getElementById("jump");
 
 var invalidPositions = [];
 var keys = [];
@@ -98,8 +102,6 @@ var player = {
   y: 0,
   dX: 0,
   dY: 0,
-  ddX: 0,
-  ddY: 0,
   left: false,
   right: false,
   jump: false,
@@ -109,12 +111,12 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.8 * 40.5, // gravity
-  maxDX: 1000, // max horizontal speed
-  maxDY: 1000, // max falling speed
-  jumpForce: 1500 * 5, // big burst of speed
+  gravity: 1100, // gravity
+  maxDX: 600, // max horizontal speed
+  maxDY: 600, // max falling speed
+  jumpForce: 800, // big burst of speed
   acceleration: 300 ,
-  friction: 900,
+  friction: 300,
   // Vertical states
   grounded: false,
   jumping: false,
@@ -229,11 +231,28 @@ multiPlayerButton.addEventListener('click', function() {
     if (nameInput.value.length < nameRules.maxLength) {
       // check if name only contains letters and numbers
       if (nameInput.value.match(/^[a-zA-Z0-9]+$/)) {
-        myName = nameInput.value;
-        myId = socket.id;
-        // send name to server
-        socket.emit('setName', myName);
-        mode = 'multiPlayer';
+        // check if name is not in takenNames
+        if (takenNames.indexOf(nameInput.value) === -1) {
+          // set name
+          myName = nameInput.value;
+          myId = socket.id;
+          // send name to server
+          socket.emit('playerUpdate', {
+            id: myId,
+            name: myName,
+            deviceInfo : {
+              width: window.innerWidth,
+              height: window.innerHeight,
+              userAgent: navigator.userAgent,
+              ratio : window.devicePixelRatio
+          }
+          });
+          mode = 'multiPlayer';
+          console.log('my name is ' + myName);
+        } else {
+          console.log('name is taken');
+          nameInput.value = 'name is taken';
+        }
       } else {
         console.log('name contains invalid characters');
         nameInput.value = 'name contains invalid characters';
@@ -248,15 +267,57 @@ multiPlayerButton.addEventListener('click', function() {
   }
 });
 
+multiPlayerButton.addEventListener('click', function() {
+  // check if name is valid
+  if (!(nameInput.value.length > nameRules.minLength)) {
+    console.log('name is too short');
+    nameInput.value = 'name is too short';
+    return;
+  }
+  if (!(nameInput.value.length < nameRules.maxLength)) {
+    console.log('name is too long');
+    nameInput.value = 'name is too long';
+    return;
+  }
+  // check if name only contains letters and numbers
+  if (!(nameInput.value.match(/^[a-zA-Z0-9]+$/))) {
+    console.log('name contains invalid characters');
+    nameInput.value = 'name contains invalid characters';
+    return;
+  }
+  // check if name is not in takenNames
+  if (!(takenNames.indexOf(nameInput.value) === -1)) {
+    console.log('name is taken');
+    nameInput.value = 'name is taken';
+    return;
+  }
+
+  // set name
+  myName = nameInput.value;
+  myId = socket.id;
+  // send name to server
+  socket.emit('playerUpdate', {
+    id: myId,
+    name: myName,
+    deviceInfo : {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      userAgent: navigator.userAgent,
+      ratio : window.devicePixelRatio
+    }
+  });
+  mode = 'multiPlayer';
+  console.log('my name is ' + myName);
+  
+});
+
 // settings
 settingsContainer.addEventListener('click', () => {
   settingsContainer.classList.toggle('open');
 });
 
-// detect if the togleDebug button is clicked
 toggleDebug.addEventListener('click', () => {
-  debug = !debug;
-  if (debug) {
+  if (stats.style.display === 'none') {
     stats.style.display = 'block';
   } else {
     stats.style.display = 'none';
@@ -272,13 +333,35 @@ toggleFullscreen.addEventListener('click', () => {
   }
 });
 
-// detect if the home button is clicked
 backToHome.addEventListener('click', () => {
   player.x = 0;
   player.y = 0;
-  player.dx = 0;
-  player.dy = 0;
+  player.dX = 0;
+  player.dY = 0;
 });
+
+toggleKeyboard.addEventListener('click', () => {
+  if (keyboard.style.display === 'none') {
+    keyboard.style.display = 'block';
+  } else {
+    keyboard.style.display = 'none';
+  }
+}
+);
+
+// virtual keyboard mimicking the physical keyboard
+keyboard.addEventListener('click', (e) => {
+  console.log(e.target.id);
+  if (e.target.id === 'left-arrow') { 
+    keys[37] = true;
+  } else if (e.target.id === 'right-arrow') {
+    keys[39] = true;
+  } else if (e.target.id === 'up-arrow') {
+    keys[38] = true;
+  }
+});
+
+
 
 //--------------------------------------------------------------------------------
 // SOCKET LISTENERS
@@ -287,14 +370,24 @@ backToHome.addEventListener('click', () => {
 socket.on('initialData', function(data) {
   console.log('initialData received');
   nameRules = data.validName;
+  takenNames = data.takenNames;
 });
 
-// listen for start the game
-socket.on('startGame', function(data) {
-  console.log('startGame received');
-  landingPage.style.display = 'none';
-  game.style.display = 'block';
-  frame();
+
+// listen for updatePack
+socket.on('updatePack', function(data) {
+  // check if takenNames is in data
+  if (data.takenNames) {
+    takenNames = data.takenNames;
+    console.log('takenNames updated');
+    console.log(takenNames);
+  }
+});
+
+// listen for forceDiscConnect (even single player is not allowed)
+socket.on('forceDiscConnect', function(data) {
+  console.log('forceDiscConnect received');
+  socket.disconnect();
 });
 
 //--------------------------------------------------------------------------------
@@ -326,50 +419,37 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
-
+  // Force vectors for a step
+  var ddx = 0;
+  var ddy = 0;
   // steal smart stuff from oindex.js
   let wasleft = player.dX < 0;
   let wasright = player.dX > 0;
 
   // move the player according to the input
   if (player.left) { // left
-    player.ddX -= player.acceleration;
+    player.dX -= player.acceleration;
   } else if (wasleft) {
-    player.ddX += player.friction;
+    player.dX += player.friction;
   }
   if (player.right) { // right
-    player.ddX += player.acceleration;
+    player.dX += player.acceleration;
   } else if (wasright) {
-    player.ddX -= player.friction;
+    player.dX -= player.friction;
   } 
 
-  // if (!player.left && !player.right) { // no horizontal input
-  //   player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
-  // }
-    
-  player.ddY += player.gravity;
+  // Vertical physics
+  ddy += player.gravity;
   if (player.jump && player.grounded) { // jump
-    player.ddY -= player.jumpForce;
+    player.dY -= player.jumpForce;
     player.jumping = true;
     player.doubleJumpingAllowed = true;
     player.grounded = false;
   }
-  // } else if (player.jump && player.doubleJumpingAllowed) { // double jump
-  //   player.ddY -= player.jumpForce;
-  //   player.doubleJumping = true;
-  //   player.doubleJumpingAllowed = false;
-  // }
-  // Idont understand how this works yet
-  // if (player.jumpCooldown > 0) { // jump cooldown
-  //   player.jumpCooldown -= deltaTime;
-  // } else { // reset jump cooldown
-  //   player.jumping = false;
-  //   player.doubleJumping = false;
-  // }
 
   // Update velocities
-  player.dX += player.ddX * deltaTime
-  player.dY += player.ddY * deltaTime
+  player.dX += ddx * deltaTime
+  player.dY += ddy * deltaTime
   // Put a cap/Clamp max speed in both direciton
   player.dX = clamp(player.dX, -player.maxDX, player.maxDX)
   player.dY = clamp(player.dY, -player.maxDY, player.maxDY)
@@ -381,7 +461,7 @@ function updatePlayer(deltaTime) {
   // Meaning player reached "sticky friction"
   if ((wasleft && player.dX > 0) || (wasright && player.dX < 0)) {
     player.dX = 0;
-    player.ddX = 0;
+    ddx = 0;
   }
   
   // check and handle if the player is colliding with a platform
@@ -438,11 +518,10 @@ function collisionCheck() { // <----- The problem is here probably
 
     // check bottom collision
     let pBottom = player.y + player.height;
-    if (pBottom > platY && pBottom < platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
+    if (pBottom > platY && pBottom <= platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
       player.collision.bottom = true;
       player.y = platY - player.height;
       player.dY = 0;
-      player.ddY = 0;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
@@ -456,17 +535,14 @@ function collisionCheck() { // <----- The problem is here probably
       // Early stage implementation of not falling
       if (player.dY < 0) {
         player.dY = 0;
-        player.ddY = 0
       }
     }
-    
+
     // check right collision
     let pRight = player.x + player.width;
     if (pRight <= platX + 10 && pRight >= platX && interceptY()) {
       player.collision.right = true;
       player.x = platX - player.width;
-      // player.dX = 0;
-
     }
     
     // check left collision
@@ -474,7 +550,6 @@ function collisionCheck() { // <----- The problem is here probably
     if (player.x >= platRight - 10 && player.x <= platRight && interceptY()) {
       player.collision.left = true;
       player.x = platX + platW;
-      // player.dX = 0;
     }
   }
 }
@@ -513,6 +588,7 @@ function drawBackground() {
   for (var i = 0; i < background.length; i++) {
     drawRect(background[i].x, background[i].y, background[i].width, background[i].height, background[i].color);
   }  
+  // parallax scrolling background
 }
 function drawPlatforms() {
   for (var i = 0; i < platforms.length; i++) {
@@ -559,7 +635,7 @@ function updateDebugDisplay(deltaTime) {
   // check if mode is single player or multiplayer
   if (mode === 'singlePlayer') {
     nameDebug.innerHTML = myName;// + ' id:  ' + myId; //+ 'ip: ' + myIp;
-    position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
+    position.innerHTML = 'x: ' + player.x.toFixed(3) + ', y: ' + player.y.toFixed(3) + '';
     fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
     velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
     grounded.innerHTML = 'grounded: ' + player.grounded + '';
@@ -586,7 +662,6 @@ function updateDebugDisplay(deltaTime) {
   position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
   fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
   velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
-  acceleration.innerHTML = 'ddX: ' + player.ddX.toFixed(2) + ', ddY: ' + player.ddY.toFixed(2) + '';
   grounded.innerHTML = 'grounded: ' + player.grounded + '';
   jumping.innerHTML = 'jumping: ' + player.jumping + '';
   doubleJumping.innerHTML = 'doubleJumping: ' + player.doubleJumping + '';
@@ -645,7 +720,7 @@ function frame() {
   // Do the render stuff
   draw();
   requestAnimationFrame(frame);
-
 };
 
 
+//test commit
