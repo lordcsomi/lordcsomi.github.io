@@ -102,8 +102,6 @@ var player = {
   y: 0,
   dX: 0,
   dY: 0,
-  ddX: 0,
-  ddY: 0,
   left: false,
   right: false,
   jump: false,
@@ -113,12 +111,12 @@ var player = {
     left: false,
     right: false
   },
-  gravity: 9.8 * 40.5, // gravity
-  maxDX: 1000, // max horizontal speed
-  maxDY: 1000, // max falling speed
-  jumpForce: 1500 * 5, // big burst of speed
+  gravity: 1100, // gravity
+  maxDX: 600, // max horizontal speed
+  maxDY: 600, // max falling speed
+  jumpForce: 800, // big burst of speed
   acceleration: 300 ,
-  friction: 900,
+  friction: 300,
   // Vertical states
   grounded: false,
   jumping: false,
@@ -294,8 +292,8 @@ toggleFullscreen.addEventListener('click', () => {
 backToHome.addEventListener('click', () => {
   player.x = 0;
   player.y = 0;
-  player.dx = 0;
-  player.dy = 0;
+  player.dX = 0;
+  player.dY = 0;
 });
 
 toggleKeyboard.addEventListener('click', () => {
@@ -377,50 +375,37 @@ function update() {
 }
 
 function updatePlayer(deltaTime) {
-
+  // Force vectors for a step
+  var ddx = 0;
+  var ddy = 0;
   // steal smart stuff from oindex.js
   let wasleft = player.dX < 0;
   let wasright = player.dX > 0;
 
   // move the player according to the input
   if (player.left) { // left
-    player.ddX -= player.acceleration;
+    player.dX -= player.acceleration;
   } else if (wasleft) {
-    player.ddX += player.friction;
+    player.dX += player.friction;
   }
   if (player.right) { // right
-    player.ddX += player.acceleration;
+    player.dX += player.acceleration;
   } else if (wasright) {
-    player.ddX -= player.friction;
+    player.dX -= player.friction;
   } 
 
-  // if (!player.left && !player.right) { // no horizontal input
-  //   player.ddX = -player.prevDirection * player.friction * (player.falling ? 0.5 : 1);
-  // }
-    
-  player.ddY += player.gravity;
+  // Vertical physics
+  ddy += player.gravity;
   if (player.jump && player.grounded) { // jump
-    player.ddY -= player.jumpForce;
+    player.dY -= player.jumpForce;
     player.jumping = true;
     player.doubleJumpingAllowed = true;
     player.grounded = false;
   }
-  // } else if (player.jump && player.doubleJumpingAllowed) { // double jump
-  //   player.ddY -= player.jumpForce;
-  //   player.doubleJumping = true;
-  //   player.doubleJumpingAllowed = false;
-  // }
-  // Idont understand how this works yet
-  // if (player.jumpCooldown > 0) { // jump cooldown
-  //   player.jumpCooldown -= deltaTime;
-  // } else { // reset jump cooldown
-  //   player.jumping = false;
-  //   player.doubleJumping = false;
-  // }
 
   // Update velocities
-  player.dX += player.ddX * deltaTime
-  player.dY += player.ddY * deltaTime
+  player.dX += ddx * deltaTime
+  player.dY += ddy * deltaTime
   // Put a cap/Clamp max speed in both direciton
   player.dX = clamp(player.dX, -player.maxDX, player.maxDX)
   player.dY = clamp(player.dY, -player.maxDY, player.maxDY)
@@ -432,7 +417,7 @@ function updatePlayer(deltaTime) {
   // Meaning player reached "sticky friction"
   if ((wasleft && player.dX > 0) || (wasright && player.dX < 0)) {
     player.dX = 0;
-    player.ddX = 0;
+    ddx = 0;
   }
   
   // check and handle if the player is colliding with a platform
@@ -489,11 +474,10 @@ function collisionCheck() { // <----- The problem is here probably
 
     // check bottom collision
     let pBottom = player.y + player.height;
-    if (pBottom > platY && pBottom < platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
+    if (pBottom > platY && pBottom <= platY + 10 && interceptX()) { // HACKY way of creating a nonexistent groundlayer on top of every platform, because it counts touching too which in this simple phase is almost the same as a resolved collision
       player.collision.bottom = true;
       player.y = platY - player.height;
       player.dY = 0;
-      player.ddY = 0;
       player.grounded = true;
       player.doubleJumping = false;
       player.wallJumping = false;
@@ -507,17 +491,14 @@ function collisionCheck() { // <----- The problem is here probably
       // Early stage implementation of not falling
       if (player.dY < 0) {
         player.dY = 0;
-        player.ddY = 0
       }
     }
-    
+
     // check right collision
     let pRight = player.x + player.width;
     if (pRight <= platX + 10 && pRight >= platX && interceptY()) {
       player.collision.right = true;
       player.x = platX - player.width;
-      // player.dX = 0;
-
     }
     
     // check left collision
@@ -525,7 +506,6 @@ function collisionCheck() { // <----- The problem is here probably
     if (player.x >= platRight - 10 && player.x <= platRight && interceptY()) {
       player.collision.left = true;
       player.x = platX + platW;
-      // player.dX = 0;
     }
   }
 }
@@ -611,7 +591,7 @@ function updateDebugDisplay(deltaTime) {
   // check if mode is single player or multiplayer
   if (mode === 'singlePlayer') {
     nameDebug.innerHTML = myName;// + ' id:  ' + myId; //+ 'ip: ' + myIp;
-    position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
+    position.innerHTML = 'x: ' + player.x.toFixed(3) + ', y: ' + player.y.toFixed(3) + '';
     fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
     velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
     grounded.innerHTML = 'grounded: ' + player.grounded + '';
@@ -638,7 +618,6 @@ function updateDebugDisplay(deltaTime) {
   position.innerHTML = 'x: ' + player.x + ', y: ' + player.y + '';
   fps.innerHTML = 'fps: ' + (1 / deltaTime).toFixed(0);
   velocity.innerHTML = 'dX: ' + player.dX.toFixed(2) + ', dY: ' + player.dY.toFixed(2) + '';
-  acceleration.innerHTML = 'ddX: ' + player.ddX.toFixed(2) + ', ddY: ' + player.ddY.toFixed(2) + '';
   grounded.innerHTML = 'grounded: ' + player.grounded + '';
   jumping.innerHTML = 'jumping: ' + player.jumping + '';
   doubleJumping.innerHTML = 'doubleJumping: ' + player.doubleJumping + '';
