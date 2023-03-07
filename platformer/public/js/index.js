@@ -267,6 +267,50 @@ multiPlayerButton.addEventListener('click', function() {
   }
 });
 
+multiPlayerButton.addEventListener('click', function() {
+  // check if name is valid
+  if (!(nameInput.value.length > nameRules.minLength)) {
+    console.log('name is too short');
+    nameInput.value = 'name is too short';
+    return;
+  }
+  if (!(nameInput.value.length < nameRules.maxLength)) {
+    console.log('name is too long');
+    nameInput.value = 'name is too long';
+    return;
+  }
+  // check if name only contains letters and numbers
+  if (!(nameInput.value.match(/^[a-zA-Z0-9]+$/))) {
+    console.log('name contains invalid characters');
+    nameInput.value = 'name contains invalid characters';
+    return;
+  }
+  // check if name is not in takenNames
+  if (!(takenNames.indexOf(nameInput.value) === -1)) {
+    console.log('name is taken');
+    nameInput.value = 'name is taken';
+    return;
+  }
+
+  // set name
+  myName = nameInput.value;
+  myId = socket.id;
+  // send name to server
+  socket.emit('playerUpdate', {
+    id: myId,
+    name: myName,
+    deviceInfo : {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      userAgent: navigator.userAgent,
+      ratio : window.devicePixelRatio
+    }
+  });
+  mode = 'multiPlayer';
+  console.log('my name is ' + myName);
+  
+});
+
 // settings
 settingsContainer.addEventListener('click', () => {
   settingsContainer.classList.toggle('open');
