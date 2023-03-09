@@ -1,0 +1,185 @@
+/* Set default styles */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #2e2e2e;
+	color: #fff;
+	/* overflow: auto; */
+	
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	overflow-y: scroll;
+
+	scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+	display: none;
+}
+
+/* Set default styles for links */
+a {
+	color: #EAEAEA;
+	text-decoration: none;
+}
+
+/*landing*/
+/* height is window height and the things inside are placed next to each other */
+#landing {
+	padding-right: 4%;
+}
+
+#landing-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#landing-container img {
+	width: 40em;
+}
+
+#start { /* start button centered */
+	display: block;
+	margin: 0 auto;
+}
+
+#intro {
+	color: #fff;
+	background-color: #242424;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	scroll-margin-top: 84px;
+}
+
+#intro h1{
+	margin: 0px;
+	padding-left: 4%;
+}
+
+#intro-container {
+	position: relative;
+}
+
+#intro-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 30px; 
+}
+
+#intro-container p{
+	width: 50%;
+}
+
+.quoteline {
+	padding: 0 0 0 10px;
+	border-left: 5px solid #fff;
+	margin-left: 2%;
+}
+
+#intro-container img {
+	width: 10em;
+	margin-right: 15%;
+	filter: hue-rotate(-20deg);
+	border-radius: 5px;
+}
+
+#navbar{
+	position: sticky;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.9);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 30px;
+	z-index: 10;
+}
+
+#navbarimg img {
+	width: 5em;
+}
+
+#navbarlinks a{
+	padding: 0px 10px;
+	cursor: pointer;
+}
+
+.definition{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+}
+
+.renewableimg {
+	padding: 0px 20px;
+}
+
+.renewableimg img{
+	width: 10em;
+	height: auto;
+	background-color: #242424;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.comperison {
+	display: flex;
+	justify-content: space-between;
+}
+
+.renewabletext h1{
+	margin-bottom: 5px;
+}
+
+.wiki p{
+	margin: 0px 10px 5px 0px;
+}
+
+.leftpro, .rightcon{
+	width: 45%;
+	padding: 0px 3%;
+}
+
+.pro li {
+	list-style-type: none;
+}
+
+.pro li::before {
+	content: "+";
+	color: #1daf00;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+	font-size: 1.5em;
+}
+
+.con li {
+	list-style-type: none;
+}
+
+.con li::before {
+	content: "-";
+	color: #ff0205;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+	font-size: 1.5em;
+}
+
+#solar, #wind, #hydro, #tidal, #geothermal, #biofuel, #fission, #fusion,#quiz {
+	margin: 30px 30px;
+	padding: 30px 0px;
+	border-bottom: 3px solid #fff;
+}
+
+#quiz {
+	display: flex;
+	justify-content: center;
+}
+
+footer {
+	padding: 20px 0px;
+	background-color: #242424;
+}
