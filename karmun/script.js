@@ -73,18 +73,14 @@ function quizButton() {
 }
 
 // quiz code
-var quiz = document.getElementById('quiz');
-var results = document.getElementById('results');
-
-addEventListener('submit', function(event) {
-	event.preventDefault();
-	var score = 0;
-	var answers = document.querySelectorAll('input:checked');
-	for (answer of answers) {
-		if (answer.value === 'correct') {
-			score++;
-		}
-	}
-	var results = document.getElementById('results');
-	results.innerHTML = 'You got ' + score + ' out of 10 correct!';
-});
+const quiz = [
+	{
+		question: 'What is the most efficient energy source ever discovered by humanity (mass-energy ratio)?',
+		answers: [
+		{ text: 'nuclear fission power plants', correct: true },
+		{ text: 'Paris', correct: false },
+		{ text: 'London', correct: false },
+		{ text: 'Madrid', correct: false }
+		]
+	},
+]
