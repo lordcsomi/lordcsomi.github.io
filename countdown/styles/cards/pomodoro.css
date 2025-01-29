@@ -1,0 +1,100 @@
+/* Pomodoro Timer Card */
+.pomodoro-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pomodoro-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pomodoro-btn:hover {
+    background: var(--accent-light);
+}
+
+.pomodoro-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+.timer-display {
+    text-align: center;
+}
+
+.remaining-time {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-family: monospace;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.timer-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.timer-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.start-btn, .reset-btn {
+    padding: 1rem;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-btn {
+    background: var(--accent);
+    color: white;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.reset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .remaining-time {
+        font-size: 4rem;
+    }
+    
+    .pomodoro-controls {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,123 @@
+/* Global Responsive Styles */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(8px);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Sections */
+    .section {
+        padding: 80px 1rem;
+    }
+
+    h1, h2 {
+        font-size: 2rem;
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tool-card:nth-child(n) {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    .tool-card:nth-child(3) { /* Subjects */
+        min-height: 350px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tools-grid {
+        gap: 1rem;
+    }
+
+    .tool-card:nth-child(3) { /* Subjects */
+        min-height: 300px;
+    }
+
+    #music .card-content {
+        height: 250px;
+    }
+
+    /* Header */
+    .nav-brand {
+        font-size: 1.5rem;
+    }
+
+    /* Sections */
+    .section {
+        padding: 60px 1rem;
+    }
+
+    /* Cards */
+    .tool-card {
+        padding: 1rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .tool-card {
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .resource-link {
+        background: rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .music-player,
+    .pomodoro-controls,
+    .timer-buttons {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .tool-card {
+        page-break-inside: avoid;
+        border: 1px solid #ddd;
+    }
+}
